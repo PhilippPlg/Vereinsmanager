@@ -9,6 +9,19 @@ package com.mycompany.vereinsmanager;
  *
  * @author masia
  */
-public class NormalesMitglied {
+public class NormalesMitglied extends Mitglied{
+    private double zuZahlenderBetrag;
+
+    public NormalesMitglied() {
+    }
+
+    public double getZuZahlenderBetrag() {
+        return zuZahlenderBetrag;
+    }
+
+    public void setZuZahlenderBetrag(double zuZahlenderBetrag) {
+        this.zuZahlenderBetrag = zuZahlenderBetrag;
+    }
+    
     
 }

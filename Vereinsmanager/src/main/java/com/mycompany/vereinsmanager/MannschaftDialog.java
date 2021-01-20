@@ -56,7 +56,7 @@ public class MannschaftDialog extends javax.swing.JFrame {
         lblÜberschrift.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblÜberschrift.setText("Mannschaft");
 
-        jLabel2.setText("Name");
+        jLabel2.setText("Bezeichnung");
 
         jLabel3.setText("Trainingszeiten");
 

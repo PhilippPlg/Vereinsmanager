@@ -10,5 +10,35 @@ package com.mycompany.vereinsmanager;
  * @author masia
  */
 public class Trainingszeit {
+
+    public Trainingszeit() {
+    }
+
+    private String wochentag;
+    private String anfangszeit;
+    private String endzeit;
     
+    public String getWochentag() {
+        return wochentag;
+    }
+
+    public void setWochentag(String wochentag) {
+        this.wochentag = wochentag;
+    }
+
+    public String getAnfangszeit() {
+        return anfangszeit;
+    }
+
+    public void setAnfangszeit(String anfangszeit) {
+        this.anfangszeit = anfangszeit;
+    }
+
+    public String getEndzeit() {
+        return endzeit;
+    }
+
+    public void setEndzeit(String endzeit) {
+        this.endzeit = endzeit;
+    }
 }

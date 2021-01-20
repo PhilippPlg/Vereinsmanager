@@ -9,6 +9,18 @@ package com.mycompany.vereinsmanager;
  *
  * @author masia
  */
-public class Profispieler {
+public class Profispieler extends Mitglied{
+    private double Gehalt;
+
+    public Profispieler() {
+    }
+
+    public double getGehalt() {
+        return Gehalt;
+    }
+
+    public void setGehalt(double Gehalt) {
+        this.Gehalt = Gehalt;
+    }
     
 }

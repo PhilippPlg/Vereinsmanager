@@ -9,6 +9,19 @@ package com.mycompany.vereinsmanager;
  *
  * @author masia
  */
-public class Trainer {
-    
+public class Trainer extends Mitglied {
+       private double Gehalt;
+
+    public Trainer() {
+    }
+
+    public double getGehalt() {
+        return Gehalt;
+    }
+
+    public void setGehalt(double Gehalt) {
+        this.Gehalt = Gehalt;
+    }
+       
+       
 }

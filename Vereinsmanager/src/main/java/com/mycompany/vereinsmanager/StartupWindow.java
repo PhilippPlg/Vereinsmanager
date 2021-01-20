@@ -7,6 +7,7 @@ package com.mycompany.vereinsmanager;
 
 import javax.swing.JOptionPane;
 import javax.swing.JFrame;
+
 /**
  *
  * @author Timo
@@ -18,11 +19,12 @@ public class StartupWindow extends javax.swing.JFrame {
      */
     public StartupWindow() {
         initComponents();
-       
+
     }
-public MannschaftDialog MannschaftDialog;
-public SpielDialog SpielDialog;
-public SpielerDialog SpielerDialog;
+    public MannschaftDialog MannschaftDialog;
+    public SpielDialog SpielDialog;
+    public SpielerDialog SpielerDialog;
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -248,25 +250,25 @@ public SpielerDialog SpielerDialog;
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddMitgliedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddMitgliedActionPerformed
-        SpielerDialog = new SpielerDialog(EZugehörigkeit.Mitglieder, EObjektStatus.erstellen); //Hier Entity übergeben und in Konstruktor die Werte setzen(wenn nicht neu)
+        SpielerDialog = new SpielerDialog(EZugehörigkeit.Mitglieder, true); //Hier Entity übergeben und in Konstruktor die Werte setzen(wenn nicht neu)
         SpielerDialog.setDefaultCloseOperation(SpielerDialog.DISPOSE_ON_CLOSE);
         SpielerDialog.setVisible(true);
     }//GEN-LAST:event_btnAddMitgliedActionPerformed
 
     private void btnAddMannschaftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddMannschaftActionPerformed
-        MannschaftDialog = new MannschaftDialog(EObjektStatus.erstellen); //Hier Entity übergeben und in Konstruktor die Werte setzen(wenn nicht neu)
+        MannschaftDialog = new MannschaftDialog(true); //Hier Entity übergeben und in Konstruktor die Werte setzen(wenn nicht neu)
         MannschaftDialog.setDefaultCloseOperation(MannschaftDialog.DISPOSE_ON_CLOSE);
         MannschaftDialog.setVisible(true);
     }//GEN-LAST:event_btnAddMannschaftActionPerformed
 
     private void btnAddSpielerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddSpielerActionPerformed
-        SpielerDialog = new SpielerDialog(EZugehörigkeit.Spieler, EObjektStatus.erstellen); //Hier Entity übergeben und in Konstruktor die Werte setzen(wenn nicht neu)
+        SpielerDialog = new SpielerDialog(EZugehörigkeit.Spieler, true); //Hier Entity übergeben und in Konstruktor die Werte setzen(wenn nicht neu)
         SpielerDialog.setDefaultCloseOperation(SpielerDialog.DISPOSE_ON_CLOSE);
         SpielerDialog.setVisible(true);
     }//GEN-LAST:event_btnAddSpielerActionPerformed
 
     private void btnAddSpielActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddSpielActionPerformed
-        SpielDialog = new SpielDialog(EObjektStatus.erstellen); //Hier Entity übergeben und in Konstruktor die Werte setzen(wenn nicht neu)
+        SpielDialog = new SpielDialog(true); //Hier Entity übergeben und in Konstruktor die Werte setzen(wenn nicht neu)
         SpielDialog.setDefaultCloseOperation(SpielDialog.DISPOSE_ON_CLOSE);
         SpielDialog.setVisible(true);
     }//GEN-LAST:event_btnAddSpielActionPerformed

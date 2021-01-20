@@ -128,3 +128,4 @@ nbdist/
 
 # End of https://www.toptal.com/developers/gitignore/api/netbeans,java,intellij+all
 
+/Vereinsmanager/target/

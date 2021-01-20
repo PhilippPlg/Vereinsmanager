@@ -10,13 +10,24 @@ package com.mycompany.vereinsmanager;
  * @author Timo
  */
 public class SpielDialog extends javax.swing.JFrame {
-
+    private static EObjektStatus ObjektStatus;
     /**
      * Creates new form MannschaftDialog
      */
-    public SpielDialog() {
-        initComponents();
+    public SpielDialog(){
+        this(EObjektStatus.bearbeiten);
     }
+    public SpielDialog(EObjektStatus ObjektStatus) {
+        initComponents();
+        this.ObjektStatus = ObjektStatus;
+        SetWindowTitle();
+    }
+    
+    
+     private void SetWindowTitle(){
+            lblÜberschrift.setText(lblÜberschrift.getText()+ " " + ObjektStatus.toString());
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -27,7 +38,7 @@ public class SpielDialog extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        lblÜberschrift = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -44,8 +55,8 @@ public class SpielDialog extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Spiel");
+        lblÜberschrift.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblÜberschrift.setText("Spiel");
 
         jLabel2.setText("Eigene Mannschaft");
 
@@ -80,7 +91,7 @@ public class SpielDialog extends javax.swing.JFrame {
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(39, 39, 39)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblÜberschrift, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -102,7 +113,7 @@ public class SpielDialog extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblÜberschrift, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -172,7 +183,6 @@ public class SpielDialog extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -186,5 +196,6 @@ public class SpielDialog extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
+    private javax.swing.JLabel lblÜberschrift;
     // End of variables declaration//GEN-END:variables
 }

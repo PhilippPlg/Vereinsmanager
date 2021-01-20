@@ -5,6 +5,8 @@
  */
 package com.mycompany.vereinsmanager;
 
+import javax.swing.JOptionPane;
+import javax.swing.JFrame;
 /**
  *
  * @author Timo
@@ -16,8 +18,11 @@ public class StartupWindow extends javax.swing.JFrame {
      */
     public StartupWindow() {
         initComponents();
+       
     }
-
+public MannschaftDialog MannschaftDialog;
+public SpielDialog SpielDialog;
+public SpielerDialog SpielerDialog;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -33,18 +38,18 @@ public class StartupWindow extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
-        jButton1 = new javax.swing.JButton();
+        btnAddMannschaft = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
+        btnAddMitglied = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jList2 = new javax.swing.JList<>();
         jButton5 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
-        jButton3 = new javax.swing.JButton();
+        btnAddSpieler = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         jList3 = new javax.swing.JList<>();
         jPanel4 = new javax.swing.JPanel();
-        jButton4 = new javax.swing.JButton();
+        btnAddSpiel = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         jList4 = new javax.swing.JList<>();
         jLabel1 = new javax.swing.JLabel();
@@ -62,7 +67,12 @@ public class StartupWindow extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jList1);
 
-        jButton1.setText("Mannschaft erstellen");
+        btnAddMannschaft.setText("Mannschaft erstellen");
+        btnAddMannschaft.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddMannschaftActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -73,7 +83,7 @@ public class StartupWindow extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(btnAddMannschaft)
                         .addGap(0, 482, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -81,7 +91,7 @@ public class StartupWindow extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1)
+                .addComponent(btnAddMannschaft)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
                 .addContainerGap())
@@ -89,10 +99,10 @@ public class StartupWindow extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Mannschaften", jPanel1);
 
-        jButton2.setText("Mitglied erstellen");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnAddMitglied.setText("Mitglied erstellen");
+        btnAddMitglied.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnAddMitgliedActionPerformed(evt);
             }
         });
 
@@ -114,7 +124,7 @@ public class StartupWindow extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton2)
+                        .addComponent(btnAddMitglied)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton5)
                         .addGap(0, 309, Short.MAX_VALUE)))
@@ -125,7 +135,7 @@ public class StartupWindow extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
+                    .addComponent(btnAddMitglied)
                     .addComponent(jButton5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
@@ -134,7 +144,12 @@ public class StartupWindow extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Mitglieder", jPanel2);
 
-        jButton3.setText("Spieler erstellen");
+        btnAddSpieler.setText("Spieler erstellen");
+        btnAddSpieler.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddSpielerActionPerformed(evt);
+            }
+        });
 
         jList3.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -152,7 +167,7 @@ public class StartupWindow extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jButton3)
+                        .addComponent(btnAddSpieler)
                         .addGap(0, 506, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -160,7 +175,7 @@ public class StartupWindow extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton3)
+                .addComponent(btnAddSpieler)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
                 .addContainerGap())
@@ -168,7 +183,12 @@ public class StartupWindow extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Spieler", jPanel3);
 
-        jButton4.setText("Spiel erstellen");
+        btnAddSpiel.setText("Spiel erstellen");
+        btnAddSpiel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddSpielActionPerformed(evt);
+            }
+        });
 
         jList4.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -186,7 +206,7 @@ public class StartupWindow extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane4)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jButton4)
+                        .addComponent(btnAddSpiel)
                         .addGap(0, 516, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -194,7 +214,7 @@ public class StartupWindow extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton4)
+                .addComponent(btnAddSpiel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
                 .addContainerGap())
@@ -227,9 +247,29 @@ public class StartupWindow extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void btnAddMitgliedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddMitgliedActionPerformed
+        SpielerDialog = new SpielerDialog(EZugehörigkeit.Mitglieder, EObjektStatus.erstellen); //Hier Entity übergeben und in Konstruktor die Werte setzen(wenn nicht neu)
+        SpielerDialog.setDefaultCloseOperation(SpielerDialog.DISPOSE_ON_CLOSE);
+        SpielerDialog.setVisible(true);
+    }//GEN-LAST:event_btnAddMitgliedActionPerformed
+
+    private void btnAddMannschaftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddMannschaftActionPerformed
+        MannschaftDialog = new MannschaftDialog(EObjektStatus.erstellen); //Hier Entity übergeben und in Konstruktor die Werte setzen(wenn nicht neu)
+        MannschaftDialog.setDefaultCloseOperation(MannschaftDialog.DISPOSE_ON_CLOSE);
+        MannschaftDialog.setVisible(true);
+    }//GEN-LAST:event_btnAddMannschaftActionPerformed
+
+    private void btnAddSpielerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddSpielerActionPerformed
+        SpielerDialog = new SpielerDialog(EZugehörigkeit.Spieler, EObjektStatus.erstellen); //Hier Entity übergeben und in Konstruktor die Werte setzen(wenn nicht neu)
+        SpielerDialog.setDefaultCloseOperation(SpielerDialog.DISPOSE_ON_CLOSE);
+        SpielerDialog.setVisible(true);
+    }//GEN-LAST:event_btnAddSpielerActionPerformed
+
+    private void btnAddSpielActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddSpielActionPerformed
+        SpielDialog = new SpielDialog(EObjektStatus.erstellen); //Hier Entity übergeben und in Konstruktor die Werte setzen(wenn nicht neu)
+        SpielDialog.setDefaultCloseOperation(SpielDialog.DISPOSE_ON_CLOSE);
+        SpielDialog.setVisible(true);
+    }//GEN-LAST:event_btnAddSpielActionPerformed
 
     /**
      * @param args the command line arguments
@@ -267,10 +307,10 @@ public class StartupWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton btnAddMannschaft;
+    private javax.swing.JButton btnAddMitglied;
+    private javax.swing.JButton btnAddSpiel;
+    private javax.swing.JButton btnAddSpieler;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JList<String> jList1;

@@ -10,14 +10,20 @@ package com.mycompany.vereinsmanager;
  */
 public class Mannschaft {
 
-    public Mannschaft() {
-    }
     private String bezeichnung;
     private Trainer trainer;
-    private Profispieler[] mitglied;
+    private Profispieler[] profispieler;
     private Trainingszeit[] trainingszeiten;
     private Spiel[] spiele;
-    
+
+    public Mannschaft() {
+
+    }
+
+    public Mannschaft(String bezeichnung) {
+        this.bezeichnung = bezeichnung;
+    }
+
     public String getBezeichnung() {
         return bezeichnung;
     }
@@ -34,12 +40,12 @@ public class Mannschaft {
         this.trainer = trainer;
     }
 
-    public Profispieler[] getMitglied() {
-        return mitglied;
+    public Profispieler[] getProfispieler() {
+        return profispieler;
     }
 
-    public void setMitglied(Profispieler[] mitglied) {
-        this.mitglied = mitglied;
+    public void setProfispieler(Profispieler[] profispieler) {
+        this.profispieler = profispieler;
     }
 
     public Trainingszeit[] getTrainingszeiten() {

@@ -13,13 +13,18 @@ import java.util.Date;
  */
 public class Spiel {
 
-    public Spiel() {
-    }
+
     private Mannschaft eigenesTeam;
     private String gegnerTeam;
     private int eigenePunkte;
     private int gegnerPunkte;
     private Date zeitpunkt;
+
+    public Spiel(Mannschaft eigenesTeam, String gegnerTeam, Date zeitpunkt) {
+        this.eigenesTeam = eigenesTeam;
+        this.gegnerTeam = gegnerTeam;
+        this.zeitpunkt = zeitpunkt;
+    }
 
     public Mannschaft getEigenesTeam() {
         return eigenesTeam;

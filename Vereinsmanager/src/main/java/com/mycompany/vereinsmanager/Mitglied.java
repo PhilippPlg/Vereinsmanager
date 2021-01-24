@@ -22,6 +22,17 @@ public class Mitglied {
     protected String TelefonNr;
     protected Mannschaft Mannschaft;
 
+    public Mitglied(String vorname, String nachname, String straße, String PLZ, String ort, Date geburtsDatum, String email, String telefonNr) {
+        Vorname = vorname;
+        Nachname = nachname;
+        Straße = straße;
+        this.PLZ = PLZ;
+        Ort = ort;
+        GeburtsDatum = geburtsDatum;
+        Email = email;
+        TelefonNr = telefonNr;
+    }
+
     public Mitglied() {
     }
 

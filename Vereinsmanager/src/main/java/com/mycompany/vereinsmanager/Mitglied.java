@@ -108,4 +108,8 @@ public class Mitglied {
         this.Mannschaft = Mannschaft;
     }
     
+    @Override
+    public String toString() {
+        return this.Vorname + " " + this.Nachname;
+    }
 }

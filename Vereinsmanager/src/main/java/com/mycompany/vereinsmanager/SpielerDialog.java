@@ -5,6 +5,7 @@
  */
 package com.mycompany.vereinsmanager;
 
+import java.util.Date;
 import javax.swing.JTextField;
 
 /**
@@ -195,6 +196,11 @@ public class SpielerDialog extends javax.swing.JFrame {
         btnVerwerfen.setText("Verwerfen");
 
         btnSpeichern.setText("Speichern");
+        btnSpeichern.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSpeichernActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -309,6 +315,29 @@ public class SpielerDialog extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnSpeichernActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSpeichernActionPerformed
+
+        Date date = new Date();
+        String vorname = tfVorname.getText();
+        String nachname = tfNachname.getText();
+        String strasse = tfStraße.getText();
+        String plz = tfPLZ.getText();
+        String ort = tfOrt.getText();
+        String email = tfEmail.getText();
+        String telefonnr = tfTelefon.getText();
+        
+        XMLMitgliedHelfer xmler = new XMLMitgliedHelfer();
+        xmler.addMitglied( new Mitglied( 
+                vorname,
+                nachname,
+                strasse, 
+                plz, 
+                ort, 
+                date, 
+                email, 
+                telefonnr));
+    }//GEN-LAST:event_btnSpeichernActionPerformed
 
     /**
      * @param args the command line arguments

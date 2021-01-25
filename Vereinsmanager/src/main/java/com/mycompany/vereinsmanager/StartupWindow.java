@@ -46,6 +46,7 @@ public class StartupWindow extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jList2 = new javax.swing.JList<>();
         jButton5 = new javax.swing.JButton();
+        btnShowMitglieder = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         btnAddSpieler = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -117,6 +118,13 @@ public class StartupWindow extends javax.swing.JFrame {
 
         jButton5.setText("Ausstehende Beträge anzeigen");
 
+        btnShowMitglieder.setText("Mitglieder anzeigen");
+        btnShowMitglieder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnShowMitgliederActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -129,7 +137,9 @@ public class StartupWindow extends javax.swing.JFrame {
                         .addComponent(btnAddMitglied)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton5)
-                        .addGap(0, 309, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnShowMitglieder)
+                        .addGap(0, 178, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -138,7 +148,8 @@ public class StartupWindow extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAddMitglied)
-                    .addComponent(jButton5))
+                    .addComponent(jButton5)
+                    .addComponent(btnShowMitglieder))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
                 .addContainerGap())
@@ -273,6 +284,13 @@ public class StartupWindow extends javax.swing.JFrame {
         SpielDialog.setVisible(true);
     }//GEN-LAST:event_btnAddSpielActionPerformed
 
+    private void btnShowMitgliederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowMitgliederActionPerformed
+        XMLMitgliedHelfer xmler = new XMLMitgliedHelfer();
+        xmler.translateMitglieder();
+        //Mitglieder in Liste eintragen
+        jList2.setModel(xmler.getEintraegeList(xmler.getEintraege()));
+    }//GEN-LAST:event_btnShowMitgliederActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -313,6 +331,7 @@ public class StartupWindow extends javax.swing.JFrame {
     private javax.swing.JButton btnAddMitglied;
     private javax.swing.JButton btnAddSpiel;
     private javax.swing.JButton btnAddSpieler;
+    private javax.swing.JButton btnShowMitglieder;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JList<String> jList1;

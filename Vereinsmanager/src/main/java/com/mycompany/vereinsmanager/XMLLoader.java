@@ -31,7 +31,7 @@ public class XMLLoader {
         return (ArrayList<NormalesMitglied>) UncastedMitglieder;
     }
 
-    public static ArrayList<Profispieler> loadSpieler() throws IOException {
+    public static ArrayList<Profispieler> loadProfiSpieler() throws IOException {
         Object UncastedSpieler;
         UncastedSpieler = deserializeFromXML(ESaveObject.profiSpieler);
         return (ArrayList<Profispieler>) UncastedSpieler;

@@ -338,12 +338,11 @@ public class SpielerDialog extends javax.swing.JFrame {
                     Mitglied.setEmail(tfEmail.getText());
                     ObjekteZumSpeichern.addAll(Mitglieder);
                     ObjekteZumSpeichern.add(Mitglied);
-                              
-                    //ObjectZumSpeichern = new NormalesMitglied();
+
                     break;
                 case Spieler:
+                    ArrayList<Profispieler> profis = XMLLoader.loadProfiSpieler();
                     SaveObject = ESaveObject.profiSpieler;
-                    //ObjectZumSpeichern = new Profispieler();
                     Profispieler Spieler = new Profispieler();
                     Spieler.setVorname(tfVorname.getText());
                     Spieler.setNachname(tfNachname.getText());
@@ -353,7 +352,8 @@ public class SpielerDialog extends javax.swing.JFrame {
                     Spieler.setOrt(tfOrt.getText());
                     Spieler.setTelefonNr(tfTelefon.getText());
                     Spieler.setEmail(tfEmail.getText());
-                    ObjekteZumSpeichern.add(Spieler);
+                    profis.add( Spieler );
+                    ObjekteZumSpeichern.addAll( profis );
                     break;
                 case Trainer:
                     SaveObject = ESaveObject.trainer;

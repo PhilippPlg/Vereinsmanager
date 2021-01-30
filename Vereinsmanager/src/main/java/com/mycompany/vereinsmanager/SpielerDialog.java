@@ -5,7 +5,10 @@
  */
 package com.mycompany.vereinsmanager;
 
+import java.io.IOException;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JTextField;
 
 /**
@@ -20,7 +23,6 @@ public class SpielerDialog extends javax.swing.JFrame {
     /**
      * Creates new form MannschaftDialog
      */
-
     public SpielerDialog(EZugehörigkeit Zugehörigkeit) {
         this(Zugehörigkeit, false);
     }
@@ -317,26 +319,58 @@ public class SpielerDialog extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSpeichernActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSpeichernActionPerformed
+        try {
+            Object ObjectZumSpeichern = new NormalesMitglied();
+            ESaveObject SaveObject = ESaveObject.normalesMitglied;
+            switch (Zugehörigkeit) {
+                case Mitglieder:
+                    SaveObject = ESaveObject.normalesMitglied;
+                    NormalesMitglied Mitglied = new NormalesMitglied();
+                    Mitglied.setVorname(tfVorname.getText());
+                    Mitglied.setNachname(tfNachname.getText());
+                    Mitglied.setStraße(tfStraße.getText());
+                    Mitglied.setGeburtsDatum(new Date()); //tfGeburtsdatum.getText()
+                    Mitglied.setPLZ(tfPLZ.getText());
+                    Mitglied.setOrt(tfOrt.getText());
+                    Mitglied.setTelefonNr(tfTelefon.getText());
+                    Mitglied.setEmail(tfEmail.getText());
+                    ObjectZumSpeichern = Mitglied;
+                    //ObjectZumSpeichern = new NormalesMitglied();
+                    break;
+                case Spieler:
+                    SaveObject = ESaveObject.profiSpieler;
+                    //ObjectZumSpeichern = new Profispieler();
+                    Profispieler Spieler = new Profispieler();
+                    Spieler.setVorname(tfVorname.getText());
+                    Spieler.setNachname(tfNachname.getText());
+                    Spieler.setStraße(tfStraße.getText());
+                    Spieler.setGeburtsDatum(new Date()); //tfGeburtsdatum.getText()
+                    Spieler.setPLZ(tfPLZ.getText());
+                    Spieler.setOrt(tfOrt.getText());
+                    Spieler.setTelefonNr(tfTelefon.getText());
+                    Spieler.setEmail(tfEmail.getText());
+                    ObjectZumSpeichern = Spieler;
+                    break;
+                case Trainer:
+                    SaveObject = ESaveObject.trainer;
+                    Trainer Trainer = new Trainer();
+                    Trainer.setVorname(tfVorname.getText());
+                    Trainer.setNachname(tfNachname.getText());
+                    Trainer.setStraße(tfStraße.getText());
+                    Trainer.setGeburtsDatum(new Date()); //tfGeburtsdatum.getText()
+                    Trainer.setPLZ(tfPLZ.getText());
+                    Trainer.setOrt(tfOrt.getText());
+                    Trainer.setTelefonNr(tfTelefon.getText());
+                    Trainer.setEmail(tfEmail.getText());
+                    ObjectZumSpeichern = Trainer;
+                    //ObjectZumSpeichern = new Trainer();
+                    break;
+            }
 
-        Date date = new Date();
-        String vorname = tfVorname.getText();
-        String nachname = tfNachname.getText();
-        String strasse = tfStraße.getText();
-        String plz = tfPLZ.getText();
-        String ort = tfOrt.getText();
-        String email = tfEmail.getText();
-        String telefonnr = tfTelefon.getText();
-        
-        XMLMitgliedHelfer xmler = new XMLMitgliedHelfer();
-        xmler.addMitglied( new Mitglied( 
-                vorname,
-                nachname,
-                strasse, 
-                plz, 
-                ort, 
-                date, 
-                email, 
-                telefonnr));
+            XMLSerializer.serializeToXML(ObjectZumSpeichern, SaveObject);
+        } catch (IOException ex) {
+            Logger.getLogger(SpielerDialog.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnSpeichernActionPerformed
 
     /**

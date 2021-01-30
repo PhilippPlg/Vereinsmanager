@@ -5,6 +5,10 @@
  */
 package com.mycompany.vereinsmanager;
 
+import java.io.IOException;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JList;
 import javax.swing.JTextField;
 
@@ -15,60 +19,60 @@ import javax.swing.JTextField;
 public class MannschaftDialog extends javax.swing.JFrame {
 
     private boolean IsNew;
-    
+
     public boolean isIsNew() {
         return IsNew;
     }
-    
+
     public void setIsNew(boolean IsNew) {
         this.IsNew = IsNew;
         SetWindowTitle();
     }
-    
+
     public JList<String> getLbSpieler() {
         return lbSpieler;
     }
-    
+
     public void setLbSpieler(JList<String> lbSpieler) {
         this.lbSpieler = lbSpieler;
     }
-    
+
     public JTextField getTfBezeichnung() {
         return tfBezeichnung;
     }
-    
+
     public void setTfBezeichnung(JTextField tfBezeichnung) {
         this.tfBezeichnung = tfBezeichnung;
     }
-    
+
     public JTextField getTfErgebnis() {
         return tfErgebnis;
     }
-    
+
     public void setTfErgebnis(JTextField tfErgebnis) {
         this.tfErgebnis = tfErgebnis;
     }
-    
+
     public JTextField getTfNaechstesSpiel() {
         return tfNaechstesSpiel;
     }
-    
+
     public void setTfNaechstesSpiel(JTextField tfNaechstesSpiel) {
         this.tfNaechstesSpiel = tfNaechstesSpiel;
     }
-    
+
     public JTextField getTfTrainer() {
         return tfTrainer;
     }
-    
+
     public void setTfTrainer(JTextField tfTrainer) {
         this.tfTrainer = tfTrainer;
     }
-    
+
     public JTextField getTfTrainingszeiten() {
         return tfTrainingszeiten;
     }
-    
+
     public void setTfTrainingszeiten(JTextField tfTrainingszeiten) {
         this.tfTrainingszeiten = tfTrainingszeiten;
     }
@@ -146,6 +150,11 @@ public class MannschaftDialog extends javax.swing.JFrame {
         btnVerwerfen.setText("Verwerfen");
 
         btnSpeichern.setText("Speichern");
+        btnSpeichern.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSpeichernActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -224,6 +233,22 @@ public class MannschaftDialog extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnSpeichernActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSpeichernActionPerformed
+        try {
+            Trainer Testtrainer = new Trainer();
+            Testtrainer.setGehalt(9999);
+            Mannschaft Mannschaft = new Mannschaft();
+            Mannschaft.setBezeichnung(tfBezeichnung.getText());
+            Mannschaft.setLetztesErgebnis(new Spiel(new Mannschaft(), "", new Date())); //Spiel erzeugen oder auswählen
+            Mannschaft.setTrainingszeiten(new Trainingszeit[1]); //Trainingszeiten????
+            Mannschaft.setNaechstesSpiel(new Spiel(new Mannschaft(), "", new Date())); //Spiel erzeugen oder auswählen
+            Mannschaft.setTrainer(Testtrainer); //Wähle hier Trainer aus
+            XMLSerializer.serializeToXML(Mannschaft, ESaveObject.mannschaft);
+        } catch (IOException ex) {
+            Logger.getLogger(MannschaftDialog.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnSpeichernActionPerformed
 
     /**
      * @param args the command line arguments

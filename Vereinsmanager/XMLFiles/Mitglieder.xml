@@ -2,36 +2,127 @@
 <!--
 Einzelne Mitglieder werden von einem <mitglied> tag umschlossen und müssen sich
 innerhalb vom root <mitglieder> befinden.
--->
-<mitglieder>
+--><mitglieder>
+            
+    
     <mitglied>
+                        
+        
         <vorname>Tove</vorname>
+                        
+        
         <nachname>Jani</nachname>
+                        
+        
         <strasse>Am grünen Grund</strasse>
+                        
+        
         <plz>48145</plz>
+                        
+        
         <ort>Münster</ort>
+                        
+        
         <geburtsdatum>12.12.2000</geburtsdatum>
+                        
+        
         <email>tove.jani@example.com</email>
+                        
+        
         <telefonnr>01515541871</telefonnr>
+                    
+    
     </mitglied>
+            
+    
     <mitglied>
+                        
+        
         <vorname>Tovel</vorname>
+                        
+        
         <nachname>Gami</nachname>
+                        
+        
         <strasse>Am blauen Grund</strasse>
+                        
+        
         <plz>48215</plz>
+                        
+        
         <ort>Münster</ort>
+                        
+        
         <geburtsdatum>09.01.1999</geburtsdatum>
+                        
+        
         <email>tovel.gami@example.com</email>
+                        
+        
         <telefonnr>01515541658</telefonnr>
-   </mitglied>
+                   
+    
+    </mitglied>
+            
+    
     <mitglied>
+                        
+        
         <vorname>Albert</vorname>
+                        
+        
         <nachname>Emilski</nachname>
+                        
+        
         <strasse>Heisstraße</strasse>
+                        
+        
         <plz>48145</plz>
+                        
+        
         <ort>Münster</ort>
+                        
+        
         <geburtsdatum>Mon Jan 25 22:11:41 CET 2021</geburtsdatum>
+                        
+        
         <email>test.test@example.de</email>
+                        
+        
         <telefonnr>0156151412</telefonnr>
+                    
+    
+    </mitglied>
+        
+    
+    <mitglied>
+                
+        <vorname>123</vorname>
+                
+        <nachname>456</nachname>
+                
+        <strasse>bism</strasse>
+                
+        <plz>48268</plz>
+                
+        <ort>Greven</ort>
+                
+        <geburtsdatum>Fri Jan 29 22:11:13 CET 2021</geburtsdatum>
+                
+        <email>timo992000@gmail.com</email>
+                
+        <telefonnr>017629543439</telefonnr>
+            
+    </mitglied>
+    
+    <mitglied>
+        <vorname>timo</vorname>
+        <nachname>schulze</nachname>
+        <strasse>bism</strasse>
+        <plz>48268</plz>
+        <ort>greven</ort>
+        <geburtsdatum>Fri Jan 29 22:12:46 CET 2021</geburtsdatum>
+        <email>timo992000</email>
+        <telefonnr>0176</telefonnr>
     </mitglied>
 </mitglieder>

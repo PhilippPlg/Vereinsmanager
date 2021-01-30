@@ -5,8 +5,12 @@
  */
 package com.mycompany.vereinsmanager;
 
-import javax.swing.JOptionPane;
-import javax.swing.JFrame;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JList;
+import javax.swing.ListModel;
 
 /**
  *
@@ -44,7 +48,7 @@ public class StartupWindow extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         btnAddMitglied = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList<>();
+        lbMitglieder = new javax.swing.JList<>();
         jButton5 = new javax.swing.JButton();
         btnShowMitglieder = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
@@ -109,14 +113,14 @@ public class StartupWindow extends javax.swing.JFrame {
             }
         });
 
-        jList2.setModel(new javax.swing.AbstractListModel<String>() {
+        lbMitglieder.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane2.setViewportView(jList2);
+        jScrollPane2.setViewportView(lbMitglieder);
 
-        jButton5.setText("Ausstehende Beträge anzeigen");
+        jButton5.setText("Ausstehende Betr�ge anzeigen");
 
         btnShowMitglieder.setText("Mitglieder anzeigen");
         btnShowMitglieder.addActionListener(new java.awt.event.ActionListener() {
@@ -261,34 +265,40 @@ public class StartupWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddMitgliedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddMitgliedActionPerformed
-        SpielerDialog = new SpielerDialog(EZugehörigkeit.Mitglieder, true); //Hier Entity übergeben und in Konstruktor die Werte setzen(wenn nicht neu)
+        SpielerDialog = new SpielerDialog(EZugehörigkeit.Mitglieder, true); //Hier Entity �bergeben und in Konstruktor die Werte setzen(wenn nicht neu)
         SpielerDialog.setDefaultCloseOperation(SpielerDialog.DISPOSE_ON_CLOSE);
         SpielerDialog.setVisible(true);
     }//GEN-LAST:event_btnAddMitgliedActionPerformed
 
     private void btnAddMannschaftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddMannschaftActionPerformed
-        MannschaftDialog = new MannschaftDialog(true); //Hier Entity übergeben und in Konstruktor die Werte setzen(wenn nicht neu)
+        MannschaftDialog = new MannschaftDialog(true); //Hier Entity �bergeben und in Konstruktor die Werte setzen(wenn nicht neu)
         MannschaftDialog.setDefaultCloseOperation(MannschaftDialog.DISPOSE_ON_CLOSE);
         MannschaftDialog.setVisible(true);
     }//GEN-LAST:event_btnAddMannschaftActionPerformed
 
     private void btnAddSpielerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddSpielerActionPerformed
-        SpielerDialog = new SpielerDialog(EZugehörigkeit.Spieler, true); //Hier Entity übergeben und in Konstruktor die Werte setzen(wenn nicht neu)
+        SpielerDialog = new SpielerDialog(EZugehörigkeit.Spieler, true); //Hier Entity �bergeben und in Konstruktor die Werte setzen(wenn nicht neu)
         SpielerDialog.setDefaultCloseOperation(SpielerDialog.DISPOSE_ON_CLOSE);
         SpielerDialog.setVisible(true);
     }//GEN-LAST:event_btnAddSpielerActionPerformed
 
     private void btnAddSpielActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddSpielActionPerformed
-        SpielDialog = new SpielDialog(true); //Hier Entity übergeben und in Konstruktor die Werte setzen(wenn nicht neu)
+        SpielDialog = new SpielDialog(true); //Hier Entity �bergeben und in Konstruktor die Werte setzen(wenn nicht neu)
         SpielDialog.setDefaultCloseOperation(SpielDialog.DISPOSE_ON_CLOSE);
         SpielDialog.setVisible(true);
     }//GEN-LAST:event_btnAddSpielActionPerformed
 
     private void btnShowMitgliederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowMitgliederActionPerformed
-        XMLMitgliedHelfer xmler = new XMLMitgliedHelfer();
-        xmler.translateMitglieder();
-        //Mitglieder in Liste eintragen
-        jList2.setModel(xmler.getEintraegeList(xmler.getEintraege()));
+        try {
+            ArrayList<NormalesMitglied> Mitglieder = new ArrayList<NormalesMitglied>();
+            Mitglieder = (ArrayList<NormalesMitglied>)XMLSerializer.deserializeFromXML(ESaveObject.normalesMitglied);
+         
+            //lbMitglieder.setModel(Mitgliedsnamen);
+                
+            
+        } catch (IOException ex) {
+            Logger.getLogger(StartupWindow.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnShowMitgliederActionPerformed
 
     /**
@@ -335,7 +345,6 @@ public class StartupWindow extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JList<String> jList1;
-    private javax.swing.JList<String> jList2;
     private javax.swing.JList<String> jList3;
     private javax.swing.JList<String> jList4;
     private javax.swing.JMenu jMenu1;
@@ -349,5 +358,6 @@ public class StartupWindow extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JList<String> lbMitglieder;
     // End of variables declaration//GEN-END:variables
 }

@@ -14,6 +14,24 @@ public class Mannschaft {
     private Trainer trainer;
     private Profispieler[] profispieler;
     private Trainingszeit[] trainingszeiten;
+    private Spiel letztesErgebnis;
+    private Spiel naechstesSpiel;
+
+    public Spiel getNaechstesSpiel() {
+        return naechstesSpiel;
+    }
+
+    public void setNaechstesSpiel(Spiel naechstesSpiel) {
+        this.naechstesSpiel = naechstesSpiel;
+    }
+
+    public Spiel getLetztesErgebnis() {
+        return letztesErgebnis;
+    }
+
+    public void setLetztesErgebnis(Spiel letztesErgebnis) {
+        this.letztesErgebnis = letztesErgebnis;
+    }
     private Spiel[] spiele;
 
     public Mannschaft() {
@@ -63,12 +81,5 @@ public class Mannschaft {
     public void setSpiele(Spiel[] spiele) {
         this.spiele = spiele;
     }
-    
-    public Spiel getLetztesSpiel(){
-        return null;
-    }
-    
-    public Spiel getNächstesSpiel(){
-        return null;
-    }
+
 }

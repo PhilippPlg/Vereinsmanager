@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextField;
 
 /**
@@ -24,16 +25,17 @@ public class SpielerDialog extends javax.swing.JFrame {
     /**
      * Creates new form MannschaftDialog
      */
-    public SpielerDialog(EZugehörigkeit Zugehörigkeit) {
+    public SpielerDialog(EZugehörigkeit Zugehörigkeit) throws IOException {
         this(Zugehörigkeit, false);
     }
 
-    public SpielerDialog(EZugehörigkeit Zugehörigkeit, boolean IsNew) {
+    public SpielerDialog(EZugehörigkeit Zugehörigkeit, boolean IsNew) throws IOException {
         this.Zugehörigkeit = Zugehörigkeit;
         initComponents();
         setIsNew(IsNew);
         AddAssignmentItems();
         SetWindowTitle();
+        setCboMannschaftenItems();
     }
 
     private void AddAssignmentItems() {
@@ -132,6 +134,17 @@ public class SpielerDialog extends javax.swing.JFrame {
                 break;
         }
         btnSpeichern.setText(ButtonCaption);
+    }
+
+    private void setCboMannschaftenItems() throws IOException {
+        ArrayList<Mannschaft> mannschaften = XMLLoader.loadMannschaft();
+        ArrayList<String> mannschaftsNamen = new ArrayList<String>();
+        for (Mannschaft cMannschaft : mannschaften) {
+            mannschaftsNamen.add(cMannschaft.getBezeichnung());
+        }
+        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
+        model.addAll(mannschaftsNamen);
+        cboMannschaft.setModel(model);
     }
 
     /**
@@ -338,7 +351,7 @@ public class SpielerDialog extends javax.swing.JFrame {
                     Mitglied.setEmail(tfEmail.getText());
                     ObjekteZumSpeichern.addAll(Mitglieder);
                     ObjekteZumSpeichern.add(Mitglied);
-                              
+
                     //ObjectZumSpeichern = new NormalesMitglied();
                     break;
                 case Spieler:
@@ -408,7 +421,11 @@ public class SpielerDialog extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new SpielerDialog(Zugehörigkeit).setVisible(true);
+                try {
+                    new SpielerDialog(Zugehörigkeit).setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(SpielerDialog.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

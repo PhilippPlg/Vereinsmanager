@@ -26,7 +26,7 @@ public class StartupWindow extends javax.swing.JFrame {
         btnShowMannschaftenActionPerformed(null);
         btnShowSpielerActionPerformed(null);
         btnShowSpieleActionPerformed(null);
-        
+
     }
     public MannschaftDialog MannschaftDialog;
     public SpielDialog SpielDialog;
@@ -304,9 +304,13 @@ public class StartupWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddMitgliedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddMitgliedActionPerformed
-        SpielerDialog = new SpielerDialog(EZugehörigkeit.Mitglieder, true); //Hier Entity �bergeben und in Konstruktor die Werte setzen(wenn nicht neu)
-        SpielerDialog.setDefaultCloseOperation(SpielerDialog.DISPOSE_ON_CLOSE);
-        SpielerDialog.setVisible(true);
+        try {
+            SpielerDialog = new SpielerDialog(EZugehörigkeit.Mitglieder, true); //Hier Entity �bergeben und in Konstruktor die Werte setzen(wenn nicht neu)
+            SpielerDialog.setDefaultCloseOperation(SpielerDialog.DISPOSE_ON_CLOSE);
+            SpielerDialog.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(StartupWindow.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnAddMitgliedActionPerformed
 
     private void btnAddMannschaftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddMannschaftActionPerformed
@@ -316,9 +320,13 @@ public class StartupWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAddMannschaftActionPerformed
 
     private void btnAddSpielerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddSpielerActionPerformed
-        SpielerDialog = new SpielerDialog(EZugehörigkeit.Spieler, true); //Hier Entity �bergeben und in Konstruktor die Werte setzen(wenn nicht neu)
-        SpielerDialog.setDefaultCloseOperation(SpielerDialog.DISPOSE_ON_CLOSE);
-        SpielerDialog.setVisible(true);
+        try {
+            SpielerDialog = new SpielerDialog(EZugehörigkeit.Spieler, true); //Hier Entity �bergeben und in Konstruktor die Werte setzen(wenn nicht neu)
+            SpielerDialog.setDefaultCloseOperation(SpielerDialog.DISPOSE_ON_CLOSE);
+            SpielerDialog.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(StartupWindow.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnAddSpielerActionPerformed
 
     private void btnAddSpielActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddSpielActionPerformed
@@ -340,15 +348,15 @@ public class StartupWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_btnShowMitgliederActionPerformed
 
     private void btnShowMannschaftenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowMannschaftenActionPerformed
-          try {
+        try {
 
             DefaultListModel model = new DefaultListModel();
             ArrayList<Mannschaft> mannschaften = XMLLoader.loadMannschaft();
             ArrayList<String> mannschaftsnamen = new ArrayList<String>();
-            for(Mannschaft cMannschaft : mannschaften){
+            for (Mannschaft cMannschaft : mannschaften) {
                 mannschaftsnamen.add(cMannschaft.getBezeichnung());
             }
-                
+
             model.addAll(mannschaftsnamen);
             lbMannschaft.setModel(model);
 
@@ -358,7 +366,7 @@ public class StartupWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_btnShowMannschaftenActionPerformed
 
     private void btnShowSpielerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowSpielerActionPerformed
-         try {
+        try {
 
             DefaultListModel model = new DefaultListModel();
             model.addAll(XMLLoader.loadSpieler());
@@ -370,7 +378,7 @@ public class StartupWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_btnShowSpielerActionPerformed
 
     private void btnShowSpieleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowSpieleActionPerformed
-         try {
+        try {
 
             DefaultListModel model = new DefaultListModel();
             model.addAll(XMLLoader.loadSpiel());
@@ -380,8 +388,6 @@ public class StartupWindow extends javax.swing.JFrame {
             Logger.getLogger(StartupWindow.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnShowSpieleActionPerformed
-
-
 
     /**
      * @param args the command line arguments

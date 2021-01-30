@@ -291,7 +291,7 @@ public class StartupWindow extends javax.swing.JFrame {
         try {
 
             DefaultListModel model = new DefaultListModel();
-            model.addAll(loadMitglieder());
+            model.addAll(XMLLoader.loadMitglieder());
             lbMitglieder.setModel(model);
 
         } catch (IOException ex) {
@@ -299,12 +299,7 @@ public class StartupWindow extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnShowMitgliederActionPerformed
 
-    public static ArrayList<NormalesMitglied> loadMitglieder() throws IOException {
-        Object UncastedMitglieder;
-        ArrayList<NormalesMitglied> Mitglieder = new ArrayList<NormalesMitglied>();
-        UncastedMitglieder = XMLSerializer.deserializeFromXML(ESaveObject.normalesMitglied);
-        return Mitglieder = (ArrayList<NormalesMitglied>) UncastedMitglieder;
-    }
+
 
     /**
      * @param args the command line arguments

@@ -325,7 +325,7 @@ public class SpielerDialog extends javax.swing.JFrame {
             ESaveObject SaveObject = ESaveObject.normalesMitglied;
             switch (Zugehörigkeit) {
                 case Mitglieder:
-                    ArrayList<NormalesMitglied> Mitglieder = StartupWindow.loadMitglieder();
+                    ArrayList<NormalesMitglied> Mitglieder = XMLLoader.loadMitglieder();
                     SaveObject = ESaveObject.normalesMitglied;
                     NormalesMitglied Mitglied = new NormalesMitglied();
                     Mitglied.setVorname(tfVorname.getText());

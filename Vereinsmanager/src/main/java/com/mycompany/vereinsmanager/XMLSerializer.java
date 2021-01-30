@@ -28,14 +28,5 @@ public class XMLSerializer {
         encoder.close();
         fos.close();
     }
-    
-     public static Object deserializeFromXML(ESaveObject SaveObject) throws IOException {
-        FileInputStream fis = new FileInputStream(SaveObject.toString() + ".xml");
-        XMLDecoder decoder = new XMLDecoder(fis);
-        Object decodedEntity = decoder.readObject();
-        decoder.close();
-        fis.close();
-        return decodedEntity;
-    }
 
 }

@@ -22,7 +22,11 @@ public class StartupWindow extends javax.swing.JFrame {
      */
     public StartupWindow() {
         initComponents();
-
+        btnShowMitgliederActionPerformed(null);
+        btnShowMannschaftenActionPerformed(null);
+        btnShowSpielerActionPerformed(null);
+        btnShowSpieleActionPerformed(null);
+        
     }
     public MannschaftDialog MannschaftDialog;
     public SpielDialog SpielDialog;
@@ -42,8 +46,9 @@ public class StartupWindow extends javax.swing.JFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        lbMannschaft = new javax.swing.JList<>();
         btnAddMannschaft = new javax.swing.JButton();
+        btnShowMannschaften = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         btnAddMitglied = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -53,11 +58,13 @@ public class StartupWindow extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         btnAddSpieler = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jList3 = new javax.swing.JList<>();
+        lbSpieler = new javax.swing.JList<>();
+        btnShowSpieler = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         btnAddSpiel = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jList4 = new javax.swing.JList<>();
+        lbSpiele = new javax.swing.JList<>();
+        btnShowSpiele = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         jMenu1.setText("jMenu1");
@@ -66,17 +73,24 @@ public class StartupWindow extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+        lbMannschaft.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(lbMannschaft);
 
         btnAddMannschaft.setText("Mannschaft erstellen");
         btnAddMannschaft.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddMannschaftActionPerformed(evt);
+            }
+        });
+
+        btnShowMannschaften.setText("Mannschaften anzeigen");
+        btnShowMannschaften.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnShowMannschaftenActionPerformed(evt);
             }
         });
 
@@ -90,14 +104,18 @@ public class StartupWindow extends javax.swing.JFrame {
                     .addComponent(jScrollPane1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnAddMannschaft)
-                        .addGap(0, 482, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnShowMannschaften)
+                        .addGap(0, 329, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnAddMannschaft)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAddMannschaft)
+                    .addComponent(btnShowMannschaften))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
                 .addContainerGap())
@@ -119,7 +137,7 @@ public class StartupWindow extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(lbMitglieder);
 
-        jButton5.setText("Ausstehende Betr�ge anzeigen");
+        jButton5.setText("Ausstehende Beträge anzeigen");
 
         btnShowMitglieder.setText("Mitglieder anzeigen");
         btnShowMitglieder.addActionListener(new java.awt.event.ActionListener() {
@@ -167,12 +185,19 @@ public class StartupWindow extends javax.swing.JFrame {
             }
         });
 
-        jList3.setModel(new javax.swing.AbstractListModel<String>() {
+        lbSpieler.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane3.setViewportView(jList3);
+        jScrollPane3.setViewportView(lbSpieler);
+
+        btnShowSpieler.setText("Spieler anzeigen");
+        btnShowSpieler.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnShowSpielerActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -184,14 +209,18 @@ public class StartupWindow extends javax.swing.JFrame {
                     .addComponent(jScrollPane3)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(btnAddSpieler)
-                        .addGap(0, 506, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnShowSpieler)
+                        .addGap(0, 389, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnAddSpieler)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAddSpieler)
+                    .addComponent(btnShowSpieler))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
                 .addContainerGap())
@@ -206,12 +235,19 @@ public class StartupWindow extends javax.swing.JFrame {
             }
         });
 
-        jList4.setModel(new javax.swing.AbstractListModel<String>() {
+        lbSpiele.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane4.setViewportView(jList4);
+        jScrollPane4.setViewportView(lbSpiele);
+
+        btnShowSpiele.setText("Spiele anzeigen");
+        btnShowSpiele.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnShowSpieleActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -223,14 +259,18 @@ public class StartupWindow extends javax.swing.JFrame {
                     .addComponent(jScrollPane4)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(btnAddSpiel)
-                        .addGap(0, 516, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnShowSpiele)
+                        .addGap(0, 403, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnAddSpiel)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAddSpiel)
+                    .addComponent(btnShowSpiele))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
                 .addContainerGap())
@@ -299,6 +339,42 @@ public class StartupWindow extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnShowMitgliederActionPerformed
 
+    private void btnShowMannschaftenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowMannschaftenActionPerformed
+          try {
+
+            DefaultListModel model = new DefaultListModel();
+            model.addAll(XMLLoader.loadMannschaft());
+            lbMannschaft.setModel(model);
+
+        } catch (IOException ex) {
+            Logger.getLogger(StartupWindow.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnShowMannschaftenActionPerformed
+
+    private void btnShowSpielerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowSpielerActionPerformed
+         try {
+
+            DefaultListModel model = new DefaultListModel();
+            model.addAll(XMLLoader.loadSpieler());
+            lbSpieler.setModel(model);
+
+        } catch (IOException ex) {
+            Logger.getLogger(StartupWindow.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnShowSpielerActionPerformed
+
+    private void btnShowSpieleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowSpieleActionPerformed
+         try {
+
+            DefaultListModel model = new DefaultListModel();
+            model.addAll(XMLLoader.loadSpiel());
+            lbSpiele.setModel(model);
+
+        } catch (IOException ex) {
+            Logger.getLogger(StartupWindow.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnShowSpieleActionPerformed
+
 
 
     /**
@@ -341,12 +417,12 @@ public class StartupWindow extends javax.swing.JFrame {
     private javax.swing.JButton btnAddMitglied;
     private javax.swing.JButton btnAddSpiel;
     private javax.swing.JButton btnAddSpieler;
+    private javax.swing.JButton btnShowMannschaften;
     private javax.swing.JButton btnShowMitglieder;
+    private javax.swing.JButton btnShowSpiele;
+    private javax.swing.JButton btnShowSpieler;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JList<String> jList1;
-    private javax.swing.JList<String> jList3;
-    private javax.swing.JList<String> jList4;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JPanel jPanel1;
@@ -358,6 +434,9 @@ public class StartupWindow extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JList<String> lbMannschaft;
     private javax.swing.JList<String> lbMitglieder;
+    private javax.swing.JList<String> lbSpiele;
+    private javax.swing.JList<String> lbSpieler;
     // End of variables declaration//GEN-END:variables
 }

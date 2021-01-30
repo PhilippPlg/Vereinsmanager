@@ -5,14 +5,12 @@
  */
 package com.mycompany.vereinsmanager;
 
-import java.awt.List;
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  *
@@ -20,17 +18,13 @@ import java.util.Arrays;
  */
 public class XMLSerializer {
 
-    public static void serializeToXML(Object object, ESaveObject SaveObject) throws IOException {
-
-        ArrayList <Object> ObjectList = new ArrayList<Object>();
-        ObjectList.add(object);
-         ObjectList.add(object);
+    public static void serializeToXML(ArrayList<Object> object, ESaveObject SaveObject) throws IOException {
         FileOutputStream fos = new FileOutputStream(SaveObject.toString() + ".xml");
         XMLEncoder encoder = new XMLEncoder(fos);
         encoder.setExceptionListener((Exception e) -> {
             System.out.println("Exception! :" + e.toString());
         });
-        encoder.writeObject(ObjectList);
+        encoder.writeObject(object);
         encoder.close();
         fos.close();
     }

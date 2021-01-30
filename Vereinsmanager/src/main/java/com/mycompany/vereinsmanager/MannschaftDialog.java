@@ -6,6 +6,7 @@
 package com.mycompany.vereinsmanager;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -236,6 +237,7 @@ public class MannschaftDialog extends javax.swing.JFrame {
 
     private void btnSpeichernActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSpeichernActionPerformed
         try {
+            ArrayList<Object> ObjekteZumSpeichern = new ArrayList<Object>();
             Trainer Testtrainer = new Trainer();
             Testtrainer.setGehalt(9999);
             Mannschaft Mannschaft = new Mannschaft();
@@ -244,7 +246,8 @@ public class MannschaftDialog extends javax.swing.JFrame {
             Mannschaft.setTrainingszeiten(new Trainingszeit[1]); //Trainingszeiten????
             Mannschaft.setNaechstesSpiel(new Spiel(new Mannschaft(), "", new Date())); //Spiel erzeugen oder auswählen
             Mannschaft.setTrainer(Testtrainer); //Wähle hier Trainer aus
-            XMLSerializer.serializeToXML(Mannschaft, ESaveObject.mannschaft);
+            ObjekteZumSpeichern.add(Testtrainer);
+            XMLSerializer.serializeToXML(ObjekteZumSpeichern, ESaveObject.mannschaft);
         } catch (IOException ex) {
             Logger.getLogger(MannschaftDialog.class.getName()).log(Level.SEVERE, null, ex);
         }

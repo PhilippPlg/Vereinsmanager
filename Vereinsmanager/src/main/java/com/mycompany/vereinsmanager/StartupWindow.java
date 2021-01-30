@@ -9,8 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JList;
-import javax.swing.ListModel;
+import javax.swing.DefaultListModel;
 
 /**
  *
@@ -290,16 +289,22 @@ public class StartupWindow extends javax.swing.JFrame {
 
     private void btnShowMitgliederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowMitgliederActionPerformed
         try {
-            ArrayList<NormalesMitglied> Mitglieder = new ArrayList<NormalesMitglied>();
-            Mitglieder = (ArrayList<NormalesMitglied>)XMLSerializer.deserializeFromXML(ESaveObject.normalesMitglied);
-         
-            //lbMitglieder.setModel(Mitgliedsnamen);
-                
-            
+
+            DefaultListModel model = new DefaultListModel();
+            model.addAll(loadMitglieder());
+            lbMitglieder.setModel(model);
+
         } catch (IOException ex) {
             Logger.getLogger(StartupWindow.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnShowMitgliederActionPerformed
+
+    public static ArrayList<NormalesMitglied> loadMitglieder() throws IOException {
+        Object UncastedMitglieder;
+        ArrayList<NormalesMitglied> Mitglieder = new ArrayList<NormalesMitglied>();
+        UncastedMitglieder = XMLSerializer.deserializeFromXML(ESaveObject.normalesMitglied);
+        return Mitglieder = (ArrayList<NormalesMitglied>) UncastedMitglieder;
+    }
 
     /**
      * @param args the command line arguments

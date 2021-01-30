@@ -6,6 +6,7 @@
 package com.mycompany.vereinsmanager;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -320,10 +321,11 @@ public class SpielerDialog extends javax.swing.JFrame {
 
     private void btnSpeichernActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSpeichernActionPerformed
         try {
-            Object ObjectZumSpeichern = new NormalesMitglied();
+            ArrayList<Object> ObjekteZumSpeichern = new ArrayList<Object>();
             ESaveObject SaveObject = ESaveObject.normalesMitglied;
             switch (Zugehörigkeit) {
                 case Mitglieder:
+                    ArrayList<NormalesMitglied> Mitglieder = StartupWindow.loadMitglieder();
                     SaveObject = ESaveObject.normalesMitglied;
                     NormalesMitglied Mitglied = new NormalesMitglied();
                     Mitglied.setVorname(tfVorname.getText());
@@ -334,7 +336,9 @@ public class SpielerDialog extends javax.swing.JFrame {
                     Mitglied.setOrt(tfOrt.getText());
                     Mitglied.setTelefonNr(tfTelefon.getText());
                     Mitglied.setEmail(tfEmail.getText());
-                    ObjectZumSpeichern = Mitglied;
+                    ObjekteZumSpeichern.addAll(Mitglieder);
+                    ObjekteZumSpeichern.add(Mitglied);
+                              
                     //ObjectZumSpeichern = new NormalesMitglied();
                     break;
                 case Spieler:
@@ -349,7 +353,7 @@ public class SpielerDialog extends javax.swing.JFrame {
                     Spieler.setOrt(tfOrt.getText());
                     Spieler.setTelefonNr(tfTelefon.getText());
                     Spieler.setEmail(tfEmail.getText());
-                    ObjectZumSpeichern = Spieler;
+                    ObjekteZumSpeichern.add(Spieler);
                     break;
                 case Trainer:
                     SaveObject = ESaveObject.trainer;
@@ -362,12 +366,12 @@ public class SpielerDialog extends javax.swing.JFrame {
                     Trainer.setOrt(tfOrt.getText());
                     Trainer.setTelefonNr(tfTelefon.getText());
                     Trainer.setEmail(tfEmail.getText());
-                    ObjectZumSpeichern = Trainer;
+                    ObjekteZumSpeichern.add(Trainer);
                     //ObjectZumSpeichern = new Trainer();
                     break;
             }
 
-            XMLSerializer.serializeToXML(ObjectZumSpeichern, SaveObject);
+            XMLSerializer.serializeToXML(ObjekteZumSpeichern, SaveObject);
         } catch (IOException ex) {
             Logger.getLogger(SpielerDialog.class.getName()).log(Level.SEVERE, null, ex);
         }

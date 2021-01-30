@@ -121,11 +121,11 @@
                   <Properties>
                     <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
                       <StringArray count="5">
-                        <StringItem index="0" value="Item 1"/>
-                        <StringItem index="1" value="Item 2"/>
-                        <StringItem index="2" value="Item 3"/>
-                        <StringItem index="3" value="Item 4"/>
-                        <StringItem index="4" value="Item 5"/>
+                        <StringItem index="0" value="Mannschaft 1"/>
+                        <StringItem index="1" value="Mannschaft 2"/>
+                        <StringItem index="2" value="Mannschaft 3"/>
+                        <StringItem index="3" value="Mannschaft 4"/>
+                        <StringItem index="4" value="Mannschaft 5"/>
                       </StringArray>
                     </Property>
                   </Properties>

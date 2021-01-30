@@ -74,7 +74,7 @@ public class StartupWindow extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         lbMannschaft.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            String[] strings = { "Mannschaft 1", "Mannschaft 2", "Mannschaft 3", "Mannschaft 4", "Mannschaft 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
@@ -343,7 +343,13 @@ public class StartupWindow extends javax.swing.JFrame {
           try {
 
             DefaultListModel model = new DefaultListModel();
-            model.addAll(XMLLoader.loadMannschaft());
+            ArrayList<Mannschaft> mannschaften = XMLLoader.loadMannschaft();
+            ArrayList<String> mannschaftsnamen = new ArrayList<String>();
+            for(Mannschaft cMannschaft : mannschaften){
+                mannschaftsnamen.add(cMannschaft.getBezeichnung());
+            }
+                
+            model.addAll(mannschaftsnamen);
             lbMannschaft.setModel(model);
 
         } catch (IOException ex) {

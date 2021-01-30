@@ -2,9 +2,36 @@
 <java version="15.0.1" class="java.beans.XMLDecoder">
  <object class="java.util.ArrayList">
   <void method="add">
-   <object class="com.mycompany.vereinsmanager.Trainer">
-    <void property="gehalt">
-     <double>9999.0</double>
+   <object class="com.mycompany.vereinsmanager.Mannschaft">
+    <void property="bezeichnung">
+     <string>mannschaft 2</string>
+    </void>
+    <void property="trainer">
+     <object class="com.mycompany.vereinsmanager.Trainer">
+      <void property="gehalt">
+       <double>9999.0</double>
+      </void>
+     </object>
+    </void>
+    <void property="trainingszeiten">
+     <array class="com.mycompany.vereinsmanager.Trainingszeit" length="1"/>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="com.mycompany.vereinsmanager.Mannschaft">
+    <void property="bezeichnung">
+     <string>mannschaft 1</string>
+    </void>
+    <void property="trainer">
+     <object class="com.mycompany.vereinsmanager.Trainer">
+      <void property="gehalt">
+       <double>9999.0</double>
+      </void>
+     </object>
+    </void>
+    <void property="trainingszeiten">
+     <array class="com.mycompany.vereinsmanager.Trainingszeit" length="1"/>
     </void>
    </object>
   </void>

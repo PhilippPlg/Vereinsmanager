@@ -72,6 +72,11 @@ public class StartupWindow extends javax.swing.JFrame {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 jMannschaftTabComponentShown(evt);
             }
+		});
+        lbMannschaft.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Mannschaft 1", "Mannschaft 2", "Mannschaft 3", "Mannschaft 4", "Mannschaft 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
         });
 
         jScrollPane1.setViewportView(lbMannschaft);
@@ -312,9 +317,13 @@ public class StartupWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddMitgliedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddMitgliedActionPerformed
-        SpielerDialog = new SpielerDialog(EZugehörigkeit.Mitglieder, true); //Hier Entity �bergeben und in Konstruktor die Werte setzen(wenn nicht neu)
-        SpielerDialog.setDefaultCloseOperation(SpielerDialog.DISPOSE_ON_CLOSE);
-        SpielerDialog.setVisible(true);
+        try {
+            SpielerDialog = new SpielerDialog(EZugehörigkeit.Mitglieder, true); //Hier Entity �bergeben und in Konstruktor die Werte setzen(wenn nicht neu)
+            SpielerDialog.setDefaultCloseOperation(SpielerDialog.DISPOSE_ON_CLOSE);
+            SpielerDialog.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(StartupWindow.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnAddMitgliedActionPerformed
 
     private void btnAddMannschaftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddMannschaftActionPerformed
@@ -324,9 +333,13 @@ public class StartupWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAddMannschaftActionPerformed
 
     private void btnAddSpielerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddSpielerActionPerformed
-        SpielerDialog = new SpielerDialog(EZugehörigkeit.Spieler, true); //Hier Entity �bergeben und in Konstruktor die Werte setzen(wenn nicht neu)
-        SpielerDialog.setDefaultCloseOperation(SpielerDialog.DISPOSE_ON_CLOSE);
-        SpielerDialog.setVisible(true);
+        try {
+            SpielerDialog = new SpielerDialog(EZugehörigkeit.Spieler, true); //Hier Entity �bergeben und in Konstruktor die Werte setzen(wenn nicht neu)
+            SpielerDialog.setDefaultCloseOperation(SpielerDialog.DISPOSE_ON_CLOSE);
+            SpielerDialog.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(StartupWindow.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnAddSpielerActionPerformed
 
     private void btnAddSpielActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddSpielActionPerformed
@@ -348,10 +361,16 @@ public class StartupWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_btnShowMitgliederActionPerformed
 
     private void btnShowMannschaftenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowMannschaftenActionPerformed
-          try {
+        try {
 
             DefaultListModel model = new DefaultListModel();
-            model.addAll(XMLLoader.loadMannschaft());
+            ArrayList<Mannschaft> mannschaften = XMLLoader.loadMannschaft();
+            ArrayList<String> mannschaftsnamen = new ArrayList<String>();
+            for (Mannschaft cMannschaft : mannschaften) {
+                mannschaftsnamen.add(cMannschaft.getBezeichnung());
+            }
+
+            model.addAll(mannschaftsnamen);
             lbMannschaft.setModel(model);
 
         } catch (IOException ex) {
@@ -360,7 +379,7 @@ public class StartupWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_btnShowMannschaftenActionPerformed
 
     private void btnShowSpielerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowSpielerActionPerformed
-         try {
+        try {
 
             DefaultListModel model = new DefaultListModel();
             model.addAll(XMLLoader.loadProfiSpieler());
@@ -372,7 +391,7 @@ public class StartupWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_btnShowSpielerActionPerformed
 
     private void btnShowSpieleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowSpieleActionPerformed
-         try {
+        try {
 
             DefaultListModel model = new DefaultListModel();
             model.addAll(XMLLoader.loadSpiel());

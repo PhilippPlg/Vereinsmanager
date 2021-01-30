@@ -238,6 +238,7 @@ public class MannschaftDialog extends javax.swing.JFrame {
     private void btnSpeichernActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSpeichernActionPerformed
         try {
             ArrayList<Object> ObjekteZumSpeichern = new ArrayList<Object>();
+            ArrayList<Mannschaft> OldMannschaften = XMLLoader.loadMannschaft();
             Trainer Testtrainer = new Trainer();
             Testtrainer.setGehalt(9999);
             Mannschaft Mannschaft = new Mannschaft();
@@ -246,7 +247,8 @@ public class MannschaftDialog extends javax.swing.JFrame {
             Mannschaft.setTrainingszeiten(new Trainingszeit[1]); //Trainingszeiten????
             Mannschaft.setNaechstesSpiel(new Spiel(new Mannschaft(), "", new Date())); //Spiel erzeugen oder auswählen
             Mannschaft.setTrainer(Testtrainer); //Wähle hier Trainer aus
-            ObjekteZumSpeichern.add(Testtrainer);
+            ObjekteZumSpeichern.addAll(OldMannschaften);
+            ObjekteZumSpeichern.add(Mannschaft);
             XMLSerializer.serializeToXML(ObjekteZumSpeichern, ESaveObject.mannschaft);
         } catch (IOException ex) {
             Logger.getLogger(MannschaftDialog.class.getName()).log(Level.SEVERE, null, ex);

@@ -29,7 +29,7 @@ import javax.swing.JTextField;
  *
  * @author Timo
  */
-public class SpielerDialog extends javax.swing.JFrame {
+public class SpielerDialog extends javax.swing.JDialog {
 
     private static EZugehörigkeit Zugehörigkeit;
     private StartupWindow parent;
@@ -199,7 +199,7 @@ public class SpielerDialog extends javax.swing.JFrame {
         btnSpeichern = new javax.swing.JButton();
         lblWarning = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
 
         lblÜberschrift.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblÜberschrift.setText("Mannschaft (erstellen / bearbeiten / anzeigen)");

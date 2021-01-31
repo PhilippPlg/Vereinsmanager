@@ -153,6 +153,11 @@ public class StartupWindow extends javax.swing.JFrame {
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
+        lbMitglieder.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbMitgliederMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(lbMitglieder);
 
         btnBeitraegeAnzeigen.setText("Ausstehende Beträge anzeigen");
@@ -214,6 +219,11 @@ public class StartupWindow extends javax.swing.JFrame {
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
+        lbSpieler.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbSpielerMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(lbSpieler);
 
         btnShowSpieler.setText("Spieler anzeigen");
@@ -263,6 +273,11 @@ public class StartupWindow extends javax.swing.JFrame {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
+        });
+        lbSpiele.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbSpieleMouseClicked(evt);
+            }
         });
         jScrollPane4.setViewportView(lbSpiele);
 
@@ -329,34 +344,26 @@ public class StartupWindow extends javax.swing.JFrame {
 
     private void btnAddMitgliedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddMitgliedActionPerformed
         try {
-            SpielerDialog = new SpielerDialog(EZugehörigkeit.Mitglieder, true, this); //Hier Entity �bergeben und in Konstruktor die Werte setzen(wenn nicht neu)
-            SpielerDialog.setDefaultCloseOperation(SpielerDialog.DISPOSE_ON_CLOSE);
-            SpielerDialog.setVisible(true);
+            mitgliedDialogErzeugen(true);
         } catch (IOException ex) {
             Logger.getLogger(StartupWindow.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnAddMitgliedActionPerformed
 
     private void btnAddMannschaftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddMannschaftActionPerformed
-        MannschaftDialog = new MannschaftDialog(true, this); //Hier Entity �bergeben und in Konstruktor die Werte setzen(wenn nicht neu)
-        MannschaftDialog.setDefaultCloseOperation(MannschaftDialog.DISPOSE_ON_CLOSE);
-        MannschaftDialog.setVisible(true);
+        mannschaftDialogErzeugen(true);
     }//GEN-LAST:event_btnAddMannschaftActionPerformed
 
     private void btnAddSpielerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddSpielerActionPerformed
         try {
-            SpielerDialog = new SpielerDialog(EZugehörigkeit.Spieler, true, this); //Hier Entity �bergeben und in Konstruktor die Werte setzen(wenn nicht neu)
-            SpielerDialog.setDefaultCloseOperation(SpielerDialog.DISPOSE_ON_CLOSE);
-            SpielerDialog.setVisible(true);
+            spielerDialogErzeugen(true);
         } catch (IOException ex) {
             Logger.getLogger(StartupWindow.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnAddSpielerActionPerformed
 
     private void btnAddSpielActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddSpielActionPerformed
-        SpielDialog = new SpielDialog(true, this); //Hier Entity �bergeben und in Konstruktor die Werte setzen(wenn nicht neu)
-        SpielDialog.setDefaultCloseOperation(SpielDialog.DISPOSE_ON_CLOSE);
-        SpielDialog.setVisible(true);
+        spielDialogErzeugen(true);
     }//GEN-LAST:event_btnAddSpielActionPerformed
 
     private void btnShowMitgliederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowMitgliederActionPerformed
@@ -429,13 +436,81 @@ public class StartupWindow extends javax.swing.JFrame {
         JList list = (JList) evt.getSource();
         if (evt.getClickCount() == 2) {
             int index = list.locationToIndex(evt.getPoint());
-            Object Caption = list.getModel().getElementAt(index);
-            System.out.println("index: " + index);
+            String Caption = list.getModel().getElementAt(index).toString();
+            mannschaftDialogErzeugen(false);
         }
     }//GEN-LAST:event_lbMannschaftMouseClicked
 
+    private void lbMitgliederMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbMitgliederMouseClicked
+        JList list = (JList) evt.getSource();
+        if (evt.getClickCount() == 2) {
+            try {
+                int index = list.locationToIndex(evt.getPoint());
+                String Caption = list.getModel().getElementAt(index).toString();
+                mitgliedDialogErzeugen(false);
+            } catch (IOException ex) {
+                Logger.getLogger(StartupWindow.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_lbMitgliederMouseClicked
+
+    private void lbSpielerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbSpielerMouseClicked
+        JList list = (JList) evt.getSource();
+        if (evt.getClickCount() == 2) {
+            try {
+                int index = list.locationToIndex(evt.getPoint());
+                String Caption = list.getModel().getElementAt(index).toString();
+                spielerDialogErzeugen(false);
+            } catch (IOException ex) {
+                Logger.getLogger(StartupWindow.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_lbSpielerMouseClicked
+
+    private void lbSpieleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbSpieleMouseClicked
+        JList list = (JList) evt.getSource();
+        if (evt.getClickCount() == 2) {
+            try {
+                int index = list.locationToIndex(evt.getPoint());
+                String Caption = list.getModel().getElementAt(index).toString();
+                spielerDialogErzeugen(false);
+            } catch (IOException ex) {
+                Logger.getLogger(StartupWindow.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_lbSpieleMouseClicked
+
     private void jSpielTabComponentShown(java.awt.event.ComponentEvent evt) {
         btnShowSpieleActionPerformed(null);
+    }
+
+    private void mitgliedDialogErzeugen(Boolean isNew) throws IOException {
+        SpielerDialog = new SpielerDialog(EZugehörigkeit.Mitglieder, isNew, this); //Hier Entity �bergeben und in Konstruktor die Werte setzen(wenn nicht neu)
+        SpielerDialog.setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
+        SpielerDialog.setDefaultCloseOperation(HIDE_ON_CLOSE);
+        SpielerDialog.setModal(true);
+        SpielerDialog.setVisible(true);
+    }
+
+    private void spielerDialogErzeugen(Boolean isNew) throws IOException {
+        SpielerDialog = new SpielerDialog(EZugehörigkeit.Spieler, isNew, this); //Hier Entity �bergeben und in Konstruktor die Werte setzen(wenn nicht neu)
+        SpielerDialog.setDefaultCloseOperation(HIDE_ON_CLOSE);
+        SpielerDialog.setModal(true);
+        SpielerDialog.setVisible(true);
+    }
+
+    private void mannschaftDialogErzeugen(Boolean isNew) {
+        MannschaftDialog = new MannschaftDialog(isNew, this); //Hier Entity �bergeben und in Konstruktor die Werte setzen(wenn nicht neu)
+        MannschaftDialog.setDefaultCloseOperation(HIDE_ON_CLOSE);
+        MannschaftDialog.setModal(true);
+        MannschaftDialog.setVisible(true);
+    }
+
+    private void spielDialogErzeugen(Boolean isNew) {
+        SpielDialog = new SpielDialog(isNew, this); //Hier Entity �bergeben und in Konstruktor die Werte setzen(wenn nicht neu)
+        SpielDialog.setDefaultCloseOperation(HIDE_ON_CLOSE);
+        SpielDialog.setModal(true);
+        SpielDialog.setVisible(true);
     }
 
     /**

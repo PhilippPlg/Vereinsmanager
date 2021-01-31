@@ -15,7 +15,7 @@ import javax.swing.JTextField;
  *
  * @author Timo
  */
-public class SpielDialog extends javax.swing.JFrame {
+public class SpielDialog extends javax.swing.JDialog {
 
     private StartupWindow parent;
 
@@ -136,7 +136,7 @@ public class SpielDialog extends javax.swing.JFrame {
         btnSpeichern = new javax.swing.JButton();
         btnVerwerfen = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
 
         lblÜberschrift.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblÜberschrift.setText("Spiel");

@@ -14,7 +14,7 @@ import java.util.ArrayList;
  *
  * @author Timo
  */
-public class SelectTrainingszeitenDialog extends javax.swing.JFrame {
+public class SelectTrainingszeitenDialog extends javax.swing.JDialog {
 
     /**
      * Creates new form SelectTrainingszeitenDialog
@@ -69,7 +69,7 @@ public class SelectTrainingszeitenDialog extends javax.swing.JFrame {
         btnSpeichern = new javax.swing.JButton();
         lblWarning = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+	setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
 
         cbMontag.setText("Montag");
         cbMontag.addItemListener(new java.awt.event.ItemListener() {

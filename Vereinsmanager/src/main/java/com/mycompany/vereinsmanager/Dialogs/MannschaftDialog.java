@@ -28,7 +28,7 @@ import javax.swing.JTextField;
  *
  * @author Timo
  */
-public class MannschaftDialog extends javax.swing.JFrame {
+public class MannschaftDialog extends javax.swing.JDialog {
 
     private boolean IsNew;
     public SelectTrainingszeitenDialog EditTrainingszeitenDialog;
@@ -149,7 +149,7 @@ public class MannschaftDialog extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         lblWarning = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
 
         lblÜberschrift.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblÜberschrift.setText("Mannschaft");

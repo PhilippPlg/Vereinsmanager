@@ -43,36 +43,41 @@ public class XMLLoader {
 
     public static ArrayList<NormalesMitglied> loadMitglieder() throws IOException {
         Object UncastedMitglieder = deserializeFromXML(ESaveObject.normalesMitglied);
-          if(UncastedMitglieder == null)
+        if (UncastedMitglieder == null) {
             return new ArrayList<NormalesMitglied>();
+        }
         return (ArrayList<NormalesMitglied>) UncastedMitglieder;
     }
 
     public static ArrayList<Profispieler> loadProfiSpieler() throws IOException {
         Object UncastedSpieler = deserializeFromXML(ESaveObject.profiSpieler);
-          if(UncastedSpieler == null)
+        if (UncastedSpieler == null) {
             return new ArrayList<Profispieler>();
+        }
         return (ArrayList<Profispieler>) UncastedSpieler;
     }
 
     public static ArrayList<Mannschaft> loadMannschaft() throws IOException {
         Object UncastedMannschaft = deserializeFromXML(ESaveObject.mannschaft);
-        if(UncastedMannschaft == null)
+        if (UncastedMannschaft == null) {
             return new ArrayList<Mannschaft>();
+        }
         return (ArrayList<Mannschaft>) UncastedMannschaft;
     }
 
     public static ArrayList<Trainer> loadTrainer() throws IOException {
         Object UncastedTrainer = deserializeFromXML(ESaveObject.trainer);
-          if(UncastedTrainer == null)
+        if (UncastedTrainer == null) {
             return new ArrayList<Trainer>();
+        }
         return (ArrayList<Trainer>) UncastedTrainer;
     }
 
     public static ArrayList<Spiel> loadSpiel() throws IOException {
         Object UncastedSpiel = deserializeFromXML(ESaveObject.spiel);
-          if(UncastedSpiel == null)
+        if (UncastedSpiel == null) {
             return new ArrayList<Spiel>();
+        }
         return (ArrayList<Spiel>) UncastedSpiel;
     }
 

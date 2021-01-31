@@ -5,6 +5,8 @@
  */
 package com.mycompany.vereinsmanager;
 
+import java.util.Date;
+
 /**
  *
  * @author masia
@@ -13,6 +15,10 @@ public class Trainer extends Mitglied {
        private double Gehalt;
 
     public Trainer() {
+    }
+    
+    public Trainer( String vorname, String nachname, String strasse, String plz, String ort, Date geburtsDatum, String email, String telefonNr ) {
+        super( vorname, nachname, strasse, plz, ort, geburtsDatum, email, telefonNr );
     }
 
     public double getGehalt() {

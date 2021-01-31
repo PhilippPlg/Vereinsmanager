@@ -5,6 +5,8 @@
  */
 package com.mycompany.vereinsmanager;
 
+import java.util.Date;
+
 /**
  *
  * @author masia
@@ -13,6 +15,10 @@ public class NormalesMitglied extends Mitglied{
     private double zuZahlenderBetrag;
 
     public NormalesMitglied() {
+    }
+    
+    public NormalesMitglied( String vorname, String nachname, String straße, String PLZ, String ort, Date geburtsDatum, String email, String telefonNr ) {
+        super( vorname, nachname, straße, PLZ, ort, geburtsDatum, email, telefonNr);
     }
 
     public double getZuZahlenderBetrag() {

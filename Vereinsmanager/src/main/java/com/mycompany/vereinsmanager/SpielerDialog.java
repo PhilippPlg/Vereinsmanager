@@ -5,6 +5,7 @@
  */
 package com.mycompany.vereinsmanager;
 
+import static com.mycompany.vereinsmanager.Validator.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -179,6 +180,7 @@ public class SpielerDialog extends javax.swing.JFrame {
         cboMannschaft = new javax.swing.JComboBox<>();
         btnVerwerfen = new javax.swing.JButton();
         btnSpeichern = new javax.swing.JButton();
+        lblWarning = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -276,7 +278,8 @@ public class SpielerDialog extends javax.swing.JFrame {
                                         .addComponent(btnVerwerfen)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(btnSpeichern))
-                                    .addComponent(cboMannschaft, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(cboMannschaft, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(lblWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -322,7 +325,9 @@ public class SpielerDialog extends javax.swing.JFrame {
                     .addComponent(cboZugehörigkeit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13)
                     .addComponent(cboMannschaft, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 121, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(lblWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSpeichern)
                     .addComponent(btnVerwerfen))
@@ -334,57 +339,70 @@ public class SpielerDialog extends javax.swing.JFrame {
 
     private void btnSpeichernActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSpeichernActionPerformed
         try {
-            ArrayList<Object> ObjekteZumSpeichern = new ArrayList<Object>();
-            ESaveObject SaveObject = ESaveObject.normalesMitglied;
-            switch (Zugehörigkeit) {
-                case Mitglieder:
-                    ArrayList<NormalesMitglied> Mitglieder = XMLLoader.loadMitglieder();
-                    SaveObject = ESaveObject.normalesMitglied;
-                    NormalesMitglied Mitglied = new NormalesMitglied();
-                    Mitglied.setVorname(tfVorname.getText());
-                    Mitglied.setNachname(tfNachname.getText());
-                    Mitglied.setStraße(tfStraße.getText());
-                    Mitglied.setGeburtsDatum(new Date()); //tfGeburtsdatum.getText()
-                    Mitglied.setPLZ(tfPLZ.getText());
-                    Mitglied.setOrt(tfOrt.getText());
-                    Mitglied.setTelefonNr(tfTelefon.getText());
-                    Mitglied.setEmail(tfEmail.getText());
-                    ObjekteZumSpeichern.addAll(Mitglieder);
-                    ObjekteZumSpeichern.add(Mitglied);
-
-                    break;
-                case Spieler:
-                    ArrayList<Profispieler> profis = XMLLoader.loadProfiSpieler();
-                    SaveObject = ESaveObject.profiSpieler;
-                    Profispieler Spieler = new Profispieler();
-                    Spieler.setVorname(tfVorname.getText());
-                    Spieler.setNachname(tfNachname.getText());
-                    Spieler.setStraße(tfStraße.getText());
-                    Spieler.setGeburtsDatum(new Date()); //tfGeburtsdatum.getText()
-                    Spieler.setPLZ(tfPLZ.getText());
-                    Spieler.setOrt(tfOrt.getText());
-                    Spieler.setTelefonNr(tfTelefon.getText());
-                    Spieler.setEmail(tfEmail.getText());
-                    profis.add( Spieler );
-                    ObjekteZumSpeichern.addAll( profis );
-                    break;
-                case Trainer:
-                    SaveObject = ESaveObject.trainer;
-                    Trainer Trainer = new Trainer();
-                    Trainer.setVorname(tfVorname.getText());
-                    Trainer.setNachname(tfNachname.getText());
-                    Trainer.setStraße(tfStraße.getText());
-                    Trainer.setGeburtsDatum(new Date()); //tfGeburtsdatum.getText()
-                    Trainer.setPLZ(tfPLZ.getText());
-                    Trainer.setOrt(tfOrt.getText());
-                    Trainer.setTelefonNr(tfTelefon.getText());
-                    Trainer.setEmail(tfEmail.getText());
-                    ObjekteZumSpeichern.add(Trainer);
-                    //ObjectZumSpeichern = new Trainer();
-                    break;
+            // html damit der linebreak im label funktioniert, sehr hässlich
+            String warning = "<html>";
+            if( !isValidEmail(tfEmail.getText() ) ) {
+                warning += "Die Email-Adresse ist falsch formatiert.<br>";
             }
+            if( !isValidDate(tfGeburtsdatum.getText()) ) {
+                warning += "Das Geburtsdatum ist falsch formatiert.";
+            }
+            if( warning.equals("<html>") ) {
+                ArrayList<Object> ObjekteZumSpeichern = new ArrayList<Object>();
+                ESaveObject SaveObject = ESaveObject.normalesMitglied;
+                switch (Zugehörigkeit) {
+                    case Mitglieder:
+                        ArrayList<NormalesMitglied> Mitglieder = XMLLoader.loadMitglieder();
+                        SaveObject = ESaveObject.normalesMitglied;
+                        NormalesMitglied Mitglied = new NormalesMitglied();
+                        Mitglied.setVorname(tfVorname.getText());
+                        Mitglied.setNachname(tfNachname.getText());
+                        Mitglied.setStraße(tfStraße.getText());
+                        Mitglied.setGeburtsDatum(new Date()); //tfGeburtsdatum.getText()
+                        Mitglied.setPLZ(tfPLZ.getText());
+                        Mitglied.setOrt(tfOrt.getText());
+                        Mitglied.setTelefonNr(tfTelefon.getText());
+                        Mitglied.setEmail(tfEmail.getText());
+                        ObjekteZumSpeichern.addAll(Mitglieder);
+                        ObjekteZumSpeichern.add(Mitglied);
 
-            XMLSerializer.serializeToXML(ObjekteZumSpeichern, SaveObject);
+                        break;
+                    case Spieler:
+                        ArrayList<Profispieler> profis = XMLLoader.loadProfiSpieler();
+                        SaveObject = ESaveObject.profiSpieler;
+                        Profispieler Spieler = new Profispieler();
+                        Spieler.setVorname(tfVorname.getText());
+                        Spieler.setNachname(tfNachname.getText());
+                        Spieler.setStraße(tfStraße.getText());
+                        Spieler.setGeburtsDatum(new Date()); //tfGeburtsdatum.getText()
+                        Spieler.setPLZ(tfPLZ.getText());
+                        Spieler.setOrt(tfOrt.getText());
+                        Spieler.setTelefonNr(tfTelefon.getText());
+                        Spieler.setEmail(tfEmail.getText());
+                        profis.add( Spieler );
+                        ObjekteZumSpeichern.addAll( profis );
+                        break;
+                    case Trainer:
+                        SaveObject = ESaveObject.trainer;
+                        Trainer Trainer = new Trainer();
+                        Trainer.setVorname(tfVorname.getText());
+                        Trainer.setNachname(tfNachname.getText());
+                        Trainer.setStraße(tfStraße.getText());
+                        Trainer.setGeburtsDatum(new Date()); //tfGeburtsdatum.getText()
+                        Trainer.setPLZ(tfPLZ.getText());
+                        Trainer.setOrt(tfOrt.getText());
+                        Trainer.setTelefonNr(tfTelefon.getText());
+                        Trainer.setEmail(tfEmail.getText());
+                        ObjekteZumSpeichern.add(Trainer);
+                        //ObjectZumSpeichern = new Trainer();
+                        break;
+                }
+                XMLSerializer.serializeToXML(ObjekteZumSpeichern, SaveObject);
+                lblWarning.setText("<html><b>Das Mitglied wurde gespeichert!</b></html>");
+            } else {
+                warning += "</html>";
+                lblWarning.setText(warning);
+            }
         } catch (IOException ex) {
             Logger.getLogger(SpielerDialog.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -445,6 +463,7 @@ public class SpielerDialog extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel lblWarning;
     private javax.swing.JLabel lblÜberschrift;
     private javax.swing.JTextField tfEmail;
     private javax.swing.JTextField tfGeburtsdatum;

@@ -95,6 +95,7 @@
                                   <Component id="cboMannschaft" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
+                          <Component id="lblWarning" alignment="0" min="-2" pref="252" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -157,7 +158,9 @@
                   <Component id="jLabel13" alignment="1" min="-2" max="-2" attributes="0"/>
                   <Component id="cboMannschaft" alignment="1" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="121" max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="lblWarning" min="-2" pref="46" max="-2" attributes="0"/>
+              <EmptySpace pref="57" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnSpeichern" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnVerwerfen" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -282,6 +285,8 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSpeichernActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblWarning">
     </Component>
   </SubComponents>
 </Form>

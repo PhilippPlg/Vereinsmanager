@@ -546,14 +546,24 @@ public class StartupWindow extends javax.swing.JFrame {
                 ArrayList<String> teamSpieler = new ArrayList<>();
                 ArrayList<Profispieler> alleSpieler = XMLLoader.loadProfiSpieler();
                 ArrayList<NormalesMitglied> alleMitglieder = XMLLoader.loadMitglieder();
+                String mannschaftsName = mannschaft.getBezeichnung();
                 for (Profispieler cSpieler : alleSpieler) {
-                    if (cSpieler.getMannschaft().equals(mannschaft.getBezeichnung())) {
+                    String cMannschaftsName = cSpieler.getMannschaft();
+
+                    if (cMannschaftsName == null || mannschaftsName == null) {
+                        continue;
+                    }
+                    if (cMannschaftsName.equals(mannschaftsName)) {
                         teamSpieler.add(cSpieler.getVorname() + " " + cSpieler.getNachname());
                     }
                     break;
                 }
                 for (NormalesMitglied cMitglied : alleMitglieder) {
-                    if (cMitglied.getMannschaft().equals(mannschaft.getBezeichnung())) {
+                    String cMannschaftsName = cMitglied.getMannschaft();
+                    if (cMannschaftsName == null || mannschaftsName == null) {
+                        continue;
+                    }
+                    if (cMannschaftsName.equals(mannschaftsName)) {
                         teamSpieler.add(cMitglied.getVorname() + " " + cMitglied.getNachname());
                     }
                     break;
@@ -620,8 +630,8 @@ public class StartupWindow extends javax.swing.JFrame {
         }
         return new Spiel(null, null, null);
     }
-    
-    public void AllesAktualisieren(){
+
+    public void AllesAktualisieren() {
         btnShowMannschaftenActionPerformed(null);
         btnShowMitgliederActionPerformed(null);
         btnShowSpieleActionPerformed(null);

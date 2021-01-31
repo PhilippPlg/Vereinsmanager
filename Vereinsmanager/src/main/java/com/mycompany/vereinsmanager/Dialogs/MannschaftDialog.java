@@ -9,6 +9,7 @@ import com.mycompany.vereinsmanager.Enums.EObjektStatus;
 import com.mycompany.vereinsmanager.Enums.ESaveObject;
 import com.mycompany.vereinsmanager.Enums.ESaveStatus;
 import com.mycompany.vereinsmanager.Entities.Mannschaft;
+import com.mycompany.vereinsmanager.Entities.NormalesMitglied;
 import com.mycompany.vereinsmanager.Entities.Spiel;
 import com.mycompany.vereinsmanager.main.StartupWindow;
 import com.mycompany.vereinsmanager.Entities.Trainer;
@@ -303,6 +304,15 @@ public class MannschaftDialog extends javax.swing.JDialog {
         try {
             ArrayList<Object> ObjekteZumSpeichern = new ArrayList<Object>();
             ArrayList<Mannschaft> OldMannschaften = XMLLoader.loadMannschaft();
+            if (!IsNew) {
+                for (Mannschaft cMannschaft : OldMannschaften) {
+                    if (tfBezeichnung.getText().equals(cMannschaft.getBezeichnung())) {
+                        OldMannschaften.remove(cMannschaft);
+                        break;
+                    }
+                }
+            }
+
             Trainer Testtrainer = new Trainer();
             Testtrainer.setGehalt(9999);
             Mannschaft Mannschaft = new Mannschaft();

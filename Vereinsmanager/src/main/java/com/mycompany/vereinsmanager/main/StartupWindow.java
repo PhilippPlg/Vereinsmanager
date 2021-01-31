@@ -3,8 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.vereinsmanager;
+package com.mycompany.vereinsmanager.main;
 
+import com.mycompany.vereinsmanager.Entities.Mannschaft;
+import com.mycompany.vereinsmanager.Enums.EZugehörigkeit;
+import com.mycompany.vereinsmanager.Dialogs.MannschaftDialog;
+import com.mycompany.vereinsmanager.Dialogs.SpielerDialog;
+import com.mycompany.vereinsmanager.Dialogs.SpielDialog;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -72,13 +77,13 @@ public class StartupWindow extends javax.swing.JFrame {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 jMannschaftTabComponentShown(evt);
             }
-		});
+        });
+
         lbMannschaft.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Mannschaft 1", "Mannschaft 2", "Mannschaft 3", "Mannschaft 4", "Mannschaft 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-
         jScrollPane1.setViewportView(lbMannschaft);
 
         btnAddMannschaft.setText("Mannschaft erstellen");

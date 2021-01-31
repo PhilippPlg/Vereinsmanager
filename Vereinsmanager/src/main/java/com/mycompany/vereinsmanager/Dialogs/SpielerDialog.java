@@ -3,9 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.vereinsmanager;
+package com.mycompany.vereinsmanager.Dialogs;
 
-import static com.mycompany.vereinsmanager.Validator.*;
+import com.mycompany.vereinsmanager.Enums.EObjektStatus;
+import com.mycompany.vereinsmanager.Enums.ESaveObject;
+import com.mycompany.vereinsmanager.Enums.ESaveStatus;
+import com.mycompany.vereinsmanager.Enums.EZugehörigkeit;
+import com.mycompany.vereinsmanager.Entities.Mannschaft;
+import com.mycompany.vereinsmanager.Entities.NormalesMitglied;
+import com.mycompany.vereinsmanager.Entities.Profispieler;
+import com.mycompany.vereinsmanager.main.StartupWindow;
+import com.mycompany.vereinsmanager.Entities.Trainer;
+import com.mycompany.vereinsmanager.main.XMLLoader;
+import com.mycompany.vereinsmanager.main.XMLSerializer;
+import static com.mycompany.vereinsmanager.main.Validator.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;

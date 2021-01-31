@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.vereinsmanager;
+package com.mycompany.vereinsmanager.Dialogs;
 
+import com.mycompany.vereinsmanager.Entities.Trainingszeit;
+import com.mycompany.vereinsmanager.main.Validator;
 import java.awt.event.ItemEvent;
 import java.util.ArrayList;
 

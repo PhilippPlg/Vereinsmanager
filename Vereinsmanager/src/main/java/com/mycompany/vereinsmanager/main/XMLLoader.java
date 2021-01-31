@@ -3,8 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.vereinsmanager;
+package com.mycompany.vereinsmanager.main;
 
+import com.mycompany.vereinsmanager.Entities.Mannschaft;
+import com.mycompany.vereinsmanager.Entities.Profispieler;
+import com.mycompany.vereinsmanager.Entities.Trainer;
+import com.mycompany.vereinsmanager.Entities.NormalesMitglied;
+import com.mycompany.vereinsmanager.Entities.Spiel;
+import com.mycompany.vereinsmanager.Enums.ESaveObject;
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
 import java.io.File;

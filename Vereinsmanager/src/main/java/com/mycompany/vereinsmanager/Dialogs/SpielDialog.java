@@ -3,8 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.vereinsmanager;
+package com.mycompany.vereinsmanager.Dialogs;
 
+import com.mycompany.vereinsmanager.Enums.EObjektStatus;
+import com.mycompany.vereinsmanager.Enums.ESaveStatus;
+import com.mycompany.vereinsmanager.main.StartupWindow;
 import javax.swing.JList;
 import javax.swing.JTextField;
 

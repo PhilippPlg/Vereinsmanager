@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.vereinsmanager;
+package com.mycompany.vereinsmanager.main;
 
+import com.mycompany.vereinsmanager.Enums.ESaveObject;
 import java.beans.XMLEncoder;
 import java.io.File;
 import java.io.FileOutputStream;

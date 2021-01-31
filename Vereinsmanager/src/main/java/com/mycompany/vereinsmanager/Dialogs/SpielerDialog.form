@@ -81,8 +81,16 @@
                               <Component id="tfEmail" min="-2" pref="115" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabel13" min="-2" pref="98" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="jLabel13" min="-2" pref="98" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="btnLoeschen" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
                                       <Component id="btnVerwerfen" min="-2" max="-2" attributes="0"/>
@@ -161,6 +169,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnSpeichern" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnVerwerfen" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnLoeschen" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
           </Group>
@@ -288,6 +297,14 @@
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblWarning">
+    </Component>
+    <Component class="javax.swing.JButton" name="btnLoeschen">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="L&#xf6;schen"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLoeschenActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

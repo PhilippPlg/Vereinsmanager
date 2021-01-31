@@ -24,6 +24,8 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" attributes="0">
+                      <Component id="btnLoeschen" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnVerwerfen" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="btnSpeichern" min="-2" max="-2" attributes="0"/>
@@ -108,6 +110,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnSpeichern" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnVerwerfen" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnLoeschen" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="24" max="32767" attributes="0"/>
           </Group>
@@ -200,6 +203,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVerwerfenActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnLoeschen">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="L&#xf6;schen"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLoeschenActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

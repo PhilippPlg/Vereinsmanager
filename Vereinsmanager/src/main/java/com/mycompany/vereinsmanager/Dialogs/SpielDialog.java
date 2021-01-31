@@ -258,6 +258,8 @@ public class SpielDialog extends javax.swing.JDialog {
 
     private void btnSpeichernActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSpeichernActionPerformed
         // TODO add your handling code here:
+        parent.AllesAktualisieren();
+        parent.SpielDialog.dispose();
     }//GEN-LAST:event_btnSpeichernActionPerformed
 
     /**

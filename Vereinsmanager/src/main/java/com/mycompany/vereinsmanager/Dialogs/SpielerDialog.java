@@ -213,8 +213,6 @@ public class SpielerDialog extends javax.swing.JDialog {
         btnSpeichern = new javax.swing.JButton();
         lblWarning = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
-
         lblÜberschrift.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblÜberschrift.setText("Mannschaft (erstellen / bearbeiten / anzeigen)");
 
@@ -239,6 +237,7 @@ public class SpielerDialog extends javax.swing.JDialog {
         jLabel13.setText("Mannschaft");
 
         cboZugehörigkeit.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboZugehörigkeit.setEnabled(false);
 
         cboMannschaft.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -417,6 +416,10 @@ public class SpielerDialog extends javax.swing.JDialog {
                         }
 
                         NormalesMitglied mitglied = new NormalesMitglied(vorname, nachname, strasse, plz, ort, geb, email, telefon);
+                        Object Mannschaft = cboMannschaft.getSelectedItem();
+                        if (Mannschaft != null) {
+                            mitglied.setMannschaft(Mannschaft.toString());
+                        }
                         ObjekteZumSpeichern.addAll(mitglieder);
                         ObjekteZumSpeichern.add(mitglied);
                         break;
@@ -435,7 +438,10 @@ public class SpielerDialog extends javax.swing.JDialog {
                         }
 
                         Profispieler spieler = new Profispieler(vorname, nachname, strasse, plz, ort, geb, email, telefon);
-                        spieler.setMannschaft(cboMannschaft.getSelectedItem().toString());
+                        Object bMannschaft = cboMannschaft.getSelectedItem();
+                        if (bMannschaft != null) {
+                            spieler.setMannschaft(bMannschaft.toString());
+                        }
                         profis.add(spieler);
                         ObjekteZumSpeichern.addAll(profis);
                         break;
@@ -460,6 +466,7 @@ public class SpielerDialog extends javax.swing.JDialog {
                 }
                 XMLSerializer.serializeToXML(ObjekteZumSpeichern, SaveObject);
                 lblWarning.setText("<html><b>Das Mitglied wurde gespeichert!</b></html>");
+                parent.AllesAktualisieren();
                 parent.SpielerDialog.dispose();
             } else {
                 warning += "</html>";

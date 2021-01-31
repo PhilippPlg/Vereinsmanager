@@ -545,9 +545,16 @@ public class StartupWindow extends javax.swing.JFrame {
                 MannschaftDialog.setTfBezeichnung(mannschaft.getBezeichnung());
                 ArrayList<String> teamSpieler = new ArrayList<>();
                 ArrayList<Profispieler> alleSpieler = XMLLoader.loadProfiSpieler();
+                ArrayList<NormalesMitglied> alleMitglieder = XMLLoader.loadMitglieder();
                 for (Profispieler cSpieler : alleSpieler) {
                     if (cSpieler.getMannschaft().equals(mannschaft.getBezeichnung())) {
                         teamSpieler.add(cSpieler.getVorname() + " " + cSpieler.getNachname());
+                    }
+                    break;
+                }
+                for (NormalesMitglied cMitglied : alleMitglieder) {
+                    if (cMitglied.getMannschaft().equals(mannschaft.getBezeichnung())) {
+                        teamSpieler.add(cMitglied.getVorname() + " " + cMitglied.getNachname());
                     }
                     break;
                 }
@@ -612,6 +619,13 @@ public class StartupWindow extends javax.swing.JFrame {
             }
         }
         return new Spiel(null, null, null);
+    }
+    
+    public void AllesAktualisieren(){
+        btnShowMannschaftenActionPerformed(null);
+        btnShowMitgliederActionPerformed(null);
+        btnShowSpieleActionPerformed(null);
+        btnShowSpielerActionPerformed(null);
     }
 
     /**

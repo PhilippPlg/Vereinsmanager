@@ -308,12 +308,16 @@ public class MannschaftDialog extends javax.swing.JDialog {
             Mannschaft Mannschaft = new Mannschaft();
             Mannschaft.setBezeichnung(tfBezeichnung.getText());
             Mannschaft.setLetztesErgebnis(new Spiel(new Mannschaft(), "", new Date())); //Spiel erzeugen oder auswählen
-            Mannschaft.setTrainingszeiten(trainingszeiten.toArray(new Trainingszeit[trainingszeiten.size()])); //Trainingszeiten????
+            if (trainingszeiten != null) {
+                Mannschaft.setTrainingszeiten(trainingszeiten.toArray(new Trainingszeit[trainingszeiten.size()]));
+            }
             Mannschaft.setNaechstesSpiel(new Spiel(new Mannschaft(), "", new Date())); //Spiel erzeugen oder auswählen
             Mannschaft.setTrainer(Testtrainer); //Wähle hier Trainer aus
             ObjekteZumSpeichern.addAll(OldMannschaften);
             ObjekteZumSpeichern.add(Mannschaft);
             XMLSerializer.serializeToXML(ObjekteZumSpeichern, ESaveObject.mannschaft);
+            parent.AllesAktualisieren();
+            parent.MannschaftDialog.dispose();
         } catch (IOException ex) {
             Logger.getLogger(MannschaftDialog.class.getName()).log(Level.SEVERE, null, ex);
         }

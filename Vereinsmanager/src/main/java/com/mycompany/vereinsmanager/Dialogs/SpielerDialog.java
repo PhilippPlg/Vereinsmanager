@@ -77,64 +77,64 @@ public class SpielerDialog extends javax.swing.JDialog {
         return tfEmail;
     }
 
-    public void setTfEmail(JTextField tfEmail) {
-        this.tfEmail = tfEmail;
+    public void setTfEmail(String Email) {
+        this.tfEmail.setText(Email);
     }
 
     public JTextField getTfGeburtsdatum() {
         return tfGeburtsdatum;
     }
 
-    public void setTfGeburtsdatum(JTextField tfGeburtsdatum) {
-        this.tfGeburtsdatum = tfGeburtsdatum;
+    public void setTfGeburtsdatum(String Geburtsdatum) {
+        this.tfGeburtsdatum.setText(Geburtsdatum);
     }
 
     public JTextField getTfNachname() {
         return tfNachname;
     }
 
-    public void setTfNachname(JTextField tfNachname) {
-        this.tfNachname = tfNachname;
+    public void setTfNachname(String Nachname) {
+        this.tfNachname.setText(Nachname);
     }
 
     public JTextField getTfOrt() {
         return tfOrt;
     }
 
-    public void setTfOrt(JTextField tfOrt) {
-        this.tfOrt = tfOrt;
+    public void setTfOrt(String Ort) {
+        this.tfOrt.setText(Ort);
     }
 
     public JTextField getTfPLZ() {
         return tfPLZ;
     }
 
-    public void setTfPLZ(JTextField tfPLZ) {
-        this.tfPLZ = tfPLZ;
+    public void setTfPLZ(String PLZ) {
+        this.tfPLZ.setText(PLZ);
     }
 
     public JTextField getTfStraße() {
         return tfStraße;
     }
 
-    public void setTfStraße(JTextField tfStraße) {
-        this.tfStraße = tfStraße;
+    public void setTfStraße(String Straße) {
+        this.tfStraße.setText(Straße);
     }
 
     public JTextField getTfTelefon() {
         return tfTelefon;
     }
 
-    public void setTfTelefon(JTextField tfTelefon) {
-        this.tfTelefon = tfTelefon;
+    public void setTfTelefon(String Telefon) {
+        this.tfTelefon.setText(Telefon);
     }
 
     public JTextField getTfVorname() {
         return tfVorname;
     }
 
-    public void setTfVorname(JTextField tfVorname) {
-        this.tfVorname = tfVorname;
+    public void setTfVorname(String Vorname) {
+        this.tfVorname.setText(Vorname);
     }
 
     private void SetWindowTitle() {

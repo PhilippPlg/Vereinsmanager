@@ -10,7 +10,12 @@ import com.mycompany.vereinsmanager.Enums.EZugehörigkeit;
 import com.mycompany.vereinsmanager.Dialogs.MannschaftDialog;
 import com.mycompany.vereinsmanager.Dialogs.SpielerDialog;
 import com.mycompany.vereinsmanager.Dialogs.SpielDialog;
+import com.mycompany.vereinsmanager.Entities.Mitglied;
+import com.mycompany.vereinsmanager.Entities.NormalesMitglied;
+import com.mycompany.vereinsmanager.Entities.Profispieler;
+import com.mycompany.vereinsmanager.Entities.Spiel;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -343,27 +348,23 @@ public class StartupWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddMitgliedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddMitgliedActionPerformed
-        try {
-            mitgliedDialogErzeugen(true);
-        } catch (IOException ex) {
-            Logger.getLogger(StartupWindow.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        mitgliedDialogErzeugen(true, null);
     }//GEN-LAST:event_btnAddMitgliedActionPerformed
 
     private void btnAddMannschaftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddMannschaftActionPerformed
-        mannschaftDialogErzeugen(true);
+        mannschaftDialogErzeugen(true, null);
     }//GEN-LAST:event_btnAddMannschaftActionPerformed
 
     private void btnAddSpielerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddSpielerActionPerformed
         try {
-            spielerDialogErzeugen(true);
+            spielerDialogErzeugen(true, null);
         } catch (IOException ex) {
             Logger.getLogger(StartupWindow.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnAddSpielerActionPerformed
 
     private void btnAddSpielActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddSpielActionPerformed
-        spielDialogErzeugen(true);
+        spielDialogErzeugen(true, null);
     }//GEN-LAST:event_btnAddSpielActionPerformed
 
     private void btnShowMitgliederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowMitgliederActionPerformed
@@ -435,9 +436,14 @@ public class StartupWindow extends javax.swing.JFrame {
     private void lbMannschaftMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbMannschaftMouseClicked
         JList list = (JList) evt.getSource();
         if (evt.getClickCount() == 2) {
-            int index = list.locationToIndex(evt.getPoint());
-            String Caption = list.getModel().getElementAt(index).toString();
-            mannschaftDialogErzeugen(false);
+            try {
+                int index = list.locationToIndex(evt.getPoint());
+                String Caption = list.getModel().getElementAt(index).toString();
+                Mannschaft mannschaft = ermittelMannschaft(Caption);
+                mannschaftDialogErzeugen(false, mannschaft);
+            } catch (IOException ex) {
+                Logger.getLogger(StartupWindow.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_lbMannschaftMouseClicked
 
@@ -447,7 +453,8 @@ public class StartupWindow extends javax.swing.JFrame {
             try {
                 int index = list.locationToIndex(evt.getPoint());
                 String Caption = list.getModel().getElementAt(index).toString();
-                mitgliedDialogErzeugen(false);
+                NormalesMitglied mitglied = ermittelMitglied(Caption);
+                mitgliedDialogErzeugen(false, mitglied);
             } catch (IOException ex) {
                 Logger.getLogger(StartupWindow.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -460,7 +467,8 @@ public class StartupWindow extends javax.swing.JFrame {
             try {
                 int index = list.locationToIndex(evt.getPoint());
                 String Caption = list.getModel().getElementAt(index).toString();
-                spielerDialogErzeugen(false);
+                Profispieler spieler = ermittelSpieler(Caption);
+                spielerDialogErzeugen(false, spieler);
             } catch (IOException ex) {
                 Logger.getLogger(StartupWindow.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -473,7 +481,8 @@ public class StartupWindow extends javax.swing.JFrame {
             try {
                 int index = list.locationToIndex(evt.getPoint());
                 String Caption = list.getModel().getElementAt(index).toString();
-                spielerDialogErzeugen(false);
+                Spiel spiel = ermittelSpiel(Caption);
+                spielDialogErzeugen(false, spiel);
             } catch (IOException ex) {
                 Logger.getLogger(StartupWindow.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -484,33 +493,107 @@ public class StartupWindow extends javax.swing.JFrame {
         btnShowSpieleActionPerformed(null);
     }
 
-    private void mitgliedDialogErzeugen(Boolean isNew) throws IOException {
-        SpielerDialog = new SpielerDialog(EZugehörigkeit.Mitglieder, isNew, this); //Hier Entity �bergeben und in Konstruktor die Werte setzen(wenn nicht neu)
-        SpielerDialog.setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
-        SpielerDialog.setDefaultCloseOperation(HIDE_ON_CLOSE);
-        SpielerDialog.setModal(true);
-        SpielerDialog.setVisible(true);
+    private void mitgliedDialogErzeugen(Boolean isNew, Mitglied mitglied) {
+        try {
+            SpielerDialog = new SpielerDialog(EZugehörigkeit.Mitglieder, isNew, this);
+            if (mitglied != null) {
+                SpielerDialog.setTfVorname(mitglied.getVorname());
+                SpielerDialog.setTfNachname(mitglied.getNachname());
+                SpielerDialog.setTfStraße(mitglied.getStraße());
+                SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.YYYY");
+                String date = sdf.format(mitglied.getGeburtsDatum());
+                SpielerDialog.setTfGeburtsdatum(date.toString());
+                SpielerDialog.setTfPLZ(mitglied.getPLZ());
+                SpielerDialog.setTfOrt(mitglied.getOrt());
+                SpielerDialog.setTfTelefon(mitglied.getTelefonNr());
+                SpielerDialog.setTfEmail(mitglied.getEmail());
+            }
+            SpielerDialog.setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
+            SpielerDialog.setDefaultCloseOperation(HIDE_ON_CLOSE);
+            SpielerDialog.setModal(true);
+            SpielerDialog.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(StartupWindow.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
-    private void spielerDialogErzeugen(Boolean isNew) throws IOException {
+    private void spielerDialogErzeugen(Boolean isNew, Profispieler spieler) throws IOException {
         SpielerDialog = new SpielerDialog(EZugehörigkeit.Spieler, isNew, this); //Hier Entity �bergeben und in Konstruktor die Werte setzen(wenn nicht neu)
+        if (spieler != null) {
+            SpielerDialog.setTfVorname(spieler.getVorname());
+            SpielerDialog.setTfNachname(spieler.getNachname());
+            SpielerDialog.setTfStraße(spieler.getStraße());
+            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.YYYY");
+            String date = sdf.format(spieler.getGeburtsDatum());
+            SpielerDialog.setTfGeburtsdatum(date.toString());
+            SpielerDialog.setTfPLZ(spieler.getPLZ());
+            SpielerDialog.setTfOrt(spieler.getOrt());
+            SpielerDialog.setTfTelefon(spieler.getTelefonNr());
+            SpielerDialog.setTfEmail(spieler.getEmail());
+        }
         SpielerDialog.setDefaultCloseOperation(HIDE_ON_CLOSE);
         SpielerDialog.setModal(true);
         SpielerDialog.setVisible(true);
     }
 
-    private void mannschaftDialogErzeugen(Boolean isNew) {
+    private void mannschaftDialogErzeugen(Boolean isNew, Mannschaft mannschaft) {
         MannschaftDialog = new MannschaftDialog(isNew, this); //Hier Entity �bergeben und in Konstruktor die Werte setzen(wenn nicht neu)
         MannschaftDialog.setDefaultCloseOperation(HIDE_ON_CLOSE);
         MannschaftDialog.setModal(true);
         MannschaftDialog.setVisible(true);
     }
 
-    private void spielDialogErzeugen(Boolean isNew) {
+    private void spielDialogErzeugen(Boolean isNew, Spiel spiel) {
         SpielDialog = new SpielDialog(isNew, this); //Hier Entity �bergeben und in Konstruktor die Werte setzen(wenn nicht neu)
         SpielDialog.setDefaultCloseOperation(HIDE_ON_CLOSE);
         SpielDialog.setModal(true);
         SpielDialog.setVisible(true);
+    }
+
+    private Mannschaft ermittelMannschaft(String Bezeichnung) throws IOException {
+        ArrayList<Mannschaft> mannschaften = XMLLoader.loadMannschaft();
+        for (Mannschaft cMannschaft : mannschaften) {
+            if (Bezeichnung.equals(cMannschaft.getBezeichnung())) {
+                return cMannschaft;
+            }
+        }
+        return new Mannschaft();
+    }
+
+    private NormalesMitglied ermittelMitglied(String Name) throws IOException {
+        String[] parts = Name.split(" ");
+        String vorname = parts[0].trim();
+        String nachname = parts[1].trim();
+        ArrayList<NormalesMitglied> mitglieder = XMLLoader.loadMitglieder();
+        for (NormalesMitglied cMitglied : mitglieder) {
+            if (vorname.equals(cMitglied.getVorname()) && nachname.equals(cMitglied.getNachname())) {
+                return cMitglied;
+            }
+        }
+        return new NormalesMitglied();
+    }
+
+    private Profispieler ermittelSpieler(String Name) throws IOException {
+        String[] parts = Name.split(" ");
+        String vorname = parts[0].trim();
+        String nachname = parts[1].trim();
+        ArrayList<Profispieler> spieler = XMLLoader.loadProfiSpieler();
+        for (Profispieler cSpieler : spieler) {
+            if (vorname.equals(cSpieler.getVorname()) && nachname.equals(cSpieler.getNachname())) {
+                return cSpieler;
+            }
+        }
+        return new Profispieler();
+    }
+
+    private Spiel ermittelSpiel(String Bezeichnung) throws IOException {
+        ArrayList<Spiel> spiele = XMLLoader.loadSpiel(); //Richtigen PK setzen
+        for (Spiel cSpiel : spiele) {
+            if (Bezeichnung.equals(cSpiel.getEigenesTeam())) {
+                return cSpiel;
+            }
+        }
+        return new Spiel(null, null, null);
     }
 
     /**

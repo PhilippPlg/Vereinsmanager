@@ -12,8 +12,6 @@ import java.util.Date;
  * @author masia
  */
 public class Spiel {
-
-
     private Mannschaft eigenesTeam;
     private String gegnerTeam;
     private int eigenePunkte;

@@ -31,5 +31,35 @@
     </void>
    </object>
   </void>
+  <void method="add">
+   <object class="com.mycompany.vereinsmanager.Entities.NormalesMitglied">
+    <void property="PLZ">
+     <string>lkjkljlkj</string>
+    </void>
+    <void property="email">
+     <string>timo992000@gmail.com</string>
+    </void>
+    <void property="geburtsDatum">
+     <object class="java.util.Date">
+      <long>968450400000</long>
+     </object>
+    </void>
+    <void property="nachname">
+     <string>jlkjlkj</string>
+    </void>
+    <void property="ort">
+     <string>lkjjlkj</string>
+    </void>
+    <void property="straße">
+     <string>ljlk</string>
+    </void>
+    <void property="telefonNr">
+     <string>lkjljj</string>
+    </void>
+    <void property="vorname">
+     <string>jlkjkl</string>
+    </void>
+   </object>
+  </void>
  </object>
 </java>

@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.JList;
 
 /**
  *
@@ -83,6 +84,11 @@ public class StartupWindow extends javax.swing.JFrame {
             String[] strings = { "Mannschaft 1", "Mannschaft 2", "Mannschaft 3", "Mannschaft 4", "Mannschaft 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
+        });
+        lbMannschaft.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbMannschaftMouseClicked(evt);
+            }
         });
         jScrollPane1.setViewportView(lbMannschaft);
 
@@ -419,9 +425,19 @@ public class StartupWindow extends javax.swing.JFrame {
         btnShowSpielerActionPerformed(null);
     }//GEN-LAST:event_jSpielerTabComponentShown
 
-    private void jSpielTabComponentShown(java.awt.event.ComponentEvent evt) {                                           
+    private void lbMannschaftMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbMannschaftMouseClicked
+        JList list = (JList) evt.getSource();
+        if (evt.getClickCount() == 2) {
+            int index = list.locationToIndex(evt.getPoint());
+            Object Caption = list.getModel().getElementAt(index);
+            System.out.println("index: " + index);
+        }
+    }//GEN-LAST:event_lbMannschaftMouseClicked
+
+    private void jSpielTabComponentShown(java.awt.event.ComponentEvent evt) {
         btnShowSpieleActionPerformed(null);
-    }  
+    }
+
     /**
      * @param args the command line arguments
      */

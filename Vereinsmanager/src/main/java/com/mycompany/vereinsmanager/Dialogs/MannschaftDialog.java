@@ -24,6 +24,7 @@ import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
@@ -366,6 +367,10 @@ public class MannschaftDialog extends javax.swing.JDialog {
 
     private void btnLoeschenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoeschenActionPerformed
         try {
+            int result = JOptionPane.showConfirmDialog(null, "Möchten Sie das aktuelle Element wirklich löschen?", "Löschen?", JOptionPane.YES_NO_OPTION);
+            if (result == JOptionPane.NO_OPTION) {
+                return;
+            }
             ArrayList<Mannschaft> OldMannschaften = XMLLoader.loadMannschaft();
             ArrayList<Object> neueMannschaften = new ArrayList();
             for (Mannschaft cMannschaft : OldMannschaften) {

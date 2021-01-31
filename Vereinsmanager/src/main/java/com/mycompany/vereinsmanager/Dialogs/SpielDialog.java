@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
@@ -279,7 +280,11 @@ public class SpielDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_btnSpeichernActionPerformed
 
     private void btnLoeschenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoeschenActionPerformed
-        parent.AllesAktualisieren(); 
+        int result = JOptionPane.showConfirmDialog(null, "Möchten Sie das aktuelle Element wirklich löschen?", "Löschen?", JOptionPane.YES_NO_OPTION);
+        if (result == JOptionPane.NO_OPTION) {
+            return;
+        }
+        parent.AllesAktualisieren();
         parent.SpielDialog.dispose();
     }//GEN-LAST:event_btnLoeschenActionPerformed
 

@@ -23,6 +23,7 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
@@ -500,6 +501,11 @@ public class SpielerDialog extends javax.swing.JDialog {
             ArrayList<Object> neueObjekte = new ArrayList();
             String vorname = tfVorname.getText();
             String nachname = tfNachname.getText();
+            int result = JOptionPane.showConfirmDialog(null, "Möchten Sie das aktuelle Element wirklich löschen?", "Löschen?", JOptionPane.YES_NO_OPTION);
+            if (result == JOptionPane.NO_OPTION) {
+                return;
+            }
+
             switch (Zugehörigkeit) {
                 case Mitglieder:
                     ArrayList<NormalesMitglied> OldMitglieder = XMLLoader.loadMitglieder();
@@ -556,16 +562,21 @@ public class SpielerDialog extends javax.swing.JDialog {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SpielerDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SpielerDialog.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SpielerDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SpielerDialog.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SpielerDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SpielerDialog.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SpielerDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SpielerDialog.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -575,8 +586,10 @@ public class SpielerDialog extends javax.swing.JDialog {
             public void run() {
                 try {
                     new SpielerDialog(Zugehörigkeit, null).setVisible(true);
+
                 } catch (IOException ex) {
-                    Logger.getLogger(SpielerDialog.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(SpielerDialog.class
+                            .getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });

@@ -5,10 +5,16 @@
  */
 package com.mycompany.vereinsmanager.Dialogs;
 
+import com.mycompany.vereinsmanager.Entities.Mannschaft;
 import com.mycompany.vereinsmanager.Entities.Trainingszeit;
+import com.mycompany.vereinsmanager.Enums.ESaveObject;
 import com.mycompany.vereinsmanager.main.Validator;
+import com.mycompany.vereinsmanager.main.XMLLoader;
 import java.awt.event.ItemEvent;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -30,6 +36,76 @@ public class SelectTrainingszeitenDialog extends javax.swing.JDialog {
         initComponents();
         this.parent = parent;
         this.mannschaftsBezeichnung = mannschaftsBezeichnung;
+    }
+    
+    
+    public void fillFields() {
+        if( !this.mannschaftsBezeichnung.isEmpty() ) {
+            try{
+                ArrayList<Mannschaft> mannschaften = XMLLoader.loadMannschaft();
+                Trainingszeit[] zeiten = null;
+                for( int i = 0; i < mannschaften.size(); i++ ) {
+                    if( this.mannschaftsBezeichnung.equals( mannschaften.get(i).getBezeichnung() ) ) {
+                        zeiten = mannschaften.get(i).getTrainingszeiten();
+                    }
+                }
+                if( zeiten != null ) {
+                    for (Trainingszeit zeiten1 : zeiten) {
+                        this.fillField(zeiten1);
+                    }
+                }
+            } catch( IOException e ) {
+                Logger.getLogger(MannschaftDialog.class.getName()).log(Level.SEVERE, null, e);
+            }
+        }
+        parent.validate();
+    }
+    
+    public void fillField( Trainingszeit zeit ) {
+        switch( zeit.getWochentag() ) {
+            case "Montag":
+                cbMontag.setEnabled(true);
+                cbMontag.setSelected(true);
+                tfvonMontag.setText( zeit.getAnfangszeit() );
+                tfBisMontag.setText( zeit.getEndzeit() );
+                break;
+            case "Dienstag":
+                cbDienstag.setEnabled(true);
+                cbDienstag.setSelected(true);
+                tfvonDienstag.setText( zeit.getAnfangszeit() );
+                tfBisDienstag.setText( zeit.getEndzeit() );
+                break;
+            case "Mittwoch":
+                cbMittwoch.setEnabled(true);
+                cbMittwoch.setSelected(true);
+                tfvonMittwoch.setText( zeit.getAnfangszeit() );
+                tfBisMittwoch.setText( zeit.getEndzeit() );
+                break;
+            case "Donnerstag":
+                cbDonnerstag.setEnabled(true);
+                cbDonnerstag.setSelected(true);
+                tfvonDonnerstag.setText( zeit.getAnfangszeit() );
+                tfBisDonnerstag.setText( zeit.getEndzeit() );
+                break;
+            case "Freitag":
+                cbFreitag.setEnabled(true);
+                cbFreitag.setSelected(true);
+                tfvonFreitag.setText( zeit.getAnfangszeit() );
+                tfBisFreitag.setText( zeit.getEndzeit() );
+                break;
+            case "Samstag":
+                cbSamstag.setEnabled(true);
+                cbSamstag.setSelected(true);
+                tfvonSamstag.setText( zeit.getAnfangszeit() );
+                tfBisSamstag.setText( zeit.getEndzeit() );
+                break;
+            case "Sonntag":
+                cbSonntag.setEnabled(true);
+                cbSonntag.setSelected(true);
+                tfvonSonntag.setText( zeit.getAnfangszeit() );
+                tfBisSonntag.setText( zeit.getEndzeit() );
+                break;
+        }
     }
 
     /**

@@ -34,6 +34,17 @@ public class SpielerDialog extends javax.swing.JDialog {
     private static EZugehörigkeit Zugehörigkeit;
     private StartupWindow parent;
     private boolean IsNew;
+    private String cboMannschaftName;
+
+    public void setCboMannschaftName(String cboMannschaftName) {
+        try {
+            this.cboMannschaftName = cboMannschaftName;
+            setCboMannschaftenItems();
+            cboMannschaft.getModel().setSelectedItem(cboMannschaftName);
+        } catch (IOException ex) {
+            Logger.getLogger(SpielerDialog.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     /**
      * Creates new form MannschaftDialog
@@ -143,12 +154,15 @@ public class SpielerDialog extends javax.swing.JDialog {
         switch (Zugehörigkeit) {
             case Mitglieder:
                 lblÜberschrift.setText("Mitglied " + Caption);
+                cboZugehörigkeit.setSelectedIndex(0);
                 break;
             case Spieler:
                 lblÜberschrift.setText("Spieler " + Caption);
+                cboZugehörigkeit.setSelectedIndex(1);
                 break;
             case Trainer:
                 lblÜberschrift.setText("Trainer " + Caption);
+                cboZugehörigkeit.setSelectedIndex(2);
                 break;
         }
         btnSpeichern.setText(ButtonCaption);
@@ -410,7 +424,7 @@ public class SpielerDialog extends javax.swing.JDialog {
                     case Spieler:
                         ArrayList<Profispieler> profis = XMLLoader.loadProfiSpieler();
                         SaveObject = ESaveObject.profiSpieler;
-                        
+
                         if (!IsNew) {
                             for (Profispieler cspieler : profis) {
                                 if (vorname.equals(cspieler.getVorname()) && nachname.equals(cspieler.getNachname())) {
@@ -419,8 +433,9 @@ public class SpielerDialog extends javax.swing.JDialog {
                                 }
                             }
                         }
-                        
+
                         Profispieler spieler = new Profispieler(vorname, nachname, strasse, plz, ort, geb, email, telefon);
+                        spieler.setMannschaft(cboMannschaft.getSelectedItem().toString());
                         profis.add(spieler);
                         ObjekteZumSpeichern.addAll(profis);
                         break;
@@ -428,7 +443,7 @@ public class SpielerDialog extends javax.swing.JDialog {
                     case Trainer:
                         ArrayList<Trainer> trainers = XMLLoader.loadTrainer();
                         SaveObject = ESaveObject.trainer;
-                        
+
                         if (!IsNew) {
                             for (Trainer cTrainer : trainers) {
                                 if (vorname.equals(cTrainer.getVorname()) && nachname.equals(cTrainer.getNachname())) {
@@ -437,7 +452,7 @@ public class SpielerDialog extends javax.swing.JDialog {
                                 }
                             }
                         }
-                        
+
                         Trainer trainer = new Trainer(vorname, nachname, strasse, plz, ort, geb, email, telefon);
                         trainers.add(trainer);
                         ObjekteZumSpeichern.addAll(trainers);

@@ -507,6 +507,7 @@ public class StartupWindow extends javax.swing.JFrame {
                 SpielerDialog.setTfOrt(mitglied.getOrt());
                 SpielerDialog.setTfTelefon(mitglied.getTelefonNr());
                 SpielerDialog.setTfEmail(mitglied.getEmail());
+                SpielerDialog.setCboMannschaftName(mitglied.getMannschaft());
             }
             SpielerDialog.setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
             SpielerDialog.setDefaultCloseOperation(HIDE_ON_CLOSE);
@@ -530,6 +531,7 @@ public class StartupWindow extends javax.swing.JFrame {
             SpielerDialog.setTfOrt(spieler.getOrt());
             SpielerDialog.setTfTelefon(spieler.getTelefonNr());
             SpielerDialog.setTfEmail(spieler.getEmail());
+            SpielerDialog.setCboMannschaftName(spieler.getMannschaft());
         }
         SpielerDialog.setDefaultCloseOperation(HIDE_ON_CLOSE);
         SpielerDialog.setModal(true);

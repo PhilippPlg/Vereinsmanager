@@ -20,7 +20,7 @@ public class Mitglied {
     protected Date GeburtsDatum;
     protected String Email;
     protected String TelefonNr;
-    protected Mannschaft Mannschaft;
+    protected String Mannschaft;
 
     public Mitglied(String vorname, String nachname, String straße, String PLZ, String ort, Date geburtsDatum, String email, String telefonNr) {
         Vorname = vorname;
@@ -100,11 +100,11 @@ public class Mitglied {
         this.TelefonNr = TelefonNr;
     }
 
-    public Mannschaft getMannschaft() {
+    public String getMannschaft() {
         return Mannschaft;
     }
 
-    public void setMannschaft(Mannschaft Mannschaft) {
+    public void setMannschaft(String Mannschaft) {
         this.Mannschaft = Mannschaft;
     }
     

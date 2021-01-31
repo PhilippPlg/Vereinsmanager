@@ -66,10 +66,6 @@ public class Verwaltung {
         }
     }
     
-    public void setzeMitgliedInMannschaft(Mitglied mitglied, Mannschaft mannschaft){
-        mitglied.setMannschaft(mannschaft);
-    }
-    
     public void bearbeiteMitglied(String Vorname, String Nachname, String Straße,
             String PLZ, String Ort, Date Geburtsdatum, String Email, String TelefonNr) {
         // No unique identifier to change data

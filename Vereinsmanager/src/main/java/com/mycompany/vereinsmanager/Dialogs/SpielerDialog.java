@@ -362,20 +362,20 @@ public class SpielerDialog extends javax.swing.JDialog {
     private void btnSpeichernActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSpeichernActionPerformed
         try {
             Date geb = null;
-            String vorname  = tfVorname.getText();
+            String vorname = tfVorname.getText();
             String nachname = tfNachname.getText();
-            String strasse  = tfStraße.getText();
-            String plz      = tfPLZ.getText();
-            String ort      = tfOrt.getText();
-            String telefon  = tfTelefon.getText();
-            String email    = tfEmail.getText();
-            String gebRaw   = tfGeburtsdatum.getText();
+            String strasse = tfStraße.getText();
+            String plz = tfPLZ.getText();
+            String ort = tfOrt.getText();
+            String telefon = tfTelefon.getText();
+            String email = tfEmail.getText();
+            String gebRaw = tfGeburtsdatum.getText();
             // html damit der linebreak im label funktioniert, sehr hässlich
             String warning = "<html>";
-            if( !isValidEmail( email ) ) {
+            if (!isValidEmail(email)) {
                 warning += "Die Email-Adresse ist falsch formatiert.<br>";
             }
-            if( !isValidDate( gebRaw ) ) {
+            if (!isValidDate(gebRaw)) {
                 warning += "Das Geburtsdatum ist falsch formatiert.";
             } else {
                 // parts[2]=Jahre || parts[1]=Monate || parts[0]=Tage
@@ -384,38 +384,68 @@ public class SpielerDialog extends javax.swing.JDialog {
                 // A year y is represented by the integer y - 1900.
                 // A month is represented by an integer from 0 to 11; 0 is January, 1 is February, and so forth; thus 11 is December.
                 // A date (day of month) is represented by an integer from 1 to 31 in the usual manner.
-                geb = new Date( Integer.parseInt(parts[2]) - 1900, Integer.parseInt(parts[1]) - 1, Integer.parseInt(parts[0]));
+                geb = new Date(Integer.parseInt(parts[2]) - 1900, Integer.parseInt(parts[1]) - 1, Integer.parseInt(parts[0]));
             }
             if (warning.equals("<html>")) {
                 ArrayList<Object> ObjekteZumSpeichern = new ArrayList<Object>();
                 ESaveObject SaveObject = ESaveObject.normalesMitglied;
                 switch (Zugehörigkeit) {
                     case Mitglieder:
-                        ArrayList<NormalesMitglied> Mitglieder = XMLLoader.loadMitglieder();
+                        ArrayList<NormalesMitglied> mitglieder = XMLLoader.loadMitglieder();
                         SaveObject = ESaveObject.normalesMitglied;
-                        NormalesMitglied mitglied = new NormalesMitglied( vorname, nachname, strasse, plz, ort, geb, email, telefon );
-                        ObjekteZumSpeichern.addAll(Mitglieder);
+                        if (!IsNew) {
+                            for (NormalesMitglied cmitglied : mitglieder) {
+                                if (vorname.equals(cmitglied.getVorname()) && nachname.equals(cmitglied.getNachname())) {
+                                    mitglieder.remove(cmitglied);
+                                    break;
+                                }
+                            }
+                        }
+
+                        NormalesMitglied mitglied = new NormalesMitglied(vorname, nachname, strasse, plz, ort, geb, email, telefon);
+                        ObjekteZumSpeichern.addAll(mitglieder);
                         ObjekteZumSpeichern.add(mitglied);
                         break;
-                        
+
                     case Spieler:
                         ArrayList<Profispieler> profis = XMLLoader.loadProfiSpieler();
                         SaveObject = ESaveObject.profiSpieler;
-                        Profispieler spieler = new Profispieler( vorname, nachname, strasse, plz, ort, geb, email, telefon );
-                        profis.add( spieler );
-                        ObjekteZumSpeichern.addAll( profis );
-                        break;
                         
+                        if (!IsNew) {
+                            for (Profispieler cspieler : profis) {
+                                if (vorname.equals(cspieler.getVorname()) && nachname.equals(cspieler.getNachname())) {
+                                    profis.remove(cspieler);
+                                    break;
+                                }
+                            }
+                        }
+                        
+                        Profispieler spieler = new Profispieler(vorname, nachname, strasse, plz, ort, geb, email, telefon);
+                        profis.add(spieler);
+                        ObjekteZumSpeichern.addAll(profis);
+                        break;
+
                     case Trainer:
                         ArrayList<Trainer> trainers = XMLLoader.loadTrainer();
                         SaveObject = ESaveObject.trainer;
-                        Trainer trainer = new Trainer( vorname, nachname, strasse, plz, ort, geb, email, telefon );
-                        trainers.add( trainer );
+                        
+                        if (!IsNew) {
+                            for (Trainer cTrainer : trainers) {
+                                if (vorname.equals(cTrainer.getVorname()) && nachname.equals(cTrainer.getNachname())) {
+                                    trainers.remove(cTrainer);
+                                    break;
+                                }
+                            }
+                        }
+                        
+                        Trainer trainer = new Trainer(vorname, nachname, strasse, plz, ort, geb, email, telefon);
+                        trainers.add(trainer);
                         ObjekteZumSpeichern.addAll(trainers);
                         break;
                 }
                 XMLSerializer.serializeToXML(ObjekteZumSpeichern, SaveObject);
                 lblWarning.setText("<html><b>Das Mitglied wurde gespeichert!</b></html>");
+                parent.SpielerDialog.dispose();
             } else {
                 warning += "</html>";
                 lblWarning.setText(warning);

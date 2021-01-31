@@ -23,6 +23,7 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
@@ -212,6 +213,7 @@ public class SpielerDialog extends javax.swing.JDialog {
         btnVerwerfen = new javax.swing.JButton();
         btnSpeichern = new javax.swing.JButton();
         lblWarning = new javax.swing.JLabel();
+        btnLoeschen = new javax.swing.JButton();
 
         lblÜberschrift.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblÜberschrift.setText("Mannschaft (erstellen / bearbeiten / anzeigen)");
@@ -252,6 +254,13 @@ public class SpielerDialog extends javax.swing.JDialog {
         btnSpeichern.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSpeichernActionPerformed(evt);
+            }
+        });
+
+        btnLoeschen.setText("Löschen");
+        btnLoeschen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoeschenActionPerformed(evt);
             }
         });
 
@@ -306,8 +315,13 @@ public class SpielerDialog extends javax.swing.JDialog {
                                 .addGap(39, 39, 39)
                                 .addComponent(tfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(39, 39, 39)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(39, 39, 39))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(btnLoeschen)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(btnVerwerfen)
@@ -365,7 +379,8 @@ public class SpielerDialog extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSpeichern)
-                    .addComponent(btnVerwerfen))
+                    .addComponent(btnVerwerfen)
+                    .addComponent(btnLoeschen))
                 .addGap(23, 23, 23))
         );
 
@@ -481,6 +496,58 @@ public class SpielerDialog extends javax.swing.JDialog {
         parent.SpielerDialog.dispose();
     }//GEN-LAST:event_btnVerwerfenActionPerformed
 
+    private void btnLoeschenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoeschenActionPerformed
+        try {
+            ArrayList<Object> neueObjekte = new ArrayList();
+            String vorname = tfVorname.getText();
+            String nachname = tfNachname.getText();
+            int result = JOptionPane.showConfirmDialog(null, "Möchten Sie das aktuelle Element wirklich löschen?", "Löschen?", JOptionPane.YES_NO_OPTION);
+            if (result == JOptionPane.NO_OPTION) {
+                return;
+            }
+
+            switch (Zugehörigkeit) {
+                case Mitglieder:
+                    ArrayList<NormalesMitglied> OldMitglieder = XMLLoader.loadMitglieder();
+                    for (NormalesMitglied cmitglied : OldMitglieder) {
+                        if (vorname.equals(cmitglied.getVorname()) && nachname.equals(cmitglied.getNachname())) {
+                            OldMitglieder.remove(cmitglied);
+                            break;
+                        }
+                    }
+                    neueObjekte.addAll(OldMitglieder);
+                    XMLSerializer.serializeToXML(neueObjekte, ESaveObject.normalesMitglied);
+                    break;
+                case Spieler:
+                    ArrayList<Profispieler> OldSpieler = XMLLoader.loadProfiSpieler();
+                    for (Profispieler cSpieler : OldSpieler) {
+                        if (vorname.equals(cSpieler.getVorname()) && nachname.equals(cSpieler.getNachname())) {
+                            OldSpieler.remove(cSpieler);
+                            break;
+                        }
+                    }
+                    neueObjekte.addAll(OldSpieler);
+                    XMLSerializer.serializeToXML(neueObjekte, ESaveObject.profiSpieler);
+                    break;
+                case Trainer:
+                    ArrayList<Trainer> OldTrainer = XMLLoader.loadTrainer();
+                    for (Trainer cTrainer : OldTrainer) {
+                        if (vorname.equals(cTrainer.getVorname()) && nachname.equals(cTrainer.getNachname())) {
+                            OldTrainer.remove(cTrainer);
+                            break;
+                        }
+                    }
+                    neueObjekte.addAll(OldTrainer);
+                    XMLSerializer.serializeToXML(neueObjekte, ESaveObject.trainer);
+                    break;
+            }
+            parent.AllesAktualisieren();
+            parent.SpielerDialog.dispose();
+        } catch (IOException ex) {
+            Logger.getLogger(SpielerDialog.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnLoeschenActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -495,16 +562,21 @@ public class SpielerDialog extends javax.swing.JDialog {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SpielerDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SpielerDialog.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SpielerDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SpielerDialog.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SpielerDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SpielerDialog.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SpielerDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SpielerDialog.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -514,14 +586,17 @@ public class SpielerDialog extends javax.swing.JDialog {
             public void run() {
                 try {
                     new SpielerDialog(Zugehörigkeit, null).setVisible(true);
+
                 } catch (IOException ex) {
-                    Logger.getLogger(SpielerDialog.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(SpielerDialog.class
+                            .getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnLoeschen;
     private javax.swing.JButton btnSpeichern;
     private javax.swing.JButton btnVerwerfen;
     private javax.swing.JComboBox<String> cboMannschaft;

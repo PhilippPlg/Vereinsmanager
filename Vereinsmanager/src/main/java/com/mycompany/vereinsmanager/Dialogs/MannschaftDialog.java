@@ -24,6 +24,7 @@ import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
@@ -165,6 +166,7 @@ public class MannschaftDialog extends javax.swing.JDialog {
         jButton1 = new javax.swing.JButton();
         lblWarning = new javax.swing.JLabel();
         cboTrainer = new javax.swing.JComboBox<>();
+        btnLoeschen = new javax.swing.JButton();
 
         lblÜberschrift.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblÜberschrift.setText("Mannschaft");
@@ -211,6 +213,13 @@ public class MannschaftDialog extends javax.swing.JDialog {
 
         cboTrainer.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        btnLoeschen.setText("Löschen");
+        btnLoeschen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoeschenActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -219,6 +228,8 @@ public class MannschaftDialog extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnLoeschen)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnVerwerfen)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnSpeichern))
@@ -293,7 +304,8 @@ public class MannschaftDialog extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSpeichern)
-                    .addComponent(btnVerwerfen))
+                    .addComponent(btnVerwerfen)
+                    .addComponent(btnLoeschen))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
@@ -353,6 +365,29 @@ public class MannschaftDialog extends javax.swing.JDialog {
         EditTrainingszeitenDialog.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void btnLoeschenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoeschenActionPerformed
+        try {
+            int result = JOptionPane.showConfirmDialog(null, "Möchten Sie das aktuelle Element wirklich löschen?", "Löschen?", JOptionPane.YES_NO_OPTION);
+            if (result == JOptionPane.NO_OPTION) {
+                return;
+            }
+            ArrayList<Mannschaft> OldMannschaften = XMLLoader.loadMannschaft();
+            ArrayList<Object> neueMannschaften = new ArrayList();
+            for (Mannschaft cMannschaft : OldMannschaften) {
+                if (tfBezeichnung.getText().equals(cMannschaft.getBezeichnung())) {
+                    OldMannschaften.remove(cMannschaft);
+                    break;
+                }
+            }
+            neueMannschaften.addAll(OldMannschaften);
+            XMLSerializer.serializeToXML(neueMannschaften, ESaveObject.mannschaft);
+            parent.AllesAktualisieren();
+            parent.MannschaftDialog.dispose();
+        } catch (IOException ex) {
+            Logger.getLogger(MannschaftDialog.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnLoeschenActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -393,6 +428,7 @@ public class MannschaftDialog extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnLoeschen;
     private javax.swing.JButton btnSpeichern;
     private javax.swing.JButton btnVerwerfen;
     private javax.swing.JComboBox<String> cboTrainer;

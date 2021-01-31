@@ -5,7 +5,6 @@
  */
 package com.mycompany.vereinsmanager.Dialogs;
 
-import com.mycompany.vereinsmanager.Dialogs.SelectTrainingszeitenDialog;
 import com.mycompany.vereinsmanager.Enums.EObjektStatus;
 import com.mycompany.vereinsmanager.Enums.ESaveObject;
 import com.mycompany.vereinsmanager.Enums.ESaveStatus;
@@ -21,6 +20,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JTextField;
 
@@ -56,58 +57,62 @@ public class MannschaftDialog extends javax.swing.JDialog {
         return lbSpieler;
     }
 
-    public void setLbSpieler(JList<String> lbSpieler) {
-        this.lbSpieler = lbSpieler;
+    public void setLbSpieler(ArrayList<String> Spieler) {
+        DefaultListModel model = new DefaultListModel();
+        model.addAll(Spieler);
+        this.lbSpieler.setModel(model);
     }
 
     public JTextField getTfBezeichnung() {
         return tfBezeichnung;
     }
 
-    public void setTfBezeichnung(JTextField tfBezeichnung) {
-        this.tfBezeichnung = tfBezeichnung;
+    public void setTfBezeichnung(String Bezeichnung) {
+        this.tfBezeichnung.setText(Bezeichnung);
     }
 
     public JTextField getTfErgebnis() {
         return tfErgebnis;
     }
 
-    public void setTfErgebnis(JTextField tfErgebnis) {
-        this.tfErgebnis = tfErgebnis;
+    public void setTfErgebnis(String Ergebnis) {
+        this.tfErgebnis.setText(Ergebnis);
     }
 
     public JTextField getTfNaechstesSpiel() {
         return tfNaechstesSpiel;
     }
 
-    public void setTfNaechstesSpiel(JTextField tfNaechstesSpiel) {
-        this.tfNaechstesSpiel = tfNaechstesSpiel;
+    public void setTfNaechstesSpiel(String NaechstesSpiel) {
+        this.tfNaechstesSpiel.setText(NaechstesSpiel);
     }
 
-    public JTextField getTfTrainer() {
-        return tfTrainer;
+    public String getcboTrainer() {
+        return cboTrainer.getModel().getSelectedItem().toString();
     }
 
-    public void setTfTrainer(JTextField tfTrainer) {
-        this.tfTrainer = tfTrainer;
+    public void setcboTrainer(String Trainer) throws IOException {
+        setCboTrainerItems();
+        cboTrainer.getModel().setSelectedItem(Trainer);
     }
 
     /**
      * Creates new form MannschaftDialog
      */
-    public MannschaftDialog() {
-
+    public MannschaftDialog() throws IOException {
+        setCboTrainerItems();
     }
 
-    public MannschaftDialog(StartupWindow parent) {
+    public MannschaftDialog(StartupWindow parent) throws IOException {
         this(false, parent);
     }
 
-    public MannschaftDialog(boolean IsNew, StartupWindow parent) {
+    public MannschaftDialog(boolean IsNew, StartupWindow parent) throws IOException {
         initComponents();
         this.parent = parent;
         setIsNew(IsNew);
         SetWindowTitle();
+        setCboTrainerItems();
     }
 
     public void ChangetfBezeichnungCanEdit(Boolean CanEdit) {
@@ -120,6 +125,17 @@ public class MannschaftDialog extends javax.swing.JDialog {
         String ButtonCaption = IsNew ? ESaveStatus.erstellen.toString() : ESaveStatus.aktualisieren.toString();
         lblÜberschrift.setText("Mannschaft " + Caption);
         btnSpeichern.setText(ButtonCaption);
+    }
+
+    private void setCboTrainerItems() throws IOException {
+        ArrayList<Trainer> trainer = XMLLoader.loadTrainer();
+        ArrayList<String> trainerNamen = new ArrayList<>();
+        for (Trainer cTrainer : trainer) {
+            trainerNamen.add(cTrainer.getNachname());
+        }
+        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
+        model.addAll(trainerNamen);
+        cboTrainer.setModel(model);
     }
 
     /**
@@ -136,7 +152,6 @@ public class MannschaftDialog extends javax.swing.JDialog {
         tfBezeichnung = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        tfTrainer = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         tfErgebnis = new javax.swing.JTextField();
@@ -148,8 +163,7 @@ public class MannschaftDialog extends javax.swing.JDialog {
         btnSpeichern = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         lblWarning = new javax.swing.JLabel();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
+        cboTrainer = new javax.swing.JComboBox<>();
 
         lblÜberschrift.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblÜberschrift.setText("Mannschaft");
@@ -194,6 +208,8 @@ public class MannschaftDialog extends javax.swing.JDialog {
             }
         });
 
+        cboTrainer.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -217,8 +233,8 @@ public class MannschaftDialog extends javax.swing.JDialog {
                                 .addGroup(layout.createSequentialGroup()
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(tfBezeichnung)
-                                        .addComponent(tfTrainer)
-                                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(cboTrainer, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(layout.createSequentialGroup()
@@ -243,6 +259,14 @@ public class MannschaftDialog extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel6)
+                            .addComponent(tfErgebnis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel7)
+                            .addComponent(tfNaechstesSpiel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(tfBezeichnung, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -252,21 +276,15 @@ public class MannschaftDialog extends javax.swing.JDialog {
                                 .addComponent(jLabel3))
                             .addGroup(layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton1))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel6)
-                            .addComponent(tfErgebnis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel7)
-                            .addComponent(tfNaechstesSpiel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jButton1)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel4)
-                        .addComponent(tfTrainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(lblWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(cboTrainer, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(6, 6, 6)
+                            .addComponent(jLabel4))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5)
                 .addGap(9, 9, 9)
@@ -351,7 +369,11 @@ public class MannschaftDialog extends javax.swing.JDialog {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MannschaftDialog().setVisible(true);
+                try {
+                    new MannschaftDialog().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(MannschaftDialog.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -359,6 +381,7 @@ public class MannschaftDialog extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSpeichern;
     private javax.swing.JButton btnVerwerfen;
+    private javax.swing.JComboBox<String> cboTrainer;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -373,6 +396,5 @@ public class MannschaftDialog extends javax.swing.JDialog {
     private javax.swing.JTextField tfBezeichnung;
     private javax.swing.JTextField tfErgebnis;
     private javax.swing.JTextField tfNaechstesSpiel;
-    private javax.swing.JTextField tfTrainer;
     // End of variables declaration//GEN-END:variables
 }

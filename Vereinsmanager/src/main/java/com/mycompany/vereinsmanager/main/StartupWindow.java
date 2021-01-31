@@ -502,7 +502,7 @@ public class StartupWindow extends javax.swing.JFrame {
                 SpielerDialog.setTfStraße(mitglied.getStraße());
                 SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.YYYY");
                 String date = sdf.format(mitglied.getGeburtsDatum());
-                SpielerDialog.setTfGeburtsdatum(date.toString());
+                SpielerDialog.setTfGeburtsdatum(date);
                 SpielerDialog.setTfPLZ(mitglied.getPLZ());
                 SpielerDialog.setTfOrt(mitglied.getOrt());
                 SpielerDialog.setTfTelefon(mitglied.getTelefonNr());
@@ -526,7 +526,7 @@ public class StartupWindow extends javax.swing.JFrame {
             SpielerDialog.setTfStraße(spieler.getStraße());
             SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.YYYY");
             String date = sdf.format(spieler.getGeburtsDatum());
-            SpielerDialog.setTfGeburtsdatum(date.toString());
+            SpielerDialog.setTfGeburtsdatum(date);
             SpielerDialog.setTfPLZ(spieler.getPLZ());
             SpielerDialog.setTfOrt(spieler.getOrt());
             SpielerDialog.setTfTelefon(spieler.getTelefonNr());
@@ -539,10 +539,26 @@ public class StartupWindow extends javax.swing.JFrame {
     }
 
     private void mannschaftDialogErzeugen(Boolean isNew, Mannschaft mannschaft) {
-        MannschaftDialog = new MannschaftDialog(isNew, this); //Hier Entity �bergeben und in Konstruktor die Werte setzen(wenn nicht neu)
-        MannschaftDialog.setDefaultCloseOperation(HIDE_ON_CLOSE);
-        MannschaftDialog.setModal(true);
-        MannschaftDialog.setVisible(true);
+        try {
+            MannschaftDialog = new MannschaftDialog(isNew, this);
+            if (mannschaft != null) {
+                MannschaftDialog.setTfBezeichnung(mannschaft.getBezeichnung());
+                ArrayList<String> teamSpieler = new ArrayList<>();
+                ArrayList<Profispieler> alleSpieler = XMLLoader.loadProfiSpieler();
+                for (Profispieler cSpieler : alleSpieler) {
+                    if (cSpieler.getMannschaft().equals(mannschaft.getBezeichnung())) {
+                        teamSpieler.add(cSpieler.getVorname() + " " + cSpieler.getNachname());
+                    }
+                    break;
+                }
+                MannschaftDialog.setLbSpieler(teamSpieler);
+            }
+            MannschaftDialog.setDefaultCloseOperation(HIDE_ON_CLOSE);
+            MannschaftDialog.setModal(true);
+            MannschaftDialog.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(StartupWindow.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     private void spielDialogErzeugen(Boolean isNew, Spiel spiel) {

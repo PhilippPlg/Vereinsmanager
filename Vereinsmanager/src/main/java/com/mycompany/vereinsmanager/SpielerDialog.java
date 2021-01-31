@@ -21,21 +21,27 @@ import javax.swing.JTextField;
 public class SpielerDialog extends javax.swing.JFrame {
 
     private static EZugehörigkeit Zugehörigkeit;
+    private StartupWindow parent;
     private boolean IsNew;
 
     /**
      * Creates new form MannschaftDialog
      */
-    public SpielerDialog(EZugehörigkeit Zugehörigkeit) throws IOException {
-        this(Zugehörigkeit, false);
+    public SpielerDialog() {
+
     }
 
-    public SpielerDialog(EZugehörigkeit Zugehörigkeit, boolean IsNew) throws IOException {
+    public SpielerDialog(EZugehörigkeit Zugehörigkeit, StartupWindow parent) throws IOException {
+        this(Zugehörigkeit, false, parent);
+    }
+
+    public SpielerDialog(EZugehörigkeit Zugehörigkeit, boolean IsNew, StartupWindow parent) throws IOException {
         this.Zugehörigkeit = Zugehörigkeit;
         initComponents();
         setIsNew(IsNew);
         AddAssignmentItems();
         SetWindowTitle();
+        this.parent = parent;
         setCboMannschaftenItems();
     }
 
@@ -212,6 +218,11 @@ public class SpielerDialog extends javax.swing.JFrame {
         cboMannschaft.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         btnVerwerfen.setText("Verwerfen");
+        btnVerwerfen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerwerfenActionPerformed(evt);
+            }
+        });
 
         btnSpeichern.setText("Speichern");
         btnSpeichern.addActionListener(new java.awt.event.ActionListener() {
@@ -341,13 +352,13 @@ public class SpielerDialog extends javax.swing.JFrame {
         try {
             // html damit der linebreak im label funktioniert, sehr hässlich
             String warning = "<html>";
-            if( !isValidEmail(tfEmail.getText() ) ) {
+            if (!isValidEmail(tfEmail.getText())) {
                 warning += "Die Email-Adresse ist falsch formatiert.<br>";
             }
-            if( !isValidDate(tfGeburtsdatum.getText()) ) {
+            if (!isValidDate(tfGeburtsdatum.getText())) {
                 warning += "Das Geburtsdatum ist falsch formatiert.";
             }
-            if( warning.equals("<html>") ) {
+            if (warning.equals("<html>")) {
                 ArrayList<Object> ObjekteZumSpeichern = new ArrayList<Object>();
                 ESaveObject SaveObject = ESaveObject.normalesMitglied;
                 switch (Zugehörigkeit) {
@@ -379,8 +390,8 @@ public class SpielerDialog extends javax.swing.JFrame {
                         Spieler.setOrt(tfOrt.getText());
                         Spieler.setTelefonNr(tfTelefon.getText());
                         Spieler.setEmail(tfEmail.getText());
-                        profis.add( Spieler );
-                        ObjekteZumSpeichern.addAll( profis );
+                        profis.add(Spieler);
+                        ObjekteZumSpeichern.addAll(profis);
                         break;
                     case Trainer:
                         SaveObject = ESaveObject.trainer;
@@ -407,6 +418,10 @@ public class SpielerDialog extends javax.swing.JFrame {
             Logger.getLogger(SpielerDialog.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnSpeichernActionPerformed
+
+    private void btnVerwerfenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerwerfenActionPerformed
+        parent.SpielerDialog.dispose();
+    }//GEN-LAST:event_btnVerwerfenActionPerformed
 
     /**
      * @param args the command line arguments
@@ -440,7 +455,7 @@ public class SpielerDialog extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    new SpielerDialog(Zugehörigkeit).setVisible(true);
+                    new SpielerDialog(Zugehörigkeit, null).setVisible(true);
                 } catch (IOException ex) {
                     Logger.getLogger(SpielerDialog.class.getName()).log(Level.SEVERE, null, ex);
                 }

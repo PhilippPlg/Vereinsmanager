@@ -318,7 +318,7 @@ public class StartupWindow extends javax.swing.JFrame {
 
     private void btnAddMitgliedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddMitgliedActionPerformed
         try {
-            SpielerDialog = new SpielerDialog(EZugehörigkeit.Mitglieder, true); //Hier Entity �bergeben und in Konstruktor die Werte setzen(wenn nicht neu)
+            SpielerDialog = new SpielerDialog(EZugehörigkeit.Mitglieder, true, this); //Hier Entity �bergeben und in Konstruktor die Werte setzen(wenn nicht neu)
             SpielerDialog.setDefaultCloseOperation(SpielerDialog.DISPOSE_ON_CLOSE);
             SpielerDialog.setVisible(true);
         } catch (IOException ex) {
@@ -327,14 +327,14 @@ public class StartupWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAddMitgliedActionPerformed
 
     private void btnAddMannschaftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddMannschaftActionPerformed
-        MannschaftDialog = new MannschaftDialog(true); //Hier Entity �bergeben und in Konstruktor die Werte setzen(wenn nicht neu)
+        MannschaftDialog = new MannschaftDialog(true, this); //Hier Entity �bergeben und in Konstruktor die Werte setzen(wenn nicht neu)
         MannschaftDialog.setDefaultCloseOperation(MannschaftDialog.DISPOSE_ON_CLOSE);
         MannschaftDialog.setVisible(true);
     }//GEN-LAST:event_btnAddMannschaftActionPerformed
 
     private void btnAddSpielerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddSpielerActionPerformed
         try {
-            SpielerDialog = new SpielerDialog(EZugehörigkeit.Spieler, true); //Hier Entity �bergeben und in Konstruktor die Werte setzen(wenn nicht neu)
+            SpielerDialog = new SpielerDialog(EZugehörigkeit.Spieler, true, this); //Hier Entity �bergeben und in Konstruktor die Werte setzen(wenn nicht neu)
             SpielerDialog.setDefaultCloseOperation(SpielerDialog.DISPOSE_ON_CLOSE);
             SpielerDialog.setVisible(true);
         } catch (IOException ex) {
@@ -343,7 +343,7 @@ public class StartupWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAddSpielerActionPerformed
 
     private void btnAddSpielActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddSpielActionPerformed
-        SpielDialog = new SpielDialog(true); //Hier Entity �bergeben und in Konstruktor die Werte setzen(wenn nicht neu)
+        SpielDialog = new SpielDialog(true, this); //Hier Entity �bergeben und in Konstruktor die Werte setzen(wenn nicht neu)
         SpielDialog.setDefaultCloseOperation(SpielDialog.DISPOSE_ON_CLOSE);
         SpielDialog.setVisible(true);
     }//GEN-LAST:event_btnAddSpielActionPerformed

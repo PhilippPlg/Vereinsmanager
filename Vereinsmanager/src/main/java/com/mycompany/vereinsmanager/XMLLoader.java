@@ -6,7 +6,10 @@
 package com.mycompany.vereinsmanager;
 
 import java.beans.XMLDecoder;
+import java.beans.XMLEncoder;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -17,6 +20,19 @@ import java.util.ArrayList;
 public class XMLLoader {
 
     public static Object deserializeFromXML(ESaveObject SaveObject) throws IOException {
+        File file = new File(SaveObject.toString() + ".xml");
+        if (!file.exists()) {
+            FileOutputStream fos = new FileOutputStream(SaveObject.toString() + ".xml");
+            file.createNewFile();
+            XMLEncoder encoder = new XMLEncoder(fos);
+            encoder.setExceptionListener((Exception e) -> {
+                System.out.println("Exception! :" + e.toString());
+            });
+            encoder.writeObject(null);
+            encoder.close();
+            fos.close();
+        }
+
         FileInputStream fis = new FileInputStream(SaveObject.toString() + ".xml");
         XMLDecoder decoder = new XMLDecoder(fis);
         Object decodedEntity = decoder.readObject();
@@ -26,32 +42,38 @@ public class XMLLoader {
     }
 
     public static ArrayList<NormalesMitglied> loadMitglieder() throws IOException {
-        Object UncastedMitglieder;
-        UncastedMitglieder = deserializeFromXML(ESaveObject.normalesMitglied);
+        Object UncastedMitglieder = deserializeFromXML(ESaveObject.normalesMitglied);
+          if(UncastedMitglieder == null)
+            return new ArrayList<NormalesMitglied>();
         return (ArrayList<NormalesMitglied>) UncastedMitglieder;
     }
 
     public static ArrayList<Profispieler> loadProfiSpieler() throws IOException {
-        Object UncastedSpieler;
-        UncastedSpieler = deserializeFromXML(ESaveObject.profiSpieler);
+        Object UncastedSpieler = deserializeFromXML(ESaveObject.profiSpieler);
+          if(UncastedSpieler == null)
+            return new ArrayList<Profispieler>();
         return (ArrayList<Profispieler>) UncastedSpieler;
     }
 
     public static ArrayList<Mannschaft> loadMannschaft() throws IOException {
-        Object UncastedMannschaft;
-        UncastedMannschaft = deserializeFromXML(ESaveObject.mannschaft);
+        Object UncastedMannschaft = deserializeFromXML(ESaveObject.mannschaft);
+        if(UncastedMannschaft == null)
+            return new ArrayList<Mannschaft>();
         return (ArrayList<Mannschaft>) UncastedMannschaft;
     }
 
     public static ArrayList<Trainer> loadTrainer() throws IOException {
-        Object UncastedTrainer;
-        UncastedTrainer = deserializeFromXML(ESaveObject.trainer);
+        Object UncastedTrainer = deserializeFromXML(ESaveObject.trainer);
+          if(UncastedTrainer == null)
+            return new ArrayList<Trainer>();
         return (ArrayList<Trainer>) UncastedTrainer;
     }
 
     public static ArrayList<Spiel> loadSpiel() throws IOException {
-        Object UncastedSpiel;
-        UncastedSpiel = deserializeFromXML(ESaveObject.spiel);
+        Object UncastedSpiel = deserializeFromXML(ESaveObject.spiel);
+          if(UncastedSpiel == null)
+            return new ArrayList<Spiel>();
         return (ArrayList<Spiel>) UncastedSpiel;
     }
+
 }

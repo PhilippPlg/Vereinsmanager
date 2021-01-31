@@ -339,13 +339,30 @@ public class SpielerDialog extends javax.swing.JFrame {
 
     private void btnSpeichernActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSpeichernActionPerformed
         try {
+            Date geb = null;
+            String vorname  = tfVorname.getText();
+            String nachname = tfNachname.getText();
+            String strasse  = tfStraße.getText();
+            String plz      = tfPLZ.getText();
+            String ort      = tfOrt.getText();
+            String telefon  = tfTelefon.getText();
+            String email    = tfEmail.getText();
+            String gebRaw   = tfGeburtsdatum.getText();
             // html damit der linebreak im label funktioniert, sehr hässlich
             String warning = "<html>";
-            if( !isValidEmail(tfEmail.getText() ) ) {
+            if( !isValidEmail( email ) ) {
                 warning += "Die Email-Adresse ist falsch formatiert.<br>";
             }
-            if( !isValidDate(tfGeburtsdatum.getText()) ) {
+            if( !isValidDate( gebRaw ) ) {
                 warning += "Das Geburtsdatum ist falsch formatiert.";
+            } else {
+                // parts[2]=Jahre || parts[1]=Monate || parts[0]=Tage
+                String[] parts = gebRaw.split("\\.");
+                // https://docs.oracle.com/javase/8/docs/api/java/util/Date.html
+                // A year y is represented by the integer y - 1900.
+                // A month is represented by an integer from 0 to 11; 0 is January, 1 is February, and so forth; thus 11 is December.
+                // A date (day of month) is represented by an integer from 1 to 31 in the usual manner.
+                geb = new Date( Integer.parseInt(parts[2]) - 1900, Integer.parseInt(parts[1]) - 1, Integer.parseInt(parts[0]));
             }
             if( warning.equals("<html>") ) {
                 ArrayList<Object> ObjekteZumSpeichern = new ArrayList<Object>();
@@ -354,47 +371,25 @@ public class SpielerDialog extends javax.swing.JFrame {
                     case Mitglieder:
                         ArrayList<NormalesMitglied> Mitglieder = XMLLoader.loadMitglieder();
                         SaveObject = ESaveObject.normalesMitglied;
-                        NormalesMitglied Mitglied = new NormalesMitglied();
-                        Mitglied.setVorname(tfVorname.getText());
-                        Mitglied.setNachname(tfNachname.getText());
-                        Mitglied.setStraße(tfStraße.getText());
-                        Mitglied.setGeburtsDatum(new Date()); //tfGeburtsdatum.getText()
-                        Mitglied.setPLZ(tfPLZ.getText());
-                        Mitglied.setOrt(tfOrt.getText());
-                        Mitglied.setTelefonNr(tfTelefon.getText());
-                        Mitglied.setEmail(tfEmail.getText());
+                        NormalesMitglied mitglied = new NormalesMitglied( vorname, nachname, strasse, plz, ort, geb, email, telefon );
                         ObjekteZumSpeichern.addAll(Mitglieder);
-                        ObjekteZumSpeichern.add(Mitglied);
-
+                        ObjekteZumSpeichern.add(mitglied);
                         break;
+                        
                     case Spieler:
                         ArrayList<Profispieler> profis = XMLLoader.loadProfiSpieler();
                         SaveObject = ESaveObject.profiSpieler;
-                        Profispieler Spieler = new Profispieler();
-                        Spieler.setVorname(tfVorname.getText());
-                        Spieler.setNachname(tfNachname.getText());
-                        Spieler.setStraße(tfStraße.getText());
-                        Spieler.setGeburtsDatum(new Date()); //tfGeburtsdatum.getText()
-                        Spieler.setPLZ(tfPLZ.getText());
-                        Spieler.setOrt(tfOrt.getText());
-                        Spieler.setTelefonNr(tfTelefon.getText());
-                        Spieler.setEmail(tfEmail.getText());
-                        profis.add( Spieler );
+                        Profispieler spieler = new Profispieler( vorname, nachname, strasse, plz, ort, geb, email, telefon );
+                        profis.add( spieler );
                         ObjekteZumSpeichern.addAll( profis );
                         break;
+                        
                     case Trainer:
+                        ArrayList<Trainer> trainers = XMLLoader.loadTrainer();
                         SaveObject = ESaveObject.trainer;
-                        Trainer Trainer = new Trainer();
-                        Trainer.setVorname(tfVorname.getText());
-                        Trainer.setNachname(tfNachname.getText());
-                        Trainer.setStraße(tfStraße.getText());
-                        Trainer.setGeburtsDatum(new Date()); //tfGeburtsdatum.getText()
-                        Trainer.setPLZ(tfPLZ.getText());
-                        Trainer.setOrt(tfOrt.getText());
-                        Trainer.setTelefonNr(tfTelefon.getText());
-                        Trainer.setEmail(tfEmail.getText());
-                        ObjekteZumSpeichern.add(Trainer);
-                        //ObjectZumSpeichern = new Trainer();
+                        Trainer trainer = new Trainer( vorname, nachname, strasse, plz, ort, geb, email, telefon );
+                        trainers.add( trainer );
+                        ObjekteZumSpeichern.addAll(trainers);
                         break;
                 }
                 XMLSerializer.serializeToXML(ObjekteZumSpeichern, SaveObject);

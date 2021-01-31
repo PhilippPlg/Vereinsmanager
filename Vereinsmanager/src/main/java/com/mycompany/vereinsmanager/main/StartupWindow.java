@@ -34,6 +34,7 @@ public class StartupWindow extends javax.swing.JFrame {
      */
     public StartupWindow() {
         initComponents();
+        this.setTitle("Handballverein ITFM4");
     }
     public MannschaftDialog MannschaftDialog;
     public SpielDialog SpielDialog;
@@ -78,7 +79,6 @@ public class StartupWindow extends javax.swing.JFrame {
         jScrollPane5 = new javax.swing.JScrollPane();
         lbTrainer = new javax.swing.JList<>();
         btnShowTrainer = new javax.swing.JButton();
-        lblTitel = new javax.swing.JLabel();
 
         jMenu1.setText("jMenu1");
 
@@ -130,8 +130,7 @@ public class StartupWindow extends javax.swing.JFrame {
                         .addComponent(btnAddMannschaft)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnShowMannschaften)
-                        .addGap(0, 333, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addContainerGap(343, Short.MAX_VALUE))))
         );
         jMannschaftTabLayout.setVerticalGroup(
             jMannschaftTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -141,8 +140,7 @@ public class StartupWindow extends javax.swing.JFrame {
                     .addComponent(btnAddMannschaft)
                     .addComponent(btnShowMannschaften))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE))
         );
 
         jContentWindow.addTab("Mannschaften", jMannschaftTab);
@@ -207,7 +205,7 @@ public class StartupWindow extends javax.swing.JFrame {
                     .addComponent(btnBeitraegeAnzeigen)
                     .addComponent(btnShowMitglieder))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -268,7 +266,7 @@ public class StartupWindow extends javax.swing.JFrame {
                     .addComponent(btnAddSpieler)
                     .addComponent(btnShowSpieler))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -323,7 +321,7 @@ public class StartupWindow extends javax.swing.JFrame {
                     .addComponent(btnAddSpiel)
                     .addComponent(btnShowSpiele))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -401,7 +399,7 @@ public class StartupWindow extends javax.swing.JFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 355, Short.MAX_VALUE)
+            .addGap(0, 397, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -411,26 +409,15 @@ public class StartupWindow extends javax.swing.JFrame {
 
         jContentWindow.addTab("Trainer", jPanel1);
 
-        lblTitel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTitel.setText("Handballverein ITFM4");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(132, 132, 132)
-                .addComponent(lblTitel, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jContentWindow)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(lblTitel, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jContentWindow, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jContentWindow, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
         pack();
@@ -601,7 +588,7 @@ public class StartupWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_lbTrainerMouseClicked
 
     private void btnShowTrainerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowTrainerActionPerformed
-         try {
+        try {
             DefaultListModel model = new DefaultListModel();
             model.addAll(XMLLoader.loadTrainer());
             lbTrainer.setModel(model);
@@ -864,6 +851,5 @@ public class StartupWindow extends javax.swing.JFrame {
     private javax.swing.JList<String> lbSpiele;
     private javax.swing.JList<String> lbSpieler;
     private javax.swing.JList<String> lbTrainer;
-    private javax.swing.JLabel lblTitel;
     // End of variables declaration//GEN-END:variables
 }

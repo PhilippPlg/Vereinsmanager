@@ -5,10 +5,21 @@
  */
 package com.mycompany.vereinsmanager.Dialogs;
 
+import com.mycompany.vereinsmanager.Entities.Mannschaft;
+import com.mycompany.vereinsmanager.Entities.Spiel;
 import com.mycompany.vereinsmanager.Enums.EObjektStatus;
 import com.mycompany.vereinsmanager.Enums.ESaveObject;
 import com.mycompany.vereinsmanager.Enums.ESaveStatus;
 import com.mycompany.vereinsmanager.main.StartupWindow;
+import static com.mycompany.vereinsmanager.main.Validator.isValidDate;
+import static com.mycompany.vereinsmanager.main.Validator.isValidTime;
+import com.mycompany.vereinsmanager.main.XMLLoader;
+import com.mycompany.vereinsmanager.main.XMLSerializer;
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import com.mycompany.vereinsmanager.main.XMLLoader;
 import com.mycompany.vereinsmanager.main.XMLSerializer;
 import java.io.IOException;
@@ -84,12 +95,12 @@ public class SpielDialog extends javax.swing.JDialog {
         this.lbSpieler = tfSpieler;
     }
 
-    public JTextField getTfTrainer() {
-        return tfTrainer;
+    public JTextField getTfDatum() {
+        return tfDatum;
     }
 
-    public void setTfTrainer(JTextField tfTrainer) {
-        this.tfTrainer = tfTrainer;
+    public void setTfDatum(JTextField tfDatum) {
+        this.tfDatum = tfDatum;
     }
     private boolean IsNew;
 
@@ -133,7 +144,7 @@ public class SpielDialog extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         tfAnfangszeit = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        tfTrainer = new javax.swing.JTextField();
+        tfDatum = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         tfGegner = new javax.swing.JTextField();
@@ -143,7 +154,7 @@ public class SpielDialog extends javax.swing.JDialog {
         lbSpieler = new javax.swing.JList<>();
         btnSpeichern = new javax.swing.JButton();
         btnVerwerfen = new javax.swing.JButton();
-        btnLoeschen = new javax.swing.JButton();
+        lblWarning = new javax.swing.JLabel();
 
         lblÜberschrift.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblÜberschrift.setText("Spiel");
@@ -152,7 +163,7 @@ public class SpielDialog extends javax.swing.JDialog {
 
         jLabel3.setText("Anfangszeit");
 
-        jLabel4.setText("Trainer");
+        jLabel4.setText("Datum");
 
         jLabel5.setText("Spieler");
 
@@ -181,50 +192,42 @@ public class SpielDialog extends javax.swing.JDialog {
             }
         });
 
-        btnLoeschen.setText("Löschen");
-        btnLoeschen.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLoeschenActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnLoeschen)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
                         .addComponent(btnVerwerfen)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnSpeichern))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGap(39, 39, 39)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lblÜberschrift, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(tfMannschaft, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(tfAnfangszeit, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(tfTrainer, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
-                                        .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGap(39, 39, 39)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(tfGegner, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(tfOrt, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jScrollPane1)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(39, 39, 39)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblÜberschrift, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(tfMannschaft, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tfAnfangszeit, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tfDatum, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(39, 39, 39)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(tfGegner, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tfOrt, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -253,7 +256,7 @@ public class SpielDialog extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel4)
-                    .addComponent(tfTrainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfDatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -262,7 +265,7 @@ public class SpielDialog extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSpeichern)
                     .addComponent(btnVerwerfen)
-                    .addComponent(btnLoeschen))
+                    .addComponent(lblWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
@@ -274,9 +277,46 @@ public class SpielDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_btnVerwerfenActionPerformed
 
     private void btnSpeichernActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSpeichernActionPerformed
-        // TODO add your handling code here:
-        parent.AllesAktualisieren();
-        parent.SpielDialog.dispose();
+        try {
+            Date geb = null;
+            String eigenesTeam = tfMannschaft.getText();
+            String gegner = tfGegner.getText();
+            String anfangszeit = tfAnfangszeit.getText();
+            String datum = tfDatum.getText();
+            String ort = tfOrt.getText();
+            // html damit der linebreak im label funktioniert, sehr hässlich
+            String warning = "<html>";
+            if (!isValidTime(anfangszeit)) {
+                warning += "Die Startzeit ist flasch formatiert.\\n";
+            }
+            if( !isValidDate( datum ) ) {
+                warning += "Das Datum ist falsch formatiert";
+            }
+            if (warning.equals("<html>")) {
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.YYYY HH:mm");
+                try{
+                    Date date = dateFormat.parse(datum + " " + anfangszeit);
+                    ArrayList<Spiel> spiele = XMLLoader.loadSpiel();
+                    ArrayList<Object> ObjekteZumSpeichern = new ArrayList<Object>();
+                    ESaveObject SaveObject = ESaveObject.spiel;
+                    Spiel newSpiel = new Spiel( new Mannschaft(), gegner, date );
+                    spiele.add(newSpiel);
+                    ObjekteZumSpeichern.addAll(spiele);
+                    XMLSerializer.serializeToXML(ObjekteZumSpeichern, SaveObject);
+                    lblWarning.setText("<html><b>Das Spiel wurde gespeichert!</b></html>");
+                    parent.SpielDialog.dispose();
+                    parent.AllesAktualisieren();
+                } catch( ParseException e ) {
+                    Logger.getLogger(SpielerDialog.class.getName()).log(Level.SEVERE, null, e);
+                }
+                
+            } else {
+                warning += "</html>";
+                lblWarning.setText(warning);
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(SpielerDialog.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnSpeichernActionPerformed
 
     private void btnLoeschenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoeschenActionPerformed
@@ -325,7 +365,6 @@ public class SpielDialog extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnLoeschen;
     private javax.swing.JButton btnSpeichern;
     private javax.swing.JButton btnVerwerfen;
     private javax.swing.JLabel jLabel2;
@@ -336,11 +375,12 @@ public class SpielDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JList<String> lbSpieler;
+    private javax.swing.JLabel lblWarning;
     private javax.swing.JLabel lblÜberschrift;
     private javax.swing.JTextField tfAnfangszeit;
+    private javax.swing.JTextField tfDatum;
     private javax.swing.JTextField tfGegner;
     private javax.swing.JTextField tfMannschaft;
     private javax.swing.JTextField tfOrt;
-    private javax.swing.JTextField tfTrainer;
     // End of variables declaration//GEN-END:variables
 }

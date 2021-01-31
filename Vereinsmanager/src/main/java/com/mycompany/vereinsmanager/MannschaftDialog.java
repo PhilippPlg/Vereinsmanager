@@ -20,6 +20,7 @@ import javax.swing.JTextField;
 public class MannschaftDialog extends javax.swing.JFrame {
 
     private boolean IsNew;
+    private StartupWindow parent;
 
     public boolean isIsNew() {
         return IsNew;
@@ -82,11 +83,16 @@ public class MannschaftDialog extends javax.swing.JFrame {
      * Creates new form MannschaftDialog
      */
     public MannschaftDialog() {
-        this(false);
+
     }
 
-    public MannschaftDialog(boolean IsNew) {
+    public MannschaftDialog(StartupWindow parent) {
+        this(false, parent);
+    }
+
+    public MannschaftDialog(boolean IsNew, StartupWindow parent) {
         initComponents();
+        this.parent = parent;
         setIsNew(IsNew);
         SetWindowTitle();
     }
@@ -149,6 +155,11 @@ public class MannschaftDialog extends javax.swing.JFrame {
         jScrollPane1.setViewportView(lbSpieler);
 
         btnVerwerfen.setText("Verwerfen");
+        btnVerwerfen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerwerfenActionPerformed(evt);
+            }
+        });
 
         btnSpeichern.setText("Speichern");
         btnSpeichern.addActionListener(new java.awt.event.ActionListener() {
@@ -254,6 +265,10 @@ public class MannschaftDialog extends javax.swing.JFrame {
             Logger.getLogger(MannschaftDialog.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnSpeichernActionPerformed
+
+    private void btnVerwerfenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerwerfenActionPerformed
+        parent.MannschaftDialog.dispose();
+    }//GEN-LAST:event_btnVerwerfenActionPerformed
 
     /**
      * @param args the command line arguments

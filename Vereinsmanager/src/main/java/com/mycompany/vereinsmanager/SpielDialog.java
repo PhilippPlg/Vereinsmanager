@@ -14,6 +14,8 @@ import javax.swing.JTextField;
  */
 public class SpielDialog extends javax.swing.JFrame {
 
+    private StartupWindow parent;
+
     public boolean isIsNew() {
         return IsNew;
     }
@@ -84,12 +86,17 @@ public class SpielDialog extends javax.swing.JFrame {
      * Creates new form MannschaftDialog
      */
     public SpielDialog() {
-        this(false);
+
     }
 
-    public SpielDialog(boolean IsNew) {
+    public SpielDialog(StartupWindow parent) {
+        this(false, parent);
+    }
+
+    public SpielDialog(boolean IsNew, StartupWindow parent) {
         initComponents();
         setIsNew(IsNew);
+        this.parent = parent;
         SetWindowTitle();
     }
 
@@ -153,6 +160,11 @@ public class SpielDialog extends javax.swing.JFrame {
         btnSpeichern.setText("Speichern");
 
         btnVerwerfen.setText("Verwerfen");
+        btnVerwerfen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerwerfenActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -231,6 +243,10 @@ public class SpielDialog extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnVerwerfenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerwerfenActionPerformed
+        parent.SpielDialog.dispose();
+    }//GEN-LAST:event_btnVerwerfenActionPerformed
 
     /**
      * @param args the command line arguments

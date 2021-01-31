@@ -21,21 +21,27 @@ import javax.swing.JTextField;
 public class SpielerDialog extends javax.swing.JFrame {
 
     private static EZugehörigkeit Zugehörigkeit;
+    private StartupWindow parent;
     private boolean IsNew;
 
     /**
      * Creates new form MannschaftDialog
      */
-    public SpielerDialog(EZugehörigkeit Zugehörigkeit) throws IOException {
-        this(Zugehörigkeit, false);
+    public SpielerDialog() {
+
     }
 
-    public SpielerDialog(EZugehörigkeit Zugehörigkeit, boolean IsNew) throws IOException {
+    public SpielerDialog(EZugehörigkeit Zugehörigkeit, StartupWindow parent) throws IOException {
+        this(Zugehörigkeit, false, parent);
+    }
+
+    public SpielerDialog(EZugehörigkeit Zugehörigkeit, boolean IsNew, StartupWindow parent) throws IOException {
         this.Zugehörigkeit = Zugehörigkeit;
         initComponents();
         setIsNew(IsNew);
         AddAssignmentItems();
         SetWindowTitle();
+        this.parent = parent;
         setCboMannschaftenItems();
     }
 
@@ -212,6 +218,11 @@ public class SpielerDialog extends javax.swing.JFrame {
         cboMannschaft.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         btnVerwerfen.setText("Verwerfen");
+        btnVerwerfen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerwerfenActionPerformed(evt);
+            }
+        });
 
         btnSpeichern.setText("Speichern");
         btnSpeichern.addActionListener(new java.awt.event.ActionListener() {
@@ -364,7 +375,7 @@ public class SpielerDialog extends javax.swing.JFrame {
                 // A date (day of month) is represented by an integer from 1 to 31 in the usual manner.
                 geb = new Date( Integer.parseInt(parts[2]) - 1900, Integer.parseInt(parts[1]) - 1, Integer.parseInt(parts[0]));
             }
-            if( warning.equals("<html>") ) {
+            if (warning.equals("<html>")) {
                 ArrayList<Object> ObjekteZumSpeichern = new ArrayList<Object>();
                 ESaveObject SaveObject = ESaveObject.normalesMitglied;
                 switch (Zugehörigkeit) {
@@ -403,6 +414,10 @@ public class SpielerDialog extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnSpeichernActionPerformed
 
+    private void btnVerwerfenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerwerfenActionPerformed
+        parent.SpielerDialog.dispose();
+    }//GEN-LAST:event_btnVerwerfenActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -435,7 +450,7 @@ public class SpielerDialog extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    new SpielerDialog(Zugehörigkeit).setVisible(true);
+                    new SpielerDialog(Zugehörigkeit, null).setVisible(true);
                 } catch (IOException ex) {
                     Logger.getLogger(SpielerDialog.class.getName()).log(Level.SEVERE, null, ex);
                 }

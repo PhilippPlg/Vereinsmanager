@@ -158,6 +158,11 @@ public class SpielDialog extends javax.swing.JFrame {
         jScrollPane1.setViewportView(lbSpieler);
 
         btnSpeichern.setText("Speichern");
+        btnSpeichern.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSpeichernActionPerformed(evt);
+            }
+        });
 
         btnVerwerfen.setText("Verwerfen");
         btnVerwerfen.addActionListener(new java.awt.event.ActionListener() {
@@ -247,6 +252,10 @@ public class SpielDialog extends javax.swing.JFrame {
     private void btnVerwerfenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerwerfenActionPerformed
         parent.SpielDialog.dispose();
     }//GEN-LAST:event_btnVerwerfenActionPerformed
+
+    private void btnSpeichernActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSpeichernActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSpeichernActionPerformed
 
     /**
      * @param args the command line arguments

@@ -20,9 +20,9 @@ import java.util.ArrayList;
 public class XMLLoader {
 
     public static Object deserializeFromXML(ESaveObject SaveObject) throws IOException {
-        File file = new File(SaveObject.toString() + ".xml");
+        File file = new File("./XMLFiles/" + SaveObject.toString() + ".xml");
         if (!file.exists()) {
-            FileOutputStream fos = new FileOutputStream(SaveObject.toString() + ".xml");
+            FileOutputStream fos = new FileOutputStream(file);
             file.createNewFile();
             XMLEncoder encoder = new XMLEncoder(fos);
             encoder.setExceptionListener((Exception e) -> {
@@ -33,7 +33,7 @@ public class XMLLoader {
             fos.close();
         }
 
-        FileInputStream fis = new FileInputStream(SaveObject.toString() + ".xml");
+        FileInputStream fis = new FileInputStream(file);
         XMLDecoder decoder = new XMLDecoder(fis);
         Object decodedEntity = decoder.readObject();
         decoder.close();

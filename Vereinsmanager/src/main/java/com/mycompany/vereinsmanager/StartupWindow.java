@@ -414,8 +414,9 @@ public class StartupWindow extends javax.swing.JFrame {
         btnShowSpielerActionPerformed(null);
     }//GEN-LAST:event_jSpielerTabComponentShown
 
-
-
+    private void jSpielTabComponentShown(java.awt.event.ComponentEvent evt) {                                           
+        btnShowSpieleActionPerformed(null);
+    }  
     /**
      * @param args the command line arguments
      */

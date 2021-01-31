@@ -6,6 +6,7 @@
 package com.mycompany.vereinsmanager;
 
 import java.beans.XMLEncoder;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,7 +18,8 @@ import java.util.ArrayList;
 public class XMLSerializer {
 
     public static void serializeToXML(ArrayList<Object> object, ESaveObject SaveObject) throws IOException {
-        FileOutputStream fos = new FileOutputStream(SaveObject.toString() + ".xml");
+        File XMLFile = new File("./XMLFiles/" + SaveObject.toString() + ".xml");
+        FileOutputStream fos = new FileOutputStream(XMLFile);
         XMLEncoder encoder = new XMLEncoder(fos);
         encoder.setExceptionListener((Exception e) -> {
             System.out.println("Exception! :" + e.toString());

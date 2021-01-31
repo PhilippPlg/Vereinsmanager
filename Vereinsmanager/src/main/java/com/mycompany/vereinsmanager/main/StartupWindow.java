@@ -14,6 +14,7 @@ import com.mycompany.vereinsmanager.Entities.Mitglied;
 import com.mycompany.vereinsmanager.Entities.NormalesMitglied;
 import com.mycompany.vereinsmanager.Entities.Profispieler;
 import com.mycompany.vereinsmanager.Entities.Spiel;
+import com.mycompany.vereinsmanager.Entities.Trainer;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -71,6 +72,12 @@ public class StartupWindow extends javax.swing.JFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         lbSpiele = new javax.swing.JList<>();
         btnShowSpiele = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jSpielerTab1 = new javax.swing.JPanel();
+        btnAddTrainer = new javax.swing.JButton();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        lbTrainer = new javax.swing.JList<>();
+        btnShowTrainer = new javax.swing.JButton();
         lblTitel = new javax.swing.JLabel();
 
         jMenu1.setText("jMenu1");
@@ -123,7 +130,7 @@ public class StartupWindow extends javax.swing.JFrame {
                         .addComponent(btnAddMannschaft)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnShowMannschaften)
-                        .addGap(0, 329, Short.MAX_VALUE)))
+                        .addGap(0, 333, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jMannschaftTabLayout.setVerticalGroup(
@@ -188,7 +195,7 @@ public class StartupWindow extends javax.swing.JFrame {
                         .addComponent(btnBeitraegeAnzeigen)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnShowMitglieder)
-                        .addGap(0, 178, Short.MAX_VALUE)))
+                        .addGap(0, 182, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jMitgliedTabLayout.setVerticalGroup(
@@ -250,7 +257,7 @@ public class StartupWindow extends javax.swing.JFrame {
                         .addComponent(btnAddSpieler)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnShowSpieler)
-                        .addGap(0, 389, Short.MAX_VALUE)))
+                        .addGap(0, 393, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jSpielerTabLayout.setVerticalGroup(
@@ -305,7 +312,7 @@ public class StartupWindow extends javax.swing.JFrame {
                         .addComponent(btnAddSpiel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnShowSpiele)
-                        .addGap(0, 403, Short.MAX_VALUE)))
+                        .addGap(0, 407, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jSpielTabLayout.setVerticalGroup(
@@ -321,6 +328,88 @@ public class StartupWindow extends javax.swing.JFrame {
         );
 
         jContentWindow.addTab("Spiele", jSpielTab);
+
+        jSpielerTab1.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                jSpielerTab1ComponentShown(evt);
+            }
+        });
+
+        btnAddTrainer.setText("Trainer erstellen");
+        btnAddTrainer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddTrainerActionPerformed(evt);
+            }
+        });
+
+        lbTrainer.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        lbTrainer.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbTrainerMouseClicked(evt);
+            }
+        });
+        jScrollPane5.setViewportView(lbTrainer);
+
+        btnShowTrainer.setText("Trainer anzeigen");
+        btnShowTrainer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnShowTrainerActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jSpielerTab1Layout = new javax.swing.GroupLayout(jSpielerTab1);
+        jSpielerTab1.setLayout(jSpielerTab1Layout);
+        jSpielerTab1Layout.setHorizontalGroup(
+            jSpielerTab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jSpielerTab1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jSpielerTab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane5)
+                    .addGroup(jSpielerTab1Layout.createSequentialGroup()
+                        .addComponent(btnAddTrainer)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnShowTrainer)
+                        .addGap(0, 389, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jSpielerTab1Layout.setVerticalGroup(
+            jSpielerTab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jSpielerTab1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jSpielerTab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAddTrainer)
+                    .addComponent(btnShowTrainer))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 639, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jSpielerTab1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 355, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jSpielerTab1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+
+        jContentWindow.addTab("Trainer", jPanel1);
 
         lblTitel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitel.setText("Handballverein ITFM4");
@@ -489,6 +578,43 @@ public class StartupWindow extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_lbSpieleMouseClicked
 
+    private void btnAddTrainerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddTrainerActionPerformed
+        try {
+            trainerDialogErzeugen(true, null);
+        } catch (IOException ex) {
+            Logger.getLogger(StartupWindow.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnAddTrainerActionPerformed
+
+    private void lbTrainerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbTrainerMouseClicked
+        JList list = (JList) evt.getSource();
+        if (evt.getClickCount() == 2) {
+            try {
+                int index = list.locationToIndex(evt.getPoint());
+                String Caption = list.getModel().getElementAt(index).toString();
+                Trainer trainer = ermittelTrainer(Caption);
+                trainerDialogErzeugen(false, trainer);
+            } catch (IOException ex) {
+                Logger.getLogger(StartupWindow.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_lbTrainerMouseClicked
+
+    private void btnShowTrainerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowTrainerActionPerformed
+         try {
+            DefaultListModel model = new DefaultListModel();
+            model.addAll(XMLLoader.loadTrainer());
+            lbTrainer.setModel(model);
+
+        } catch (IOException ex) {
+            Logger.getLogger(StartupWindow.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnShowTrainerActionPerformed
+
+    private void jSpielerTab1ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jSpielerTab1ComponentShown
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jSpielerTab1ComponentShown
+
     private void jSpielTabComponentShown(java.awt.event.ComponentEvent evt) {
         btnShowSpieleActionPerformed(null);
     }
@@ -585,6 +711,26 @@ public class StartupWindow extends javax.swing.JFrame {
         SpielDialog.setVisible(true);
     }
 
+    private void trainerDialogErzeugen(Boolean isNew, Trainer trainer) throws IOException {
+        SpielerDialog = new SpielerDialog(EZugehörigkeit.Trainer, isNew, this); //Hier Entity �bergeben und in Konstruktor die Werte setzen(wenn nicht neu)
+        if (trainer != null) {
+            SpielerDialog.setTfVorname(trainer.getVorname());
+            SpielerDialog.setTfNachname(trainer.getNachname());
+            SpielerDialog.setTfStraße(trainer.getStraße());
+            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.YYYY");
+            String date = sdf.format(trainer.getGeburtsDatum());
+            SpielerDialog.setTfGeburtsdatum(date);
+            SpielerDialog.setTfPLZ(trainer.getPLZ());
+            SpielerDialog.setTfOrt(trainer.getOrt());
+            SpielerDialog.setTfTelefon(trainer.getTelefonNr());
+            SpielerDialog.setTfEmail(trainer.getEmail());
+            SpielerDialog.setCboMannschaftName(trainer.getMannschaft());
+        }
+        SpielerDialog.setDefaultCloseOperation(HIDE_ON_CLOSE);
+        SpielerDialog.setModal(true);
+        SpielerDialog.setVisible(true);
+    }
+
     private Mannschaft ermittelMannschaft(String Bezeichnung) throws IOException {
         ArrayList<Mannschaft> mannschaften = XMLLoader.loadMannschaft();
         for (Mannschaft cMannschaft : mannschaften) {
@@ -621,6 +767,19 @@ public class StartupWindow extends javax.swing.JFrame {
         return new Profispieler();
     }
 
+    private Trainer ermittelTrainer(String Name) throws IOException {
+        String[] parts = Name.split(" ");
+        String vorname = parts[0].trim();
+        String nachname = parts[1].trim();
+        ArrayList<Trainer> trainer = XMLLoader.loadTrainer();
+        for (Trainer cTrainer : trainer) {
+            if (vorname.equals(cTrainer.getVorname()) && nachname.equals(cTrainer.getNachname())) {
+                return cTrainer;
+            }
+        }
+        return new Trainer();
+    }
+
     private Spiel ermittelSpiel(String Bezeichnung) throws IOException {
         ArrayList<Spiel> spiele = XMLLoader.loadSpiel(); //Richtigen PK setzen
         for (Spiel cSpiel : spiele) {
@@ -636,6 +795,7 @@ public class StartupWindow extends javax.swing.JFrame {
         btnShowMitgliederActionPerformed(null);
         btnShowSpieleActionPerformed(null);
         btnShowSpielerActionPerformed(null);
+        btnShowTrainerActionPerformed(null);
     }
 
     /**
@@ -678,26 +838,32 @@ public class StartupWindow extends javax.swing.JFrame {
     private javax.swing.JButton btnAddMitglied;
     private javax.swing.JButton btnAddSpiel;
     private javax.swing.JButton btnAddSpieler;
+    private javax.swing.JButton btnAddTrainer;
     private javax.swing.JButton btnBeitraegeAnzeigen;
     private javax.swing.JButton btnShowMannschaften;
     private javax.swing.JButton btnShowMitglieder;
     private javax.swing.JButton btnShowSpiele;
     private javax.swing.JButton btnShowSpieler;
+    private javax.swing.JButton btnShowTrainer;
     private javax.swing.JTabbedPane jContentWindow;
     private javax.swing.JPanel jMannschaftTab;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JPanel jMitgliedTab;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JPanel jSpielTab;
     private javax.swing.JPanel jSpielerTab;
+    private javax.swing.JPanel jSpielerTab1;
     private javax.swing.JList<String> lbMannschaft;
     private javax.swing.JList<String> lbMitglieder;
     private javax.swing.JList<String> lbSpiele;
     private javax.swing.JList<String> lbSpieler;
+    private javax.swing.JList<String> lbTrainer;
     private javax.swing.JLabel lblTitel;
     // End of variables declaration//GEN-END:variables
 }

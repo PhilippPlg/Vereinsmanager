@@ -38,4 +38,16 @@ public class Validator {
         }
         return false;
     }
+    
+    public static boolean isValidTime( String time ) {
+        Pattern p = Pattern.compile( "^\\d{2}:\\d{2}$" );
+        Matcher m = p.matcher( time );
+        if( m.matches() ) {
+            String[] parts = time.split(":");
+            if( Integer.parseInt( parts[0] ) <= 23 && Integer.parseInt( parts[1] ) <= 59 ) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

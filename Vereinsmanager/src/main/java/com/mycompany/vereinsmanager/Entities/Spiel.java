@@ -5,6 +5,8 @@
  */
 package com.mycompany.vereinsmanager.Entities;
 
+import static com.mycompany.vereinsmanager.main.Validator.isValidDate;
+import static com.mycompany.vereinsmanager.main.Validator.isValidTime;
 import java.util.Date;
 
 /**
@@ -18,6 +20,9 @@ public class Spiel {
     private int gegnerPunkte;
     private Date zeitpunkt;
 
+    public Spiel() {
+    }
+    
     public Spiel(Mannschaft eigenesTeam, String gegnerTeam, Date zeitpunkt) {
         this.eigenesTeam = eigenesTeam;
         this.gegnerTeam = gegnerTeam;
@@ -67,5 +72,9 @@ public class Spiel {
     public boolean hatSpielAngefangen(){
         //CODE HERE
         return true;
+    }
+    
+    public String toString() {
+        return this.eigenesTeam + " gegen " + this.gegnerTeam;
     }
 }

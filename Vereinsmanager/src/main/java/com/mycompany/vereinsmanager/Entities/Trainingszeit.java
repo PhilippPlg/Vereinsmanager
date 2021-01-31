@@ -13,6 +13,12 @@ public class Trainingszeit {
 
     public Trainingszeit() {
     }
+    
+    public Trainingszeit( String wochentag, String anfangszeit, String endzeit ) {
+        this.wochentag = wochentag;
+        this.anfangszeit = anfangszeit;
+        this.endzeit = endzeit;
+    }
 
     private String wochentag;
     private String anfangszeit;

@@ -6,6 +6,7 @@
 package com.mycompany.vereinsmanager;
 
 import java.awt.event.ItemEvent;
+import java.util.ArrayList;
 
 /**
  *
@@ -18,9 +19,9 @@ public class SelectTrainingszeitenDialog extends javax.swing.JFrame {
      */
     private MannschaftDialog parent;
     private String mannschaftsBezeichnung;
+    private ArrayList<Trainingszeit> trainingszeiten;
 
     public SelectTrainingszeitenDialog() {
-
     }
 
     public SelectTrainingszeitenDialog(MannschaftDialog parent, String mannschaftsBezeichnung) {
@@ -64,6 +65,7 @@ public class SelectTrainingszeitenDialog extends javax.swing.JFrame {
         tfBisSonntag = new javax.swing.JTextField();
         btnVerwerfen = new javax.swing.JButton();
         btnSpeichern = new javax.swing.JButton();
+        lblWarning = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -292,10 +294,13 @@ public class SelectTrainingszeitenDialog extends javax.swing.JFrame {
                                 .addComponent(btnVerwerfen)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnSpeichern)))
-                        .addContainerGap(28, Short.MAX_VALUE))
+                        .addContainerGap(29, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -341,7 +346,9 @@ public class SelectTrainingszeitenDialog extends javax.swing.JFrame {
                     .addComponent(cbSonntag)
                     .addComponent(tfvonSonntag, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfBisSonntag, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSpeichern)
                     .addComponent(btnVerwerfen))
@@ -385,7 +392,7 @@ public class SelectTrainingszeitenDialog extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVerwerfenActionPerformed
 
     private void btnSpeichernActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSpeichernActionPerformed
-
+        checkBoxenAuswerten();
     }//GEN-LAST:event_btnSpeichernActionPerformed
 
     private void cbMontagItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbMontagItemStateChanged
@@ -486,6 +493,143 @@ public class SelectTrainingszeitenDialog extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cbSonntagItemStateChanged
 
+    private void checkBoxenAuswerten() {
+        Boolean ungueltigeZeiten = false;
+        trainingszeiten = new ArrayList<>();
+        if (cbMontag.isSelected()) {
+            Trainingszeit MontagsTraining = new Trainingszeit();
+            MontagsTraining.setWochentag("Montag");
+            String anfangszeit = tfvonMontag.getText();
+            if (Validator.isValidTime(anfangszeit)) {
+                MontagsTraining.setAnfangszeit(anfangszeit);
+            } else {
+                ungueltigeZeiten = true;
+            }
+            String endzeit = tfBisMontag.getText();
+            if (Validator.isValidTime(endzeit)) {
+                MontagsTraining.setEndzeit(endzeit);
+            } else {
+                ungueltigeZeiten = true;
+            }
+            trainingszeiten.add(MontagsTraining);
+        }
+
+        if (cbDienstag.isSelected()) {
+            Trainingszeit DienstagsTraining = new Trainingszeit();
+            DienstagsTraining.setWochentag("Dienstag");
+            String anfangszeit = tfvonDienstag.getText();
+            if (Validator.isValidTime(anfangszeit)) {
+                DienstagsTraining.setAnfangszeit(anfangszeit);
+            } else {
+                ungueltigeZeiten = true;
+            }
+            String endzeit = tfBisDienstag.getText();
+            if (Validator.isValidTime(endzeit)) {
+                DienstagsTraining.setEndzeit(endzeit);
+            } else {
+                ungueltigeZeiten = true;
+            }
+            trainingszeiten.add(DienstagsTraining);
+        }
+
+        if (cbMittwoch.isSelected()) {
+            Trainingszeit MittwochsTraining = new Trainingszeit();
+            MittwochsTraining.setWochentag("Mittwoch");
+            String anfangszeit = tfvonMittwoch.getText();
+            if (Validator.isValidTime(anfangszeit)) {
+                MittwochsTraining.setAnfangszeit(anfangszeit);
+            } else {
+                ungueltigeZeiten = true;
+            }
+            String endzeit = tfBisMittwoch.getText();
+            if (Validator.isValidTime(endzeit)) {
+                MittwochsTraining.setEndzeit(endzeit);
+            } else {
+                ungueltigeZeiten = true;
+            }
+            trainingszeiten.add(MittwochsTraining);
+        }
+
+        if (cbDonnerstag.isSelected()) {
+            Trainingszeit DonnerstagsTraining = new Trainingszeit();
+            DonnerstagsTraining.setWochentag("Donnerstag");
+            String anfangszeit = tfvonDonnerstag.getText();
+            if (Validator.isValidTime(anfangszeit)) {
+                DonnerstagsTraining.setAnfangszeit(anfangszeit);
+            } else {
+                ungueltigeZeiten = true;
+            }
+            String endzeit = tfBisDonnerstag.getText();
+            if (Validator.isValidTime(endzeit)) {
+                DonnerstagsTraining.setEndzeit(endzeit);
+            } else {
+                ungueltigeZeiten = true;
+            }
+            trainingszeiten.add(DonnerstagsTraining);
+        }
+
+        if (cbFreitag.isSelected()) {
+            Trainingszeit FreitagsTraining = new Trainingszeit();
+            FreitagsTraining.setWochentag("Freitag");
+            String anfangszeit = tfvonFreitag.getText();
+            if (Validator.isValidTime(anfangszeit)) {
+                FreitagsTraining.setAnfangszeit(anfangszeit);
+            } else {
+                ungueltigeZeiten = true;
+            }
+            String endzeit = tfBisFreitag.getText();
+            if (Validator.isValidTime(endzeit)) {
+                FreitagsTraining.setEndzeit(endzeit);
+            } else {
+                ungueltigeZeiten = true;
+            }
+            trainingszeiten.add(FreitagsTraining);
+        }
+
+        if (cbSamstag.isSelected()) {
+            Trainingszeit SamstagsTraining = new Trainingszeit();
+            SamstagsTraining.setWochentag("Samstag");
+            String anfangszeit = tfvonSamstag.getText();
+            if (Validator.isValidTime(anfangszeit)) {
+                SamstagsTraining.setAnfangszeit(anfangszeit);
+            } else {
+                ungueltigeZeiten = true;
+            }
+            String endzeit = tfBisSamstag.getText();
+            if (Validator.isValidTime(endzeit)) {
+                SamstagsTraining.setEndzeit(endzeit);
+            } else {
+                ungueltigeZeiten = true;
+            }
+            trainingszeiten.add(SamstagsTraining);
+        }
+
+        if (cbSonntag.isSelected()) {
+            Trainingszeit SonntagsTraining = new Trainingszeit();
+            SonntagsTraining.setWochentag("Sonntag");
+            String anfangszeit = tfvonSonntag.getText();
+            if (Validator.isValidTime(anfangszeit)) {
+                SonntagsTraining.setAnfangszeit(anfangszeit);
+            } else {
+                ungueltigeZeiten = true;
+            }
+            String endzeit = tfBisSonntag.getText();
+            if (Validator.isValidTime(endzeit)) {
+                SonntagsTraining.setEndzeit(endzeit);
+            } else {
+                ungueltigeZeiten = true;
+            }
+            trainingszeiten.add(SonntagsTraining);
+        }
+        if (ungueltigeZeiten == true) {
+            lblWarning.setText("<html><b>Mindestens eine Zeitangabe ist ungültig!</b></html>");
+        } else {
+            lblWarning.setText(null);
+            parent.setTrainingszeiten(trainingszeiten);
+            this.dispose();
+        }
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -534,6 +678,7 @@ public class SelectTrainingszeitenDialog extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel lblWarning;
     private javax.swing.JTextField tfBisDienstag;
     private javax.swing.JTextField tfBisDonnerstag;
     private javax.swing.JTextField tfBisFreitag;

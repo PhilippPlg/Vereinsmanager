@@ -19,6 +19,8 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.NavigableSet;
+import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
@@ -707,7 +709,7 @@ public class StartupWindow extends javax.swing.JFrame {
         }
     }
 
-    private void spielDialogErzeugen(Boolean isNew, Spiel spiel) throws IOException {
+    public void spielDialogErzeugen(Boolean isNew, Spiel spiel) throws IOException {
         SpielDialog = new SpielDialog(isNew, this); //Hier Entity �bergeben und in Konstruktor die Werte setzen(wenn nicht neu)
         if (spiel != null) {
             SpielDialog.setCboMannschaftName(spiel.getEigenesTeam());
@@ -805,6 +807,32 @@ public class StartupWindow extends javax.swing.JFrame {
             }
         }
         return new Spiel(null, null, null, null);
+    }
+
+    public Spiel ermittelNaechstesSpiel(Mannschaft mannschaft) throws IOException {
+        Spiel naechstesSpiel = new Spiel();
+        ArrayList<Spiel> alleSpiele = XMLLoader.loadSpiel();
+        ArrayList<Spiel> alleMannschaftsSpiele = new ArrayList<>();
+        for (Spiel cSpiel : alleSpiele) {
+            if (cSpiel.getEigenesTeam().equals(mannschaft.getBezeichnung())) {
+                alleMannschaftsSpiele.add(cSpiel);
+            }
+        }
+
+        NavigableSet<Date> dates = new TreeSet<>();
+        alleSpiele.forEach(cSpiel -> {
+            dates.add(cSpiel.getZeitpunkt());
+        });
+
+        Date now = new Date();
+        Date highestDateUpUntilNow = dates.lower(now);
+
+        for (Spiel cSpiel : alleMannschaftsSpiele) {
+            if (cSpiel.getZeitpunkt().equals(highestDateUpUntilNow)) {
+                naechstesSpiel = cSpiel;
+            }
+        }
+        return naechstesSpiel;
     }
 
     public void AllesAktualisieren() {

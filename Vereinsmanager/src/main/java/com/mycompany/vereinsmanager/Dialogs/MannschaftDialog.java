@@ -81,15 +81,7 @@ public class MannschaftDialog extends javax.swing.JDialog {
     public void setTfErgebnis(String Ergebnis) {
         this.tfErgebnis.setText(Ergebnis);
     }
-
-    public JTextField getTfNaechstesSpiel() {
-        return tfNaechstesSpiel;
-    }
-
-    public void setTfNaechstesSpiel(String NaechstesSpiel) {
-        this.tfNaechstesSpiel.setText(NaechstesSpiel);
-    }
-
+    
     public String getcboTrainer() {
         return cboTrainer.getModel().getSelectedItem().toString();
     }
@@ -159,7 +151,6 @@ public class MannschaftDialog extends javax.swing.JDialog {
         jLabel6 = new javax.swing.JLabel();
         tfErgebnis = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        tfNaechstesSpiel = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         lbSpieler = new javax.swing.JList<>();
         btnVerwerfen = new javax.swing.JButton();
@@ -168,6 +159,7 @@ public class MannschaftDialog extends javax.swing.JDialog {
         lblWarning = new javax.swing.JLabel();
         cboTrainer = new javax.swing.JComboBox<>();
         btnLoeschen = new javax.swing.JButton();
+        btnSpielOeffnen = new javax.swing.JButton();
 
         lblÜberschrift.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblÜberschrift.setText("Mannschaft");
@@ -221,6 +213,13 @@ public class MannschaftDialog extends javax.swing.JDialog {
             }
         });
 
+        btnSpielOeffnen.setText("Nächstes Spiel öffnen");
+        btnSpielOeffnen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSpielOeffnenActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -254,12 +253,15 @@ public class MannschaftDialog extends javax.swing.JDialog {
                                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                                 .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
                                                 .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                            .addGap(39, 39, 39)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(tfErgebnis, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(tfNaechstesSpiel, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGap(0, 0, Short.MAX_VALUE))
-                                        .addComponent(lblWarning, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                                .addGroup(layout.createSequentialGroup()
+                                                    .addComponent(tfErgebnis, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addGap(0, 0, Short.MAX_VALUE))
+                                                .addComponent(btnSpielOeffnen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGap(212, 212, 212)
+                                            .addComponent(lblWarning, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jScrollPane1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -275,10 +277,10 @@ public class MannschaftDialog extends javax.swing.JDialog {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel6)
                             .addComponent(tfErgebnis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGap(8, 8, 8)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
-                            .addComponent(tfNaechstesSpiel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btnSpielOeffnen)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -307,7 +309,7 @@ public class MannschaftDialog extends javax.swing.JDialog {
                     .addComponent(btnSpeichern)
                     .addComponent(btnVerwerfen)
                     .addComponent(btnLoeschen))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         pack();
@@ -333,23 +335,7 @@ public class MannschaftDialog extends javax.swing.JDialog {
                 Mannschaft.setTrainingszeiten(trainingszeiten.toArray(new Trainingszeit[trainingszeiten.size()]));
             }
             ArrayList<Spiel> alleSpiele = XMLLoader.loadSpiel();
-            Spiel naechstesSpiel = new Spiel();
 
-            NavigableSet<Date> dates = new TreeSet<>();
-            alleSpiele.forEach(cSpiel -> {
-                dates.add(cSpiel.getZeitpunkt());
-            });
-
-            Date now = new Date();
-            Date highestDateUpUntilNow = dates.lower(now);
-
-            for (Spiel cSpiel : alleSpiele) {
-                if (cSpiel.getZeitpunkt().equals(highestDateUpUntilNow)) {
-                    naechstesSpiel = cSpiel;
-                }
-            }
-
-            Mannschaft.setNaechstesSpiel(naechstesSpiel);
             Mannschaft.setTrainer(getcboTrainer());
             ObjekteZumSpeichern.addAll(OldMannschaften);
             ObjekteZumSpeichern.add(Mannschaft);
@@ -405,6 +391,16 @@ public class MannschaftDialog extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_btnLoeschenActionPerformed
 
+    private void btnSpielOeffnenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSpielOeffnenActionPerformed
+        try {
+            Mannschaft tmpMannschaft = new Mannschaft();
+            tmpMannschaft.setBezeichnung(this.tfBezeichnung.getText());
+            parent.spielDialogErzeugen(false, parent.ermittelNaechstesSpiel(tmpMannschaft));
+        } catch (IOException ex) {
+            Logger.getLogger(MannschaftDialog.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnSpielOeffnenActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -447,6 +443,7 @@ public class MannschaftDialog extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLoeschen;
     private javax.swing.JButton btnSpeichern;
+    private javax.swing.JButton btnSpielOeffnen;
     private javax.swing.JButton btnVerwerfen;
     private javax.swing.JComboBox<String> cboTrainer;
     private javax.swing.JButton jButton1;
@@ -462,6 +459,5 @@ public class MannschaftDialog extends javax.swing.JDialog {
     private javax.swing.JLabel lblÜberschrift;
     private javax.swing.JTextField tfBezeichnung;
     private javax.swing.JTextField tfErgebnis;
-    private javax.swing.JTextField tfNaechstesSpiel;
     // End of variables declaration//GEN-END:variables
 }

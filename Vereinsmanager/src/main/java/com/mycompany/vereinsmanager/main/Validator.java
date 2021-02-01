@@ -8,6 +8,9 @@ package com.mycompany.vereinsmanager.main;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -27,16 +30,15 @@ public class Validator {
         Pattern p = Pattern.compile( "^\\d{1,2}\\.\\d{1,2}\\.\\d{4}$" );
         Matcher m = p.matcher( date );
         if( m.matches() ) {
-            DateFormat test = new SimpleDateFormat("dd.MM.YYYY");
-            test.setLenient(false);
+            // Wenn das Datum nicht geparst werden kann wird false return
             try {
-                test.parse(date);
-            } catch (ParseException e) {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+                LocalDate localDate = formatter.parse(date, LocalDate::from);
+            } catch (DateTimeParseException e) {
                 return false;
             }
-            return true;
         }
-        return false;
+        return true;
     }
     
     public static boolean isValidTime( String time ) {

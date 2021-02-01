@@ -375,6 +375,7 @@ public class MannschaftDialog extends javax.swing.JDialog {
         }
         ChangetfBezeichnungCanEdit(false);
         EditTrainingszeitenDialog = new SelectTrainingszeitenDialog(this, bezeichnung);
+        EditTrainingszeitenDialog.fillFields();
         EditTrainingszeitenDialog.setResizable(false);
         EditTrainingszeitenDialog.setDefaultCloseOperation(SelectTrainingszeitenDialog.HIDE_ON_CLOSE);
         EditTrainingszeitenDialog.setModal(true);

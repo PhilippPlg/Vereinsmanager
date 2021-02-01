@@ -548,6 +548,10 @@ public class SpielerDialog extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_btnLoeschenActionPerformed
 
+    public void changeStatecboMannschaften(Boolean isEnabled){
+        cboMannschaft.setEnabled(isEnabled);
+        cboMannschaft.setEditable(isEnabled);
+    }
     /**
      * @param args the command line arguments
      */

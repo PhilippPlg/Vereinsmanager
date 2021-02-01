@@ -9,7 +9,6 @@ import com.mycompany.vereinsmanager.Enums.EObjektStatus;
 import com.mycompany.vereinsmanager.Enums.ESaveObject;
 import com.mycompany.vereinsmanager.Enums.ESaveStatus;
 import com.mycompany.vereinsmanager.Entities.Mannschaft;
-import com.mycompany.vereinsmanager.Entities.NormalesMitglied;
 import com.mycompany.vereinsmanager.Entities.Spiel;
 import com.mycompany.vereinsmanager.main.StartupWindow;
 import com.mycompany.vereinsmanager.Entities.Trainer;
@@ -19,6 +18,8 @@ import com.mycompany.vereinsmanager.main.XMLSerializer;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.NavigableSet;
+import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
@@ -133,7 +134,7 @@ public class MannschaftDialog extends javax.swing.JDialog {
         ArrayList<Trainer> trainer = XMLLoader.loadTrainer();
         ArrayList<String> trainerNamen = new ArrayList<>();
         for (Trainer cTrainer : trainer) {
-            trainerNamen.add(cTrainer.getNachname());
+            trainerNamen.add(cTrainer.getVorname() + " " + cTrainer.getNachname());
         }
         DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
         model.addAll(trainerNamen);
@@ -325,16 +326,31 @@ public class MannschaftDialog extends javax.swing.JDialog {
                 }
             }
 
-            Trainer Testtrainer = new Trainer();
-            Testtrainer.setGehalt(9999);
             Mannschaft Mannschaft = new Mannschaft();
             Mannschaft.setBezeichnung(tfBezeichnung.getText());
-            Mannschaft.setLetztesErgebnis(new Spiel(new Mannschaft(), "", new Date())); //Spiel erzeugen oder auswählen
+            Mannschaft.setLetztesErgebnis(new Spiel("", "", new Date(), null)); //Spiel erzeugen oder auswählen
             if (trainingszeiten != null) {
                 Mannschaft.setTrainingszeiten(trainingszeiten.toArray(new Trainingszeit[trainingszeiten.size()]));
             }
-            Mannschaft.setNaechstesSpiel(new Spiel(new Mannschaft(), "", new Date())); //Spiel erzeugen oder auswählen
-            Mannschaft.setTrainer(Testtrainer); //Wähle hier Trainer aus
+            ArrayList<Spiel> alleSpiele = XMLLoader.loadSpiel();
+            Spiel naechstesSpiel = new Spiel();
+
+            NavigableSet<Date> dates = new TreeSet<>();
+            alleSpiele.forEach(cSpiel -> {
+                dates.add(cSpiel.getZeitpunkt());
+            });
+
+            Date now = new Date();
+            Date highestDateUpUntilNow = dates.lower(now);
+
+            for (Spiel cSpiel : alleSpiele) {
+                if (cSpiel.getZeitpunkt().equals(highestDateUpUntilNow)) {
+                    naechstesSpiel = cSpiel;
+                }
+            }
+
+            Mannschaft.setNaechstesSpiel(naechstesSpiel);
+            Mannschaft.setTrainer(getcboTrainer());
             ObjekteZumSpeichern.addAll(OldMannschaften);
             ObjekteZumSpeichern.add(Mannschaft);
             XMLSerializer.serializeToXML(ObjekteZumSpeichern, ESaveObject.mannschaft);

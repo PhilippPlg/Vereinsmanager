@@ -18,6 +18,7 @@ import com.mycompany.vereinsmanager.Entities.Trainer;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
@@ -34,6 +35,8 @@ public class StartupWindow extends javax.swing.JFrame {
      */
     public StartupWindow() {
         initComponents();
+        btnShowSpieleActionPerformed(null);
+        btnShowTrainerActionPerformed(null);
         this.setTitle("Handballverein ITFM4");
     }
     public MannschaftDialog MannschaftDialog;
@@ -86,6 +89,12 @@ public class StartupWindow extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jContentWindow.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                jContentWindowComponentShown(evt);
+            }
+        });
+
         jMannschaftTab.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 jMannschaftTabComponentShown(evt);
@@ -130,7 +139,8 @@ public class StartupWindow extends javax.swing.JFrame {
                         .addComponent(btnAddMannschaft)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnShowMannschaften)
-                        .addContainerGap(343, Short.MAX_VALUE))))
+                        .addGap(0, 343, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jMannschaftTabLayout.setVerticalGroup(
             jMannschaftTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -140,7 +150,8 @@ public class StartupWindow extends javax.swing.JFrame {
                     .addComponent(btnAddMannschaft)
                     .addComponent(btnShowMannschaften))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jContentWindow.addTab("Mannschaften", jMannschaftTab);
@@ -193,7 +204,7 @@ public class StartupWindow extends javax.swing.JFrame {
                         .addComponent(btnBeitraegeAnzeigen)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnShowMitglieder)
-                        .addGap(0, 182, Short.MAX_VALUE)))
+                        .addGap(0, 192, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jMitgliedTabLayout.setVerticalGroup(
@@ -205,7 +216,7 @@ public class StartupWindow extends javax.swing.JFrame {
                     .addComponent(btnBeitraegeAnzeigen)
                     .addComponent(btnShowMitglieder))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -255,7 +266,7 @@ public class StartupWindow extends javax.swing.JFrame {
                         .addComponent(btnAddSpieler)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnShowSpieler)
-                        .addGap(0, 393, Short.MAX_VALUE)))
+                        .addGap(0, 403, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jSpielerTabLayout.setVerticalGroup(
@@ -266,7 +277,7 @@ public class StartupWindow extends javax.swing.JFrame {
                     .addComponent(btnAddSpieler)
                     .addComponent(btnShowSpieler))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -310,7 +321,7 @@ public class StartupWindow extends javax.swing.JFrame {
                         .addComponent(btnAddSpiel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnShowSpiele)
-                        .addGap(0, 407, Short.MAX_VALUE)))
+                        .addGap(0, 417, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jSpielTabLayout.setVerticalGroup(
@@ -321,7 +332,7 @@ public class StartupWindow extends javax.swing.JFrame {
                     .addComponent(btnAddSpiel)
                     .addComponent(btnShowSpiele))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -364,15 +375,11 @@ public class StartupWindow extends javax.swing.JFrame {
         jSpielerTab1Layout.setHorizontalGroup(
             jSpielerTab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jSpielerTab1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jSpielerTab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane5)
-                    .addGroup(jSpielerTab1Layout.createSequentialGroup()
-                        .addComponent(btnAddTrainer)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnShowTrainer)
-                        .addGap(0, 389, Short.MAX_VALUE)))
-                .addContainerGap())
+                .addComponent(btnAddTrainer, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnShowTrainer)
+                .addContainerGap(409, Short.MAX_VALUE))
+            .addComponent(jScrollPane5)
         );
         jSpielerTab1Layout.setVerticalGroup(
             jSpielerTab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -382,7 +389,7 @@ public class StartupWindow extends javax.swing.JFrame {
                     .addComponent(btnAddTrainer)
                     .addComponent(btnShowTrainer))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -390,20 +397,18 @@ public class StartupWindow extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 639, Short.MAX_VALUE)
+            .addGap(0, 649, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(jSpielerTab1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 397, Short.MAX_VALUE)
+            .addGap(0, 376, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jSpielerTab1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSpielerTab1, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
@@ -417,7 +422,9 @@ public class StartupWindow extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jContentWindow, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jContentWindow, javax.swing.GroupLayout.PREFERRED_SIZE, 393, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -440,7 +447,11 @@ public class StartupWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAddSpielerActionPerformed
 
     private void btnAddSpielActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddSpielActionPerformed
-        spielDialogErzeugen(true, null);
+        try {
+            spielDialogErzeugen(true, null);
+        } catch (IOException ex) {
+            Logger.getLogger(StartupWindow.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnAddSpielActionPerformed
 
     private void btnShowMitgliederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowMitgliederActionPerformed
@@ -508,6 +519,10 @@ public class StartupWindow extends javax.swing.JFrame {
     private void jSpielerTabComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jSpielerTabComponentShown
         btnShowSpielerActionPerformed(null);
     }//GEN-LAST:event_jSpielerTabComponentShown
+
+    private void jTrainerTabComponentShown(java.awt.event.ComponentEvent evt) {
+        btnShowTrainerActionPerformed(null);
+    }
 
     private void lbMannschaftMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbMannschaftMouseClicked
         JList list = (JList) evt.getSource();
@@ -599,12 +614,12 @@ public class StartupWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_btnShowTrainerActionPerformed
 
     private void jSpielerTab1ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jSpielerTab1ComponentShown
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_jSpielerTab1ComponentShown
 
-    private void jSpielTabComponentShown(java.awt.event.ComponentEvent evt) {
-        btnShowSpieleActionPerformed(null);
-    }
+    private void jContentWindowComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jContentWindowComponentShown
+        btnShowTrainerActionPerformed(null);
+    }//GEN-LAST:event_jContentWindowComponentShown
 
     private void mitgliedDialogErzeugen(Boolean isNew, Mitglied mitglied) {
         try {
@@ -656,6 +671,7 @@ public class StartupWindow extends javax.swing.JFrame {
             MannschaftDialog = new MannschaftDialog(isNew, this);
             if (mannschaft != null) {
                 MannschaftDialog.setTfBezeichnung(mannschaft.getBezeichnung());
+                MannschaftDialog.setcboTrainer(mannschaft.getTrainer());
                 ArrayList<String> teamSpieler = new ArrayList<>();
                 ArrayList<Profispieler> alleSpieler = XMLLoader.loadProfiSpieler();
                 ArrayList<NormalesMitglied> alleMitglieder = XMLLoader.loadMitglieder();
@@ -691,8 +707,20 @@ public class StartupWindow extends javax.swing.JFrame {
         }
     }
 
-    private void spielDialogErzeugen(Boolean isNew, Spiel spiel) {
+    private void spielDialogErzeugen(Boolean isNew, Spiel spiel) throws IOException {
         SpielDialog = new SpielDialog(isNew, this); //Hier Entity �bergeben und in Konstruktor die Werte setzen(wenn nicht neu)
+        if (spiel != null) {
+            SpielDialog.setCboMannschaftName(spiel.getEigenesTeam());
+            SpielDialog.setTfGegner(spiel.getGegnerTeam());
+            SpielDialog.setTfAnfangszeit(spiel.getBeginn());
+            SpielDialog.setTfOrt(spiel.getOrt());
+            Date datum = spiel.getZeitpunkt();
+            if (datum != null) {
+                SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.YYYY");
+                String date = sdf.format(datum);
+                SpielDialog.setTfDatum(date);
+            }
+        }
         SpielDialog.setDefaultCloseOperation(HIDE_ON_CLOSE);
         SpielDialog.setModal(true);
         SpielDialog.setVisible(true);
@@ -713,6 +741,7 @@ public class StartupWindow extends javax.swing.JFrame {
             SpielerDialog.setTfEmail(trainer.getEmail());
             SpielerDialog.setCboMannschaftName(trainer.getMannschaft());
         }
+        SpielerDialog.changeStatecboMannschaften(false);
         SpielerDialog.setDefaultCloseOperation(HIDE_ON_CLOSE);
         SpielerDialog.setModal(true);
         SpielerDialog.setVisible(true);
@@ -770,11 +799,12 @@ public class StartupWindow extends javax.swing.JFrame {
     private Spiel ermittelSpiel(String Bezeichnung) throws IOException {
         ArrayList<Spiel> spiele = XMLLoader.loadSpiel(); //Richtigen PK setzen
         for (Spiel cSpiel : spiele) {
-            if (Bezeichnung.equals(cSpiel.getEigenesTeam())) {
+            String spielCaption = cSpiel.getEigenesTeam() + " gegen " + cSpiel.getGegnerTeam();
+            if (Bezeichnung.equals(spielCaption)) {
                 return cSpiel;
             }
         }
-        return new Spiel(null, null, null);
+        return new Spiel(null, null, null, null);
     }
 
     public void AllesAktualisieren() {

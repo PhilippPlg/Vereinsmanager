@@ -14,26 +14,46 @@ import java.util.Date;
  * @author masia
  */
 public class Spiel {
-    private Mannschaft eigenesTeam;
+
+    private String eigenesTeam;
     private String gegnerTeam;
     private int eigenePunkte;
     private int gegnerPunkte;
     private Date zeitpunkt;
+    private String ort;
+
+    public String getOrt() {
+        return ort;
+    }
+
+    public void setOrt(String ort) {
+        this.ort = ort;
+    }
+    private String beginn;
+
+    public String getBeginn() {
+        return beginn;
+    }
+
+    public void setBeginn(String beginn) {
+        this.beginn = beginn;
+    }
 
     public Spiel() {
     }
-    
-    public Spiel(Mannschaft eigenesTeam, String gegnerTeam, Date zeitpunkt) {
+
+    public Spiel(String eigenesTeam, String gegnerTeam, Date zeitpunkt, String ort) {
         this.eigenesTeam = eigenesTeam;
         this.gegnerTeam = gegnerTeam;
         this.zeitpunkt = zeitpunkt;
+        this.ort = ort;
     }
 
-    public Mannschaft getEigenesTeam() {
+    public String getEigenesTeam() {
         return eigenesTeam;
     }
 
-    public void setEigenesTeam(Mannschaft eigenesTeam) {
+    public void setEigenesTeam(String eigenesTeam) {
         this.eigenesTeam = eigenesTeam;
     }
 
@@ -68,12 +88,12 @@ public class Spiel {
     public void setZeitpunkt(Date zeitpunkt) {
         this.zeitpunkt = zeitpunkt;
     }
-    
-    public boolean hatSpielAngefangen(){
+
+    public boolean hatSpielAngefangen() {
         //CODE HERE
         return true;
     }
-    
+
     public String toString() {
         return this.eigenesTeam + " gegen " + this.gegnerTeam;
     }

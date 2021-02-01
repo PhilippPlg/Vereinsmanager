@@ -88,15 +88,6 @@ public class Verwaltung {
         return null;
     }
     
-    public void erstelleSpiel(Mannschaft eigenesTeam, String gegnerTeam, Date zeitpunkt) {
-        Spiel spiel = new Spiel(eigenesTeam, gegnerTeam, zeitpunkt);
-        for (int i = 0; i < spiele.length; i++) {
-            if(spiele[i] == null) {
-                spiele[i] = spiel;
-            }
-        }
-    }
-    
     public Spiel getSpiel(Mannschaft Mannschaft, Date Zeitpunkt){
          //NOT IMPLEMENTED || return passendes Spiel von Spielen 
         return null;

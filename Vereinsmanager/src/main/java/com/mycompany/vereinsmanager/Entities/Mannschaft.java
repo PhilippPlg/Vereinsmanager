@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package com.mycompany.vereinsmanager.Entities;
+
 /**
  *
  * @author masia
@@ -11,7 +12,7 @@ package com.mycompany.vereinsmanager.Entities;
 public class Mannschaft {
 
     private String bezeichnung;
-    private Trainer trainer;
+    private String trainer;
     private Profispieler[] profispieler;
     private Trainingszeit[] trainingszeiten;
     private Spiel letztesErgebnis;
@@ -50,11 +51,11 @@ public class Mannschaft {
         this.bezeichnung = bezeichnung;
     }
 
-    public Trainer getTrainer() {
+    public String getTrainer() {
         return trainer;
     }
 
-    public void setTrainer(Trainer trainer) {
+    public void setTrainer(String trainer) {
         this.trainer = trainer;
     }
 

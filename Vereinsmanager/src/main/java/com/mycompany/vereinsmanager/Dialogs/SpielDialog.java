@@ -6,6 +6,7 @@
 package com.mycompany.vereinsmanager.Dialogs;
 
 import com.mycompany.vereinsmanager.Entities.Mannschaft;
+import com.mycompany.vereinsmanager.Entities.NormalesMitglied;
 import com.mycompany.vereinsmanager.Entities.Spiel;
 import com.mycompany.vereinsmanager.Enums.EObjektStatus;
 import com.mycompany.vereinsmanager.Enums.ESaveObject;
@@ -13,19 +14,19 @@ import com.mycompany.vereinsmanager.Enums.ESaveStatus;
 import com.mycompany.vereinsmanager.main.StartupWindow;
 import static com.mycompany.vereinsmanager.main.Validator.isValidDate;
 import static com.mycompany.vereinsmanager.main.Validator.isValidTime;
-import com.mycompany.vereinsmanager.main.XMLLoader;
-import com.mycompany.vereinsmanager.main.XMLSerializer;
-import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import com.mycompany.vereinsmanager.main.XMLLoader;
 import com.mycompany.vereinsmanager.main.XMLSerializer;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -51,8 +52,8 @@ public class SpielDialog extends javax.swing.JDialog {
         return tfAnfangszeit;
     }
 
-    public void setTfAnfangszeit(JTextField tfAnfangszeit) {
-        this.tfAnfangszeit = tfAnfangszeit;
+    public void setTfAnfangszeit(String Anfangszeit) {
+        this.tfAnfangszeit.setText(Anfangszeit);
     }
 
     public JList<String> getLbSpieler() {
@@ -67,24 +68,28 @@ public class SpielDialog extends javax.swing.JDialog {
         return tfGegner;
     }
 
-    public void setTfGegner(JTextField tfGegner) {
-        this.tfGegner = tfGegner;
+    public void setTfGegner(String Gegner) {
+        this.tfGegner.setText(Gegner);
     }
 
-    public JTextField getTfMannschaft() {
-        return tfMannschaft;
-    }
-
-    public void setTfMannschaft(JTextField tfMannschaft) {
-        this.tfMannschaft = tfMannschaft;
+    public Mannschaft getMannschaft() throws IOException {
+        ArrayList<Mannschaft> tempMannschaften = XMLLoader.loadMannschaft();
+        Mannschaft eigeneMannschaft = new Mannschaft();
+        for (Mannschaft cMannschaft : tempMannschaften) {
+            if (cMannschaft.getBezeichnung().equals(cboMannschaft.getModel().getSelectedItem().toString())) {
+                eigeneMannschaft = cMannschaft;
+                break;
+            }
+        }
+        return eigeneMannschaft;
     }
 
     public JTextField getTfOrt() {
         return tfOrt;
     }
 
-    public void setTfOrt(JTextField tfOrt) {
-        this.tfOrt = tfOrt;
+    public void setTfOrt(String Ort) {
+        this.tfOrt.setText(Ort);
     }
 
     public JList<String> getTfSpieler() {
@@ -99,26 +104,27 @@ public class SpielDialog extends javax.swing.JDialog {
         return tfDatum;
     }
 
-    public void setTfDatum(JTextField tfDatum) {
-        this.tfDatum = tfDatum;
+    public void setTfDatum(String tfDatum) {
+        this.tfDatum.setText(tfDatum);
     }
     private boolean IsNew;
 
     /**
      * Creates new form MannschaftDialog
      */
-    public SpielDialog() {
-
+    public SpielDialog() throws IOException {
+        setCboMannschaftenItems();
     }
 
-    public SpielDialog(StartupWindow parent) {
+    public SpielDialog(StartupWindow parent) throws IOException {
         this(false, parent);
     }
 
-    public SpielDialog(boolean IsNew, StartupWindow parent) {
+    public SpielDialog(boolean IsNew, StartupWindow parent) throws IOException {
         initComponents();
         setIsNew(IsNew);
         this.parent = parent;
+        setCboMannschaftenItems();
         SetWindowTitle();
     }
 
@@ -127,6 +133,26 @@ public class SpielDialog extends javax.swing.JDialog {
         String ButtonCaption = IsNew ? ESaveStatus.erstellen.toString() : ESaveStatus.aktualisieren.toString();
         lblÜberschrift.setText("Spiel " + Caption);
         btnSpeichern.setText(ButtonCaption);
+    }
+
+    public void setCboMannschaftName(String cboMannschaftName) {
+        try {
+            setCboMannschaftenItems();
+            cboMannschaft.getModel().setSelectedItem(cboMannschaftName);
+        } catch (IOException ex) {
+            Logger.getLogger(SpielerDialog.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void setCboMannschaftenItems() throws IOException {
+        ArrayList<Mannschaft> mannschaften = XMLLoader.loadMannschaft();
+        ArrayList<String> mannschaftsNamen = new ArrayList<String>();
+        for (Mannschaft cMannschaft : mannschaften) {
+            mannschaftsNamen.add(cMannschaft.getBezeichnung());
+        }
+        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
+        model.addAll(mannschaftsNamen);
+        cboMannschaft.setModel(model);
     }
 
     /**
@@ -140,7 +166,6 @@ public class SpielDialog extends javax.swing.JDialog {
 
         lblÜberschrift = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        tfMannschaft = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         tfAnfangszeit = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -155,6 +180,7 @@ public class SpielDialog extends javax.swing.JDialog {
         btnSpeichern = new javax.swing.JButton();
         btnVerwerfen = new javax.swing.JButton();
         lblWarning = new javax.swing.JLabel();
+        cboMannschaft = new javax.swing.JComboBox<>();
 
         lblÜberschrift.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblÜberschrift.setText("Spiel");
@@ -192,6 +218,8 @@ public class SpielDialog extends javax.swing.JDialog {
             }
         });
 
+        cboMannschaft.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -214,15 +242,19 @@ public class SpielDialog extends javax.swing.JDialog {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblÜberschrift, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tfMannschaft, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tfAnfangszeit, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tfDatum, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(39, 39, 39)
+                                    .addComponent(tfAnfangszeit, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
+                                    .addComponent(tfDatum, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
+                                    .addComponent(cboMannschaft, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(39, 39, 39))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(tfGegner, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(tfOrt, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))))
@@ -235,28 +267,28 @@ public class SpielDialog extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblÜberschrift, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(tfMannschaft, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(6, 6, 6)
+                        .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel3)
-                            .addComponent(tfAnfangszeit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(tfAnfangszeit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel7))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel6)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel6)
+                                .addComponent(cboMannschaft, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(tfGegner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel7)
-                            .addComponent(tfOrt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(tfOrt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel4)
-                    .addComponent(tfDatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfDatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -266,7 +298,7 @@ public class SpielDialog extends javax.swing.JDialog {
                     .addComponent(btnSpeichern)
                     .addComponent(btnVerwerfen)
                     .addComponent(lblWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -279,7 +311,12 @@ public class SpielDialog extends javax.swing.JDialog {
     private void btnSpeichernActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSpeichernActionPerformed
         try {
             Date geb = null;
-            String eigenesTeam = tfMannschaft.getText();
+
+            String eigenesTeam = "";
+            Object mannschaft = cboMannschaft.getSelectedItem();
+            if (mannschaft != null) {
+                eigenesTeam = mannschaft.toString();
+            }
             String gegner = tfGegner.getText();
             String anfangszeit = tfAnfangszeit.getText();
             String datum = tfDatum.getText();
@@ -287,29 +324,47 @@ public class SpielDialog extends javax.swing.JDialog {
             // html damit der linebreak im label funktioniert, sehr hässlich
             String warning = "<html>";
             if (!isValidTime(anfangszeit)) {
-                warning += "Die Startzeit ist flasch formatiert.\\n";
+                warning += "Die Startzeit ist fasch formatiert.\\n";
             }
-            if( !isValidDate( datum ) ) {
+            if (!isValidDate(datum)) {
                 warning += "Das Datum ist falsch formatiert";
             }
+            //DateFormat format = new SimpleDateFormat("dd.MM.YYYY", Locale.GERMAN);
+            //Date zukunftsDate = format.parse(datum);
+            //if (!zukunftsDate.after(new Date())) {
+            //  warning += "Das Datum muss in der Zukunft liegen!";
+            //}
+
             if (warning.equals("<html>")) {
                 SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.YYYY HH:mm");
-                try{
+                try {
                     Date date = dateFormat.parse(datum + " " + anfangszeit);
                     ArrayList<Spiel> spiele = XMLLoader.loadSpiel();
                     ArrayList<Object> ObjekteZumSpeichern = new ArrayList<Object>();
                     ESaveObject SaveObject = ESaveObject.spiel;
-                    Spiel newSpiel = new Spiel( new Mannschaft(), gegner, date );
+
+                    if (!IsNew) {
+                        String actualCaption = eigenesTeam + " gegen " + gegner;
+                        for (Spiel cSpiel : spiele) {
+                            String spielCaption = cSpiel.getEigenesTeam() + " gegen " + cSpiel.getGegnerTeam();
+                            if (spielCaption.equals(actualCaption)) {
+                                spiele.remove(cSpiel);
+                                break;
+                            }
+                        }
+                    }
+
+                    Spiel newSpiel = new Spiel(eigenesTeam, gegner, date, ort);
                     spiele.add(newSpiel);
                     ObjekteZumSpeichern.addAll(spiele);
                     XMLSerializer.serializeToXML(ObjekteZumSpeichern, SaveObject);
                     lblWarning.setText("<html><b>Das Spiel wurde gespeichert!</b></html>");
                     parent.SpielDialog.dispose();
                     parent.AllesAktualisieren();
-                } catch( ParseException e ) {
+                } catch (ParseException e) {
                     Logger.getLogger(SpielerDialog.class.getName()).log(Level.SEVERE, null, e);
                 }
-                
+
             } else {
                 warning += "</html>";
                 lblWarning.setText(warning);
@@ -359,7 +414,11 @@ public class SpielDialog extends javax.swing.JDialog {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new SpielDialog().setVisible(true);
+                try {
+                    new SpielDialog().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(SpielDialog.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -367,6 +426,7 @@ public class SpielDialog extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSpeichern;
     private javax.swing.JButton btnVerwerfen;
+    private javax.swing.JComboBox<String> cboMannschaft;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -380,7 +440,6 @@ public class SpielDialog extends javax.swing.JDialog {
     private javax.swing.JTextField tfAnfangszeit;
     private javax.swing.JTextField tfDatum;
     private javax.swing.JTextField tfGegner;
-    private javax.swing.JTextField tfMannschaft;
     private javax.swing.JTextField tfOrt;
     // End of variables declaration//GEN-END:variables
 }

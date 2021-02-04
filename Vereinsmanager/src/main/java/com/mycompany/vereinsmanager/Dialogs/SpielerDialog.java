@@ -83,6 +83,12 @@ public class SpielerDialog extends javax.swing.JDialog {
     public void setIsNew(boolean IsNew) {
         this.IsNew = IsNew;
         SetWindowTitle();
+        this.tfVorname.setEnabled(IsNew);
+        this.tfVorname.setEditable(IsNew);
+        this.tfNachname.setEnabled(IsNew);
+        this.tfNachname.setEditable(IsNew);
+        this.tfGeburtsdatum.setEnabled(IsNew);
+        this.tfGeburtsdatum.setEditable(IsNew);
     }
 
     public JTextField getTfEmail() {
@@ -548,10 +554,11 @@ public class SpielerDialog extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_btnLoeschenActionPerformed
 
-    public void changeStatecboMannschaften(Boolean isEnabled){
+    public void changeStatecboMannschaften(Boolean isEnabled) {
         cboMannschaft.setEnabled(isEnabled);
         cboMannschaft.setEditable(isEnabled);
     }
+
     /**
      * @param args the command line arguments
      */

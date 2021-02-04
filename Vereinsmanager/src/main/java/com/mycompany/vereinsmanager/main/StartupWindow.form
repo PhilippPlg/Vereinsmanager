@@ -84,9 +84,7 @@
                           <Component id="jScrollPane1" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Component id="btnAddMannschaft" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="btnShowMannschaften" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="343" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="496" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -97,10 +95,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btnAddMannschaft" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnShowMannschaften" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="btnAddMannschaft" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jScrollPane1" pref="309" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -145,14 +140,6 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddMannschaftActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnShowMannschaften">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Mannschaften anzeigen"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnShowMannschaftenActionPerformed"/>
-              </Events>
-            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="jMitgliedTab">
@@ -178,9 +165,7 @@
                               <Component id="btnAddMitglied" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="btnBeitraegeAnzeigen" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="btnShowMitglieder" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="192" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="323" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -194,7 +179,6 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btnAddMitglied" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnBeitraegeAnzeigen" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnShowMitglieder" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jScrollPane2" pref="309" max="32767" attributes="0"/>
@@ -245,14 +229,6 @@
                 <Property name="text" type="java.lang.String" value="Ausstehende Betr&#xe4;ge anzeigen"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="btnShowMitglieder">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Mitglieder anzeigen"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnShowMitgliederActionPerformed"/>
-              </Events>
-            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="jSpielerTab">
@@ -276,9 +252,7 @@
                           <Component id="jScrollPane3" alignment="0" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="btnAddSpieler" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="btnShowSpieler" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="403" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="520" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -289,10 +263,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btnAddSpieler" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnShowSpieler" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="btnAddSpieler" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jScrollPane3" pref="309" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -337,14 +308,6 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JButton" name="btnShowSpieler">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Spieler anzeigen"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnShowSpielerActionPerformed"/>
-              </Events>
-            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="jSpielTab">
@@ -365,9 +328,7 @@
                           <Component id="jScrollPane4" alignment="0" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="btnAddSpiel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="btnShowSpiele" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="417" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="530" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -378,10 +339,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btnAddSpiel" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnShowSpiele" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="btnAddSpiel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jScrollPane4" pref="309" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -426,14 +384,6 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JButton" name="btnShowSpiele">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Spiele anzeigen"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnShowSpieleActionPerformed"/>
-              </Events>
-            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="jPanel1">
@@ -480,9 +430,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <Component id="btnAddTrainer" min="-2" pref="121" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="btnShowTrainer" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="409" max="32767" attributes="0"/>
+                          <EmptySpace pref="528" max="32767" attributes="0"/>
                       </Group>
                       <Component id="jScrollPane5" alignment="0" max="32767" attributes="0"/>
                   </Group>
@@ -491,10 +439,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="btnAddTrainer" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="btnShowTrainer" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="btnAddTrainer" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="jScrollPane5" min="-2" pref="351" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
@@ -539,14 +484,6 @@
                     </Component>
                   </SubComponents>
                 </Container>
-                <Component class="javax.swing.JButton" name="btnShowTrainer">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Trainer anzeigen"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnShowTrainerActionPerformed"/>
-                  </Events>
-                </Component>
               </SubComponents>
             </Container>
           </SubComponents>

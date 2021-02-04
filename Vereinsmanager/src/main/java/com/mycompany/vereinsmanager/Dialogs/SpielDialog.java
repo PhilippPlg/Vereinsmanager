@@ -46,6 +46,10 @@ public class SpielDialog extends javax.swing.JDialog {
     public void setIsNew(boolean IsNew) {
         this.IsNew = IsNew;
         SetWindowTitle();
+        this.cboMannschaft.setEnabled(IsNew);
+        this.cboMannschaft.setEditable(IsNew);
+        this.tfGegner.setEnabled(IsNew);
+        this.tfGegner.setEditable(IsNew);
     }
 
     public JTextField getTfAnfangszeit() {

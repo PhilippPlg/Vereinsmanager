@@ -37,8 +37,8 @@ public class StartupWindow extends javax.swing.JFrame {
      */
     public StartupWindow() {
         initComponents();
-        btnShowSpieleActionPerformed(null);
-        btnShowTrainerActionPerformed(null);
+        showTrainer();
+        showSpiele();
         this.setTitle("Handballverein ITFM4");
     }
     public MannschaftDialog MannschaftDialog;
@@ -61,29 +61,24 @@ public class StartupWindow extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         lbMannschaft = new javax.swing.JList<>();
         btnAddMannschaft = new javax.swing.JButton();
-        btnShowMannschaften = new javax.swing.JButton();
         jMitgliedTab = new javax.swing.JPanel();
         btnAddMitglied = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         lbMitglieder = new javax.swing.JList<>();
         btnBeitraegeAnzeigen = new javax.swing.JButton();
-        btnShowMitglieder = new javax.swing.JButton();
         jSpielerTab = new javax.swing.JPanel();
         btnAddSpieler = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         lbSpieler = new javax.swing.JList<>();
-        btnShowSpieler = new javax.swing.JButton();
         jSpielTab = new javax.swing.JPanel();
         btnAddSpiel = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         lbSpiele = new javax.swing.JList<>();
-        btnShowSpiele = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jSpielerTab1 = new javax.swing.JPanel();
         btnAddTrainer = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
         lbTrainer = new javax.swing.JList<>();
-        btnShowTrainer = new javax.swing.JButton();
 
         jMenu1.setText("jMenu1");
 
@@ -122,13 +117,6 @@ public class StartupWindow extends javax.swing.JFrame {
             }
         });
 
-        btnShowMannschaften.setText("Mannschaften anzeigen");
-        btnShowMannschaften.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnShowMannschaftenActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jMannschaftTabLayout = new javax.swing.GroupLayout(jMannschaftTab);
         jMannschaftTab.setLayout(jMannschaftTabLayout);
         jMannschaftTabLayout.setHorizontalGroup(
@@ -139,18 +127,14 @@ public class StartupWindow extends javax.swing.JFrame {
                     .addComponent(jScrollPane1)
                     .addGroup(jMannschaftTabLayout.createSequentialGroup()
                         .addComponent(btnAddMannschaft)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnShowMannschaften)
-                        .addGap(0, 343, Short.MAX_VALUE)))
+                        .addGap(0, 496, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jMannschaftTabLayout.setVerticalGroup(
             jMannschaftTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jMannschaftTabLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jMannschaftTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAddMannschaft)
-                    .addComponent(btnShowMannschaften))
+                .addComponent(btnAddMannschaft)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
                 .addContainerGap())
@@ -185,13 +169,6 @@ public class StartupWindow extends javax.swing.JFrame {
 
         btnBeitraegeAnzeigen.setText("Ausstehende Beträge anzeigen");
 
-        btnShowMitglieder.setText("Mitglieder anzeigen");
-        btnShowMitglieder.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnShowMitgliederActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jMitgliedTabLayout = new javax.swing.GroupLayout(jMitgliedTab);
         jMitgliedTab.setLayout(jMitgliedTabLayout);
         jMitgliedTabLayout.setHorizontalGroup(
@@ -204,9 +181,7 @@ public class StartupWindow extends javax.swing.JFrame {
                         .addComponent(btnAddMitglied)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnBeitraegeAnzeigen)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnShowMitglieder)
-                        .addGap(0, 192, Short.MAX_VALUE)))
+                        .addGap(0, 323, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jMitgliedTabLayout.setVerticalGroup(
@@ -215,8 +190,7 @@ public class StartupWindow extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jMitgliedTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAddMitglied)
-                    .addComponent(btnBeitraegeAnzeigen)
-                    .addComponent(btnShowMitglieder))
+                    .addComponent(btnBeitraegeAnzeigen))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
                 .addContainerGap())
@@ -249,13 +223,6 @@ public class StartupWindow extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(lbSpieler);
 
-        btnShowSpieler.setText("Spieler anzeigen");
-        btnShowSpieler.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnShowSpielerActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jSpielerTabLayout = new javax.swing.GroupLayout(jSpielerTab);
         jSpielerTab.setLayout(jSpielerTabLayout);
         jSpielerTabLayout.setHorizontalGroup(
@@ -266,18 +233,14 @@ public class StartupWindow extends javax.swing.JFrame {
                     .addComponent(jScrollPane3)
                     .addGroup(jSpielerTabLayout.createSequentialGroup()
                         .addComponent(btnAddSpieler)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnShowSpieler)
-                        .addGap(0, 403, Short.MAX_VALUE)))
+                        .addGap(0, 520, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jSpielerTabLayout.setVerticalGroup(
             jSpielerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jSpielerTabLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jSpielerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAddSpieler)
-                    .addComponent(btnShowSpieler))
+                .addComponent(btnAddSpieler)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
                 .addContainerGap())
@@ -304,13 +267,6 @@ public class StartupWindow extends javax.swing.JFrame {
         });
         jScrollPane4.setViewportView(lbSpiele);
 
-        btnShowSpiele.setText("Spiele anzeigen");
-        btnShowSpiele.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnShowSpieleActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jSpielTabLayout = new javax.swing.GroupLayout(jSpielTab);
         jSpielTab.setLayout(jSpielTabLayout);
         jSpielTabLayout.setHorizontalGroup(
@@ -321,18 +277,14 @@ public class StartupWindow extends javax.swing.JFrame {
                     .addComponent(jScrollPane4)
                     .addGroup(jSpielTabLayout.createSequentialGroup()
                         .addComponent(btnAddSpiel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnShowSpiele)
-                        .addGap(0, 417, Short.MAX_VALUE)))
+                        .addGap(0, 530, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jSpielTabLayout.setVerticalGroup(
             jSpielTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jSpielTabLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jSpielTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAddSpiel)
-                    .addComponent(btnShowSpiele))
+                .addComponent(btnAddSpiel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
                 .addContainerGap())
@@ -365,31 +317,20 @@ public class StartupWindow extends javax.swing.JFrame {
         });
         jScrollPane5.setViewportView(lbTrainer);
 
-        btnShowTrainer.setText("Trainer anzeigen");
-        btnShowTrainer.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnShowTrainerActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jSpielerTab1Layout = new javax.swing.GroupLayout(jSpielerTab1);
         jSpielerTab1.setLayout(jSpielerTab1Layout);
         jSpielerTab1Layout.setHorizontalGroup(
             jSpielerTab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jSpielerTab1Layout.createSequentialGroup()
                 .addComponent(btnAddTrainer, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnShowTrainer)
-                .addContainerGap(409, Short.MAX_VALUE))
+                .addContainerGap(528, Short.MAX_VALUE))
             .addComponent(jScrollPane5)
         );
         jSpielerTab1Layout.setVerticalGroup(
             jSpielerTab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jSpielerTab1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jSpielerTab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAddTrainer)
-                    .addComponent(btnShowTrainer))
+                .addComponent(btnAddTrainer)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -456,21 +397,18 @@ public class StartupWindow extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnAddSpielActionPerformed
 
-    private void btnShowMitgliederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowMitgliederActionPerformed
+    private void showMitglieder() {
         try {
-
             DefaultListModel model = new DefaultListModel();
             model.addAll(XMLLoader.loadMitglieder());
             lbMitglieder.setModel(model);
-
         } catch (IOException ex) {
             Logger.getLogger(StartupWindow.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_btnShowMitgliederActionPerformed
+    }
 
-    private void btnShowMannschaftenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowMannschaftenActionPerformed
+    private void showMannschaften() {
         try {
-
             DefaultListModel model = new DefaultListModel();
             ArrayList<Mannschaft> mannschaften = XMLLoader.loadMannschaft();
             ArrayList<String> mannschaftsnamen = new ArrayList<String>();
@@ -480,50 +418,45 @@ public class StartupWindow extends javax.swing.JFrame {
 
             model.addAll(mannschaftsnamen);
             lbMannschaft.setModel(model);
-
         } catch (IOException ex) {
             Logger.getLogger(StartupWindow.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_btnShowMannschaftenActionPerformed
+    }
 
-    private void btnShowSpielerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowSpielerActionPerformed
+    private void showSpieler() {
         try {
-
             DefaultListModel model = new DefaultListModel();
             model.addAll(XMLLoader.loadProfiSpieler());
             lbSpieler.setModel(model);
-
         } catch (IOException ex) {
             Logger.getLogger(StartupWindow.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_btnShowSpielerActionPerformed
+    }
 
-    private void btnShowSpieleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowSpieleActionPerformed
+    private void showSpiele() {
         try {
-
             DefaultListModel model = new DefaultListModel();
             model.addAll(XMLLoader.loadSpiel());
             lbSpiele.setModel(model);
-
         } catch (IOException ex) {
             Logger.getLogger(StartupWindow.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_btnShowSpieleActionPerformed
+    }
 
     private void jMannschaftTabComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jMannschaftTabComponentShown
-        btnShowMannschaftenActionPerformed(null);
+        showMannschaften();
     }//GEN-LAST:event_jMannschaftTabComponentShown
 
     private void jMitgliedTabComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jMitgliedTabComponentShown
-        btnShowMitgliederActionPerformed(null);
+        showMitglieder();
     }//GEN-LAST:event_jMitgliedTabComponentShown
 
     private void jSpielerTabComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jSpielerTabComponentShown
-        btnShowSpielerActionPerformed(null);
+        showSpieler();
     }//GEN-LAST:event_jSpielerTabComponentShown
 
     private void jTrainerTabComponentShown(java.awt.event.ComponentEvent evt) {
-        btnShowTrainerActionPerformed(null);
+        showTrainer();
     }
 
     private void lbMannschaftMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbMannschaftMouseClicked
@@ -604,23 +537,22 @@ public class StartupWindow extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_lbTrainerMouseClicked
 
-    private void btnShowTrainerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowTrainerActionPerformed
+    private void showTrainer() {
         try {
             DefaultListModel model = new DefaultListModel();
             model.addAll(XMLLoader.loadTrainer());
             lbTrainer.setModel(model);
-
         } catch (IOException ex) {
             Logger.getLogger(StartupWindow.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_btnShowTrainerActionPerformed
 
+    }
     private void jSpielerTab1ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jSpielerTab1ComponentShown
 
     }//GEN-LAST:event_jSpielerTab1ComponentShown
 
     private void jContentWindowComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jContentWindowComponentShown
-        btnShowTrainerActionPerformed(null);
+        showTrainer();
     }//GEN-LAST:event_jContentWindowComponentShown
 
     private void mitgliedDialogErzeugen(Boolean isNew, Mitglied mitglied) {
@@ -836,11 +768,11 @@ public class StartupWindow extends javax.swing.JFrame {
     }
 
     public void AllesAktualisieren() {
-        btnShowMannschaftenActionPerformed(null);
-        btnShowMitgliederActionPerformed(null);
-        btnShowSpieleActionPerformed(null);
-        btnShowSpielerActionPerformed(null);
-        btnShowTrainerActionPerformed(null);
+        showMannschaften();
+        showMitglieder();
+        showSpiele();
+        showSpieler();
+        showTrainer();
     }
 
     /**
@@ -885,11 +817,6 @@ public class StartupWindow extends javax.swing.JFrame {
     private javax.swing.JButton btnAddSpieler;
     private javax.swing.JButton btnAddTrainer;
     private javax.swing.JButton btnBeitraegeAnzeigen;
-    private javax.swing.JButton btnShowMannschaften;
-    private javax.swing.JButton btnShowMitglieder;
-    private javax.swing.JButton btnShowSpiele;
-    private javax.swing.JButton btnShowSpieler;
-    private javax.swing.JButton btnShowTrainer;
     private javax.swing.JTabbedPane jContentWindow;
     private javax.swing.JPanel jMannschaftTab;
     private javax.swing.JMenu jMenu1;

@@ -7,6 +7,7 @@ package com.mycompany.vereinsmanager.Dialogs;
 
 import com.mycompany.vereinsmanager.Entities.Mannschaft;
 import com.mycompany.vereinsmanager.Entities.NormalesMitglied;
+import com.mycompany.vereinsmanager.Entities.Profispieler;
 import com.mycompany.vereinsmanager.Entities.Spiel;
 import com.mycompany.vereinsmanager.Enums.EObjektStatus;
 import com.mycompany.vereinsmanager.Enums.ESaveObject;
@@ -27,6 +28,7 @@ import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -36,13 +38,13 @@ import javax.swing.JTextField;
  * @author Timo
  */
 public class SpielDialog extends javax.swing.JDialog {
-
+    
     private StartupWindow parent;
-
+    
     public boolean isIsNew() {
         return IsNew;
     }
-
+    
     public void setIsNew(boolean IsNew) {
         this.IsNew = IsNew;
         SetWindowTitle();
@@ -50,32 +52,37 @@ public class SpielDialog extends javax.swing.JDialog {
         this.cboMannschaft.setEditable(IsNew);
         this.tfGegner.setEnabled(IsNew);
         this.tfGegner.setEditable(IsNew);
+        if (!IsNew) {
+            setcboMannschaftItems(cboMannschaft.getSelectedItem().toString());
+        }
     }
-
+    
     public JTextField getTfAnfangszeit() {
         return tfAnfangszeit;
     }
-
+    
     public void setTfAnfangszeit(String Anfangszeit) {
         this.tfAnfangszeit.setText(Anfangszeit);
     }
-
+    
     public JList<String> getLbSpieler() {
         return lbSpieler;
     }
-
-    public void setLbSpieler(JList<String> lbSpieler) {
-        this.lbSpieler = lbSpieler;
+    
+    public void setLbSpieler(ArrayList<String> Spieler) {
+        DefaultListModel model = new DefaultListModel();
+        model.addAll(Spieler);
+        this.lbSpieler.setModel(model);
     }
-
+    
     public JTextField getTfGegner() {
         return tfGegner;
     }
-
+    
     public void setTfGegner(String Gegner) {
         this.tfGegner.setText(Gegner);
     }
-
+    
     public Mannschaft getMannschaft() throws IOException {
         ArrayList<Mannschaft> tempMannschaften = XMLLoader.loadMannschaft();
         Mannschaft eigeneMannschaft = new Mannschaft();
@@ -87,27 +94,27 @@ public class SpielDialog extends javax.swing.JDialog {
         }
         return eigeneMannschaft;
     }
-
+    
     public JTextField getTfOrt() {
         return tfOrt;
     }
-
+    
     public void setTfOrt(String Ort) {
         this.tfOrt.setText(Ort);
     }
-
+    
     public JList<String> getTfSpieler() {
         return lbSpieler;
     }
-
+    
     public void setTfSpieler(JList<String> tfSpieler) {
         this.lbSpieler = tfSpieler;
     }
-
+    
     public JTextField getTfDatum() {
         return tfDatum;
     }
-
+    
     public void setTfDatum(String tfDatum) {
         this.tfDatum.setText(tfDatum);
     }
@@ -119,26 +126,27 @@ public class SpielDialog extends javax.swing.JDialog {
     public SpielDialog() throws IOException {
         setCboMannschaftenItems();
     }
-
+    
     public SpielDialog(StartupWindow parent) throws IOException {
         this(false, parent);
     }
-
+    
     public SpielDialog(boolean IsNew, StartupWindow parent) throws IOException {
         initComponents();
         setIsNew(IsNew);
         this.parent = parent;
         setCboMannschaftenItems();
         SetWindowTitle();
+        
     }
-
+    
     private void SetWindowTitle() {
         String Caption = IsNew ? EObjektStatus.erstellen.toString() : EObjektStatus.bearbeiten.toString();
         String ButtonCaption = IsNew ? ESaveStatus.erstellen.toString() : ESaveStatus.aktualisieren.toString();
         lblÜberschrift.setText("Spiel " + Caption);
         btnSpeichern.setText(ButtonCaption);
     }
-
+    
     public void setCboMannschaftName(String cboMannschaftName) {
         try {
             setCboMannschaftenItems();
@@ -147,7 +155,7 @@ public class SpielDialog extends javax.swing.JDialog {
             Logger.getLogger(SpielerDialog.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
     private void setCboMannschaftenItems() throws IOException {
         ArrayList<Mannschaft> mannschaften = XMLLoader.loadMannschaft();
         ArrayList<String> mannschaftsNamen = new ArrayList<String>();
@@ -223,6 +231,11 @@ public class SpielDialog extends javax.swing.JDialog {
         });
 
         cboMannschaft.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboMannschaft.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cboMannschaftItemStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -315,7 +328,7 @@ public class SpielDialog extends javax.swing.JDialog {
     private void btnSpeichernActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSpeichernActionPerformed
         try {
             Date geb = null;
-
+            
             String eigenesTeam = "";
             Object mannschaft = cboMannschaft.getSelectedItem();
             if (mannschaft != null) {
@@ -346,7 +359,7 @@ public class SpielDialog extends javax.swing.JDialog {
                     ArrayList<Spiel> spiele = XMLLoader.loadSpiel();
                     ArrayList<Object> ObjekteZumSpeichern = new ArrayList<Object>();
                     ESaveObject SaveObject = ESaveObject.spiel;
-
+                    
                     if (!IsNew) {
                         String actualCaption = eigenesTeam + " gegen " + gegner;
                         for (Spiel cSpiel : spiele) {
@@ -357,7 +370,7 @@ public class SpielDialog extends javax.swing.JDialog {
                             }
                         }
                     }
-
+                    
                     Spiel newSpiel = new Spiel(eigenesTeam, gegner, date, ort);
                     spiele.add(newSpiel);
                     ObjekteZumSpeichern.addAll(spiele);
@@ -368,7 +381,7 @@ public class SpielDialog extends javax.swing.JDialog {
                 } catch (ParseException e) {
                     Logger.getLogger(SpielerDialog.class.getName()).log(Level.SEVERE, null, e);
                 }
-
+                
             } else {
                 warning += "</html>";
                 lblWarning.setText(warning);
@@ -386,6 +399,42 @@ public class SpielDialog extends javax.swing.JDialog {
         parent.AllesAktualisieren();
         parent.SpielDialog.dispose();
     }//GEN-LAST:event_btnLoeschenActionPerformed
+
+    private void cboMannschaftItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboMannschaftItemStateChanged
+        setcboMannschaftItems(evt.getItem().toString());
+    }//GEN-LAST:event_cboMannschaftItemStateChanged
+    
+    private void setcboMannschaftItems(String mannschaftsName) {
+        try {
+            ArrayList<String> teamSpieler = new ArrayList<>();
+            ArrayList<Profispieler> alleSpieler = XMLLoader.loadProfiSpieler();
+            ArrayList<NormalesMitglied> alleMitglieder = XMLLoader.loadMitglieder();
+            for (Profispieler cSpieler : alleSpieler) {
+                String cMannschaftsName = cSpieler.getMannschaft();
+                
+                if (cMannschaftsName == null || mannschaftsName == null) {
+                    continue;
+                }
+                if (cMannschaftsName.equals(mannschaftsName)) {
+                    teamSpieler.add(cSpieler.getVorname() + " " + cSpieler.getNachname());
+                }
+                break;
+            }
+            for (NormalesMitglied cMitglied : alleMitglieder) {
+                String cMannschaftsName = cMitglied.getMannschaft();
+                if (cMannschaftsName == null || mannschaftsName == null) {
+                    continue;
+                }
+                if (cMannschaftsName.equals(mannschaftsName)) {
+                    teamSpieler.add(cMitglied.getVorname() + " " + cMitglied.getNachname());
+                }
+                break;
+            }
+            this.setLbSpieler(teamSpieler);
+        } catch (IOException ex) {
+            Logger.getLogger(SpielDialog.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     /**
      * @param args the command line arguments

@@ -83,7 +83,7 @@ public class MannschaftDialog extends javax.swing.JDialog {
     public void setTfErgebnis(String Ergebnis) {
         this.tfErgebnis.setText(Ergebnis);
     }
-    
+
     public String getcboTrainer() {
         return cboTrainer.getModel().getSelectedItem().toString();
     }
@@ -397,7 +397,15 @@ public class MannschaftDialog extends javax.swing.JDialog {
         try {
             Mannschaft tmpMannschaft = new Mannschaft();
             tmpMannschaft.setBezeichnung(this.tfBezeichnung.getText());
-            parent.spielDialogErzeugen(false, parent.ermittelNaechstesSpiel(tmpMannschaft));
+            Spiel naechstesSpiel = parent.ermittelNaechstesSpiel(tmpMannschaft);
+
+            if (naechstesSpiel.toString().equals("null gegen null")) {
+                int result = JOptionPane.showConfirmDialog(null, "Kein nächstes Spiel vorhanden, neues anlegen?", "Kein Spiel gefunden", JOptionPane.YES_NO_OPTION);
+                if (result == JOptionPane.NO_OPTION) {
+                    return;
+                }
+            }
+            parent.spielDialogErzeugen(true, naechstesSpiel);
         } catch (IOException ex) {
             Logger.getLogger(MannschaftDialog.class.getName()).log(Level.SEVERE, null, ex);
         }

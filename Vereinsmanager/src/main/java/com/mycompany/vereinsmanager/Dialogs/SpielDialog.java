@@ -38,13 +38,13 @@ import javax.swing.JTextField;
  * @author Timo
  */
 public class SpielDialog extends javax.swing.JDialog {
-    
+
     private StartupWindow parent;
-    
+
     public boolean isIsNew() {
         return IsNew;
     }
-    
+
     public void setIsNew(boolean IsNew) {
         this.IsNew = IsNew;
         SetWindowTitle();
@@ -56,33 +56,33 @@ public class SpielDialog extends javax.swing.JDialog {
             setcboMannschaftItems(cboMannschaft.getSelectedItem().toString());
         }
     }
-    
+
     public JTextField getTfAnfangszeit() {
         return tfAnfangszeit;
     }
-    
+
     public void setTfAnfangszeit(String Anfangszeit) {
         this.tfAnfangszeit.setText(Anfangszeit);
     }
-    
+
     public JList<String> getLbSpieler() {
         return lbSpieler;
     }
-    
+
     public void setLbSpieler(ArrayList<String> Spieler) {
         DefaultListModel model = new DefaultListModel();
         model.addAll(Spieler);
         this.lbSpieler.setModel(model);
     }
-    
+
     public JTextField getTfGegner() {
         return tfGegner;
     }
-    
+
     public void setTfGegner(String Gegner) {
         this.tfGegner.setText(Gegner);
     }
-    
+
     public Mannschaft getMannschaft() throws IOException {
         ArrayList<Mannschaft> tempMannschaften = XMLLoader.loadMannschaft();
         Mannschaft eigeneMannschaft = new Mannschaft();
@@ -94,27 +94,27 @@ public class SpielDialog extends javax.swing.JDialog {
         }
         return eigeneMannschaft;
     }
-    
+
     public JTextField getTfOrt() {
         return tfOrt;
     }
-    
+
     public void setTfOrt(String Ort) {
         this.tfOrt.setText(Ort);
     }
-    
+
     public JList<String> getTfSpieler() {
         return lbSpieler;
     }
-    
+
     public void setTfSpieler(JList<String> tfSpieler) {
         this.lbSpieler = tfSpieler;
     }
-    
+
     public JTextField getTfDatum() {
         return tfDatum;
     }
-    
+
     public void setTfDatum(String tfDatum) {
         this.tfDatum.setText(tfDatum);
     }
@@ -126,27 +126,27 @@ public class SpielDialog extends javax.swing.JDialog {
     public SpielDialog() throws IOException {
         setCboMannschaftenItems();
     }
-    
+
     public SpielDialog(StartupWindow parent) throws IOException {
         this(false, parent);
     }
-    
+
     public SpielDialog(boolean IsNew, StartupWindow parent) throws IOException {
         initComponents();
         setIsNew(IsNew);
         this.parent = parent;
         setCboMannschaftenItems();
         SetWindowTitle();
-        
+
     }
-    
+
     private void SetWindowTitle() {
         String Caption = IsNew ? EObjektStatus.erstellen.toString() : EObjektStatus.bearbeiten.toString();
         String ButtonCaption = IsNew ? ESaveStatus.erstellen.toString() : ESaveStatus.aktualisieren.toString();
         lblÜberschrift.setText("Spiel " + Caption);
         btnSpeichern.setText(ButtonCaption);
     }
-    
+
     public void setCboMannschaftName(String cboMannschaftName) {
         try {
             setCboMannschaftenItems();
@@ -155,7 +155,7 @@ public class SpielDialog extends javax.swing.JDialog {
             Logger.getLogger(SpielerDialog.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     private void setCboMannschaftenItems() throws IOException {
         ArrayList<Mannschaft> mannschaften = XMLLoader.loadMannschaft();
         ArrayList<String> mannschaftsNamen = new ArrayList<String>();
@@ -193,6 +193,7 @@ public class SpielDialog extends javax.swing.JDialog {
         btnVerwerfen = new javax.swing.JButton();
         lblWarning = new javax.swing.JLabel();
         cboMannschaft = new javax.swing.JComboBox<>();
+        btnLoeschen = new javax.swing.JButton();
 
         lblÜberschrift.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblÜberschrift.setText("Spiel");
@@ -237,6 +238,13 @@ public class SpielDialog extends javax.swing.JDialog {
             }
         });
 
+        btnLoeschen.setText("Löschen");
+        btnLoeschen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoeschenActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -246,7 +254,9 @@ public class SpielDialog extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnLoeschen)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnVerwerfen)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnSpeichern))
@@ -265,7 +275,7 @@ public class SpielDialog extends javax.swing.JDialog {
                                     .addComponent(cboMannschaft, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(39, 39, 39))
                                     .addGroup(layout.createSequentialGroup()
@@ -277,7 +287,7 @@ public class SpielDialog extends javax.swing.JDialog {
                                     .addComponent(tfOrt, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -314,7 +324,8 @@ public class SpielDialog extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSpeichern)
                     .addComponent(btnVerwerfen)
-                    .addComponent(lblWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLoeschen))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -328,7 +339,7 @@ public class SpielDialog extends javax.swing.JDialog {
     private void btnSpeichernActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSpeichernActionPerformed
         try {
             Date geb = null;
-            
+
             String eigenesTeam = "";
             Object mannschaft = cboMannschaft.getSelectedItem();
             if (mannschaft != null) {
@@ -359,7 +370,7 @@ public class SpielDialog extends javax.swing.JDialog {
                     ArrayList<Spiel> spiele = XMLLoader.loadSpiel();
                     ArrayList<Object> ObjekteZumSpeichern = new ArrayList<Object>();
                     ESaveObject SaveObject = ESaveObject.spiel;
-                    
+
                     if (!IsNew) {
                         String actualCaption = eigenesTeam + " gegen " + gegner;
                         for (Spiel cSpiel : spiele) {
@@ -370,7 +381,7 @@ public class SpielDialog extends javax.swing.JDialog {
                             }
                         }
                     }
-                    
+
                     Spiel newSpiel = new Spiel(eigenesTeam, gegner, date, ort);
                     spiele.add(newSpiel);
                     ObjekteZumSpeichern.addAll(spiele);
@@ -381,7 +392,7 @@ public class SpielDialog extends javax.swing.JDialog {
                 } catch (ParseException e) {
                     Logger.getLogger(SpielerDialog.class.getName()).log(Level.SEVERE, null, e);
                 }
-                
+
             } else {
                 warning += "</html>";
                 lblWarning.setText(warning);
@@ -392,18 +403,33 @@ public class SpielDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_btnSpeichernActionPerformed
 
     private void btnLoeschenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoeschenActionPerformed
-        int result = JOptionPane.showConfirmDialog(null, "Möchten Sie das aktuelle Element wirklich löschen?", "Löschen?", JOptionPane.YES_NO_OPTION);
-        if (result == JOptionPane.NO_OPTION) {
-            return;
+        try {
+            int result = JOptionPane.showConfirmDialog(null, "Möchten Sie das aktuelle Element wirklich löschen?", "Löschen?", JOptionPane.YES_NO_OPTION);
+            if (result == JOptionPane.NO_OPTION) {
+                return;
+            }
+            ArrayList<Spiel> OldSpiele = XMLLoader.loadSpiel();
+            ArrayList<Object> neueSpiele = new ArrayList();
+            for (Spiel cSpiel : OldSpiele) {
+                if ((cboMannschaft.getSelectedItem().toString() + " gegen " + tfGegner.getText())
+                        .equals(cSpiel.getEigenesTeam() + " gegen " + cSpiel.getGegnerTeam())) {
+                    OldSpiele.remove(cSpiel);
+                    break;
+                }
+            }
+            neueSpiele.addAll(OldSpiele);
+            XMLSerializer.serializeToXML(neueSpiele, ESaveObject.spiel);
+            parent.AllesAktualisieren();
+            parent.SpielDialog.dispose();
+        } catch (IOException ex) {
+            Logger.getLogger(MannschaftDialog.class.getName()).log(Level.SEVERE, null, ex);
         }
-        parent.AllesAktualisieren();
-        parent.SpielDialog.dispose();
     }//GEN-LAST:event_btnLoeschenActionPerformed
 
     private void cboMannschaftItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboMannschaftItemStateChanged
         setcboMannschaftItems(evt.getItem().toString());
     }//GEN-LAST:event_cboMannschaftItemStateChanged
-    
+
     private void setcboMannschaftItems(String mannschaftsName) {
         try {
             ArrayList<String> teamSpieler = new ArrayList<>();
@@ -411,7 +437,7 @@ public class SpielDialog extends javax.swing.JDialog {
             ArrayList<NormalesMitglied> alleMitglieder = XMLLoader.loadMitglieder();
             for (Profispieler cSpieler : alleSpieler) {
                 String cMannschaftsName = cSpieler.getMannschaft();
-                
+
                 if (cMannschaftsName == null || mannschaftsName == null) {
                     continue;
                 }
@@ -477,6 +503,7 @@ public class SpielDialog extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnLoeschen;
     private javax.swing.JButton btnSpeichern;
     private javax.swing.JButton btnVerwerfen;
     private javax.swing.JComboBox<String> cboMannschaft;

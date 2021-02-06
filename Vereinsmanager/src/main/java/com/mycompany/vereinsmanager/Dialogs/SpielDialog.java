@@ -369,7 +369,7 @@ public class SpielDialog extends javax.swing.JDialog {
                 try {
                     Date date = dateFormat.parse(datum + " " + anfangszeit);
                     ArrayList<Spiel> spiele = XMLLoader.loadSpiel();
-                    ArrayList<Object> ObjekteZumSpeichern = new ArrayList<Object>();
+                    ArrayList<Object> ObjekteZumSpeichern = new ArrayList<>();
                     ESaveObject SaveObject = ESaveObject.spiel;
 
                     if (!IsNew) {

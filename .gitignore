@@ -129,3 +129,8 @@ nbdist/
 # End of https://www.toptal.com/developers/gitignore/api/netbeans,java,intellij+all
 
 /Vereinsmanager/target/
+Vereinsmanager/XMLFiles/profiSpieler.xml
+Vereinsmanager/XMLFiles/mannschaft.xml
+Vereinsmanager/XMLFiles/spiel.xml
+Vereinsmanager/XMLFiles/normalesMitglied.xml
+Vereinsmanager/XMLFiles/trainer.xml

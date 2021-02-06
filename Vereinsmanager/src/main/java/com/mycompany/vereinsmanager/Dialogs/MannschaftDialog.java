@@ -86,7 +86,7 @@ public class MannschaftDialog extends javax.swing.JDialog {
     }
 
     public String getcboTrainer() {
-        return cboTrainer.getModel().getSelectedItem().toString();
+        return cboTrainer.getModel().getSelectedItem() != null ? cboTrainer.getModel().getSelectedItem().toString() : "";
     }
 
     public void setcboTrainer(String Trainer) throws IOException {

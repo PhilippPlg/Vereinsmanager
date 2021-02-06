@@ -56,6 +56,7 @@ public class MannschaftDialog extends javax.swing.JDialog {
         SetWindowTitle();
         this.tfBezeichnung.setEnabled(IsNew);
         this.tfBezeichnung.setEditable(IsNew);
+        this.btnLoeschen.setEnabled(!IsNew);
     }
 
     public JList<String> getLbSpieler() {

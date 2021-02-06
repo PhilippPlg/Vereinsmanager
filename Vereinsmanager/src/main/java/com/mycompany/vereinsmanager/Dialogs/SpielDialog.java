@@ -52,6 +52,7 @@ public class SpielDialog extends javax.swing.JDialog {
         this.cboMannschaft.setEditable(IsNew);
         this.tfGegner.setEnabled(IsNew);
         this.tfGegner.setEditable(IsNew);
+        this.btnLoeschen.setEnabled(!IsNew);
         if (!IsNew) {
             setcboMannschaftItems(cboMannschaft.getSelectedItem().toString());
         }

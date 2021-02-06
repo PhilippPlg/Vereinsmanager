@@ -89,6 +89,7 @@ public class SpielerDialog extends javax.swing.JDialog {
         this.tfNachname.setEditable(IsNew);
         this.tfGeburtsdatum.setEnabled(IsNew);
         this.tfGeburtsdatum.setEditable(IsNew);
+        this.btnLoeschen.setEnabled(!IsNew);
     }
 
     public JTextField getTfEmail() {

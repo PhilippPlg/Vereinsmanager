@@ -20,6 +20,10 @@ public class XMLSerializer {
 
     public static void serializeToXML(ArrayList<Object> object, ESaveObject SaveObject) throws IOException {
         File XMLFile = new File("./XMLFiles/" + SaveObject.toString() + ".xml");
+        if (!XMLFile.exists()) {
+            XMLFile.getParentFile().mkdirs();
+            XMLFile.createNewFile();
+        }
         FileOutputStream fos = new FileOutputStream(XMLFile);
         XMLEncoder encoder = new XMLEncoder(fos);
         encoder.setExceptionListener((Exception e) -> {

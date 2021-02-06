@@ -28,8 +28,9 @@ public class XMLLoader {
     public static Object deserializeFromXML(ESaveObject SaveObject) throws IOException {
         File file = new File("./XMLFiles/" + SaveObject.toString() + ".xml");
         if (!file.exists()) {
-            FileOutputStream fos = new FileOutputStream(file);
+            file.getParentFile().mkdirs();
             file.createNewFile();
+            FileOutputStream fos = new FileOutputStream(file);
             XMLEncoder encoder = new XMLEncoder(fos);
             encoder.setExceptionListener((Exception e) -> {
                 System.out.println("Exception! :" + e.toString());

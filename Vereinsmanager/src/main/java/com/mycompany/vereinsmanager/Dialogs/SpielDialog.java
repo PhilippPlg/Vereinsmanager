@@ -80,7 +80,7 @@ public class SpielDialog extends javax.swing.JDialog {
     public void setTfGegner(String Gegner) {
         this.tfGegner.setText(Gegner);
     }
-    
+
     public void hideErgebnis() {
         lblErgebnis.setVisible(false);
         tfErgebnis.setVisible(false);
@@ -362,6 +362,7 @@ public class SpielDialog extends javax.swing.JDialog {
         try {
             Date date = null;
             String eigenesTeam = "";
+            Boolean existiertBereits = false;
             Object mannschaft = cboMannschaft.getSelectedItem();
             if (mannschaft != null) {
                 eigenesTeam = mannschaft.toString();
@@ -375,7 +376,7 @@ public class SpielDialog extends javax.swing.JDialog {
             if (!isValidTime(anfangszeit)) {
                 warning += "Die Startzeit ist fasch formatiert.<br>";
             }
-            if (!isValidDate(datum) || datum.isEmpty() ) {
+            if (!isValidDate(datum) || datum.isEmpty()) {
                 warning += "Das Datum ist falsch formatiert";
             } else {
                 // parts[2]=Jahre || parts[1]=Monate || parts[0]=Tage
@@ -386,25 +387,32 @@ public class SpielDialog extends javax.swing.JDialog {
                 // A date (day of month) is represented by an integer from 1 to 31 in the usual manner.
                 date = new Date(Integer.parseInt(parts[2]) - 1900, Integer.parseInt(parts[1]) - 1, Integer.parseInt(parts[0]), Integer.parseInt(anfangszeit.split(":")[0]), Integer.parseInt(anfangszeit.split(":")[1]));
                 // Das Datum muss nur in der Zukunft liegen wenn ein neues Spiel erstellt wird
-                if ( IsNew && !date.after(new Date())) {
+                if (IsNew && !date.after(new Date())) {
                     warning += "Das Datum muss in der Zukunft liegen!";
                 }
             }
-            
+
             if (warning.equals("<html>")) {
                 ArrayList<Spiel> spiele = XMLLoader.loadSpiel();
                 ArrayList<Object> ObjekteZumSpeichern = new ArrayList<>();
                 ESaveObject SaveObject = ESaveObject.spiel;
 
-                if (!IsNew) {
-                    String actualCaption = eigenesTeam + " gegen " + gegner;
-                    for (Spiel cSpiel : spiele) {
-                        String spielCaption = cSpiel.getEigenesTeam() + " gegen " + cSpiel.getGegnerTeam();
-                        if (spielCaption.equals(actualCaption)) {
+                String actualCaption = eigenesTeam + " gegen " + gegner;
+                for (Spiel cSpiel : spiele) {
+                    String spielCaption = cSpiel.getEigenesTeam() + " gegen " + cSpiel.getGegnerTeam();
+                    if (spielCaption.equals(actualCaption)) {
+                        if (!IsNew) {
                             spiele.remove(cSpiel);
-                            break;
+                        } else {
+                            lblWarning.setText(lblWarning.getText() + " <html><b>" + spielCaption + " existiert bereits<br></b></html>");
+                            existiertBereits = true;
                         }
+                        break;
                     }
+                }
+
+                if (existiertBereits) {
+                    return;
                 }
 
                 Spiel newSpiel = new Spiel(eigenesTeam, gegner, date, ort);

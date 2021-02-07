@@ -322,15 +322,21 @@ public class MannschaftDialog extends javax.swing.JDialog {
         try {
             ArrayList<Object> ObjekteZumSpeichern = new ArrayList<Object>();
             ArrayList<Mannschaft> OldMannschaften = XMLLoader.loadMannschaft();
-            if (!IsNew) {
-                for (Mannschaft cMannschaft : OldMannschaften) {
-                    if (tfBezeichnung.getText().equals(cMannschaft.getBezeichnung())) {
+            Boolean existiertBereits = false;
+            for (Mannschaft cMannschaft : OldMannschaften) {
+                if (tfBezeichnung.getText().equals(cMannschaft.getBezeichnung())) {
+                    if (!IsNew) {
                         OldMannschaften.remove(cMannschaft);
-                        break;
+                    } else {
+                        lblWarning.setText("<html><b>" + tfBezeichnung.getText() + " existiert bereits</b></html>");
+                        existiertBereits = true;
                     }
+                    break;
                 }
             }
-
+            if (existiertBereits) {
+                return;
+            }
             Mannschaft Mannschaft = new Mannschaft();
             Mannschaft.setBezeichnung(tfBezeichnung.getText());
             Mannschaft.setLetztesErgebnis(new Spiel("", "", new Date(), null)); //Spiel erzeugen oder auswählen

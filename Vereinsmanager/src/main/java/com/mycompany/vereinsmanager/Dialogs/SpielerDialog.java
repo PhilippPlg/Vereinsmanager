@@ -80,11 +80,13 @@ public class SpielerDialog extends javax.swing.JDialog {
     public boolean isIsNew() {
         return IsNew;
     }
-    
+
     public final void setLblBeitrag() {
-        switch( Zugehörigkeit ) {
-            case Mitglieder -> lblBeitrag.setText("Beitrag");
-            case Spieler, Trainer -> lblBeitrag.setText("Gehalt");
+        switch (Zugehörigkeit) {
+            case Mitglieder ->
+                lblBeitrag.setText("Beitrag");
+            case Spieler, Trainer ->
+                lblBeitrag.setText("Gehalt");
         }
     }
 
@@ -103,9 +105,9 @@ public class SpielerDialog extends javax.swing.JDialog {
     public JTextField getTfEmail() {
         return tfEmail;
     }
-    
-    public void setTfBeitrag( String beitrag ) {
-        this.tfBeitrag.setText( beitrag );
+
+    public void setTfBeitrag(String beitrag) {
+        this.tfBeitrag.setText(beitrag);
     }
 
     public void setTfEmail(String Email) {
@@ -449,24 +451,29 @@ public class SpielerDialog extends javax.swing.JDialog {
                 // A date (day of month) is represented by an integer from 1 to 31 in the usual manner.
                 geb = new Date(Integer.parseInt(parts[2]) - 1900, Integer.parseInt(parts[1]) - 1, Integer.parseInt(parts[0]));
             }
-            if( !isValidGeldBetrag(betragRaw ) ) {
+            if (!isValidGeldBetrag(betragRaw)) {
                 warning += "Der Beitrag ist falsch formatiert.";
             } else {
-                betrag = Double.parseDouble( betragRaw.replace( ',', '.' ) );
+                betrag = Double.parseDouble(betragRaw.replace(',', '.'));
             }
             if (warning.equals("<html>")) {
                 ArrayList<Object> ObjekteZumSpeichern = new ArrayList<Object>();
                 ESaveObject SaveObject = ESaveObject.normalesMitglied;
+                Boolean existiertBereits = false;
                 switch (Zugehörigkeit) {
                     case Mitglieder:
                         ArrayList<NormalesMitglied> mitglieder = XMLLoader.loadMitglieder();
                         SaveObject = ESaveObject.normalesMitglied;
-                        if (!IsNew) {
-                            for (NormalesMitglied cmitglied : mitglieder) {
-                                if (vorname.equals(cmitglied.getVorname()) && nachname.equals(cmitglied.getNachname())) {
+
+                        for (NormalesMitglied cmitglied : mitglieder) {
+                            if (vorname.equals(cmitglied.getVorname()) && nachname.equals(cmitglied.getNachname())) {
+                                if (!IsNew) {
                                     mitglieder.remove(cmitglied);
-                                    break;
+                                } else {
+                                    lblWarning.setText("<html><b>" + cmitglied.getVorname() + " " + cmitglied.getNachname() + " existiert bereits</b></html>");
+                                    existiertBereits = true;
                                 }
+                                break;
                             }
                         }
 
@@ -483,12 +490,15 @@ public class SpielerDialog extends javax.swing.JDialog {
                         ArrayList<Profispieler> profis = XMLLoader.loadProfiSpieler();
                         SaveObject = ESaveObject.profiSpieler;
 
-                        if (!IsNew) {
-                            for (Profispieler cspieler : profis) {
-                                if (vorname.equals(cspieler.getVorname()) && nachname.equals(cspieler.getNachname())) {
+                        for (Profispieler cspieler : profis) {
+                            if (vorname.equals(cspieler.getVorname()) && nachname.equals(cspieler.getNachname())) {
+                                if (!IsNew) {
                                     profis.remove(cspieler);
-                                    break;
+                                } else {
+                                    lblWarning.setText("<html><b>" + cspieler.getVorname() + " " + cspieler.getNachname() + " existiert bereits</b></html>");
+                                    existiertBereits = true;
                                 }
+                                break;
                             }
                         }
 
@@ -505,12 +515,16 @@ public class SpielerDialog extends javax.swing.JDialog {
                         ArrayList<Trainer> trainers = XMLLoader.loadTrainer();
                         SaveObject = ESaveObject.trainer;
 
-                        if (!IsNew) {
-                            for (Trainer cTrainer : trainers) {
-                                if (vorname.equals(cTrainer.getVorname()) && nachname.equals(cTrainer.getNachname())) {
+                        for (Trainer cTrainer : trainers) {
+                            if (vorname.equals(cTrainer.getVorname()) && nachname.equals(cTrainer.getNachname())) {
+                                if (!IsNew) {
                                     trainers.remove(cTrainer);
-                                    break;
+                                } else {
+                                    lblWarning.setText("<html><b>" + cTrainer.getVorname() + " " + cTrainer.getNachname() + " existiert bereits</b></html>");
+                                    existiertBereits = true;
                                 }
+
+                                break;
                             }
                         }
 
@@ -518,6 +532,9 @@ public class SpielerDialog extends javax.swing.JDialog {
                         trainers.add(trainer);
                         ObjekteZumSpeichern.addAll(trainers);
                         break;
+                }
+                if (existiertBereits) {
+                    return;
                 }
                 XMLSerializer.serializeToXML(ObjekteZumSpeichern, SaveObject);
                 lblWarning.setText("<html><b>Das Mitglied wurde gespeichert!</b></html>");

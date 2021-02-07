@@ -11,7 +11,8 @@ import java.util.Date;
  *
  * @author masia
  */
-public class NormalesMitglied extends Mitglied{
+public class NormalesMitglied extends Mitglied {
+    
     private double zuZahlenderBetrag;
 
     public NormalesMitglied() {

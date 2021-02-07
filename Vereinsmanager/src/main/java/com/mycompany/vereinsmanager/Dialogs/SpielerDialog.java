@@ -81,7 +81,7 @@ public class SpielerDialog extends javax.swing.JDialog {
         return IsNew;
     }
     
-    public void setLblBeitrag() {
+    public final void setLblBeitrag() {
         switch( Zugehörigkeit ) {
             case Mitglieder -> lblBeitrag.setText("Beitrag");
             case Spieler, Trainer -> lblBeitrag.setText("Gehalt");

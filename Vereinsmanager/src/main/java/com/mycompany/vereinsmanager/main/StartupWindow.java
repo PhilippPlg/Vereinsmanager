@@ -5,6 +5,7 @@
  */
 package com.mycompany.vereinsmanager.main;
 
+import com.mycompany.vereinsmanager.Dialogs.BeitraegeDialog;
 import com.mycompany.vereinsmanager.Entities.Mannschaft;
 import com.mycompany.vereinsmanager.Enums.EZugehörigkeit;
 import com.mycompany.vereinsmanager.Dialogs.MannschaftDialog;
@@ -44,6 +45,7 @@ public class StartupWindow extends javax.swing.JFrame {
     public MannschaftDialog MannschaftDialog;
     public SpielDialog SpielDialog;
     public SpielerDialog SpielerDialog;
+    public BeitraegeDialog BeitraegeDialog;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -168,6 +170,11 @@ public class StartupWindow extends javax.swing.JFrame {
         jScrollPane2.setViewportView(lbMitglieder);
 
         btnBeitraegeAnzeigen.setText("Ausstehende Beträge anzeigen");
+        btnBeitraegeAnzeigen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBeitraegeAnzeigenActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jMitgliedTabLayout = new javax.swing.GroupLayout(jMitgliedTab);
         jMitgliedTab.setLayout(jMitgliedTabLayout);
@@ -188,9 +195,9 @@ public class StartupWindow extends javax.swing.JFrame {
             jMitgliedTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jMitgliedTabLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jMitgliedTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAddMitglied)
-                    .addComponent(btnBeitraegeAnzeigen))
+                .addGroup(jMitgliedTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnAddMitglied, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnBeitraegeAnzeigen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
                 .addContainerGap())
@@ -555,6 +562,22 @@ public class StartupWindow extends javax.swing.JFrame {
         showTrainer();
     }//GEN-LAST:event_jContentWindowComponentShown
 
+    private void btnBeitraegeAnzeigenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBeitraegeAnzeigenActionPerformed
+        try {
+            beitraegeDialogErzeugen(XMLLoader.loadMitglieder());
+        } catch( IOException ex ) {
+            Logger.getLogger(StartupWindow.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnBeitraegeAnzeigenActionPerformed
+
+    private void beitraegeDialogErzeugen(ArrayList<NormalesMitglied> mitglieder ) {
+        BeitraegeDialog = new BeitraegeDialog( this, true, mitglieder );
+        BeitraegeDialog.setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
+        BeitraegeDialog.setDefaultCloseOperation(HIDE_ON_CLOSE);
+        BeitraegeDialog.setModal(true);
+        BeitraegeDialog.setVisible(true);
+    }
+    
     private void mitgliedDialogErzeugen(Boolean isNew, NormalesMitglied mitglied) {
         try {
             SpielerDialog = new SpielerDialog(EZugehörigkeit.Mitglieder, isNew, this);

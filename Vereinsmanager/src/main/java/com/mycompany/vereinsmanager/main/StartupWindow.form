@@ -176,9 +176,9 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btnAddMitglied" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnBeitraegeAnzeigen" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="btnAddMitglied" max="32767" attributes="0"/>
+                          <Component id="btnBeitraegeAnzeigen" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jScrollPane2" pref="309" max="32767" attributes="0"/>
@@ -228,6 +228,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Ausstehende Betr&#xe4;ge anzeigen"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBeitraegeAnzeigenActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

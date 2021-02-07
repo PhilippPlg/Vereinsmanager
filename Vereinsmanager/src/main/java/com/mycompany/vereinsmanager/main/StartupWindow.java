@@ -686,6 +686,9 @@ public class StartupWindow extends javax.swing.JFrame {
                 formatter.applyPattern("dd.MM.YYYY");
                 String date = formatter.format(datum);
                 SpielDialog.setTfDatum(date);
+                if( datum.after( new Date() ) ) {
+                    SpielDialog.hideErgebnis();
+                }
             }
         }
         SpielDialog.setDefaultCloseOperation(HIDE_ON_CLOSE);

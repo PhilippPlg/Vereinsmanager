@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mycompany.vereinsmanager.Dialogs;
 
 import com.mycompany.vereinsmanager.Entities.NormalesMitglied;
@@ -12,12 +7,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.MutableTreeNode;
 
 /**
  *
@@ -25,15 +17,23 @@ import javax.swing.tree.MutableTreeNode;
  */
 public final class BeitraegeDialog extends javax.swing.JDialog {
     
-    private ArrayList<NormalesMitglied> mitglieder = null;
+    private ArrayList<NormalesMitglied> mitglieder;
     /**
      * Creates new form BeitraegeDialog
+     * @param parent Frame von dem der Dialog geöffnet wird, null akzeptiert
+     * @param modal true sperrt die weitere Ausführung von obenliegenden GUI-Elementen, während dieser Dialog geöffnet ist
      */
     public BeitraegeDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
     
+    /**
+     *
+     * @param parent Frame von dem der Dialog geöffnet wird, null akzeptiert
+     * @param modal true sperrt die weitere Ausführung von obenliegenden GUI-Elementen, während dieser Dialog geöffnet ist
+     * @param mitglieder Mitgliederliste als ArrayList
+     */
     public BeitraegeDialog(java.awt.Frame parent, boolean modal, ArrayList<NormalesMitglied> mitglieder) {
         super(parent, modal);
         this.mitglieder = mitglieder;
@@ -42,6 +42,10 @@ public final class BeitraegeDialog extends javax.swing.JDialog {
         this.validate();
     }
     
+    /**
+     * Erzeugt aus allen Mitgliedern mit offenen Beitragszahlungen ein TreeModel
+     * und lädt dieses in treeBeitraege
+     */
     public void createTree() {
         DefaultMutableTreeNode root = new DefaultMutableTreeNode("Mitglieder");
         DefaultTreeModel model = new DefaultTreeModel( root );

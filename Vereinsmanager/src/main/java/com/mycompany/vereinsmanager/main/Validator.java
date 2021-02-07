@@ -17,12 +17,22 @@ import java.util.regex.Pattern;
  */
 public class Validator {
     
+    /**
+     * prüft ob email eine gültige Email-Adresse ist
+     * @param email     der zu prüfende String
+     * @return boolean  true falls email gültig ist, andernfalls false
+     */
     public static boolean isValidEmail( String email ) {
         Pattern p = Pattern.compile( "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE );
         Matcher m = p.matcher( email );
         return m.matches();
     }
     
+    /**
+     * prüft ob date dem Format dd.mm.YYYY entspricht und sich als Date parsen lässt
+     * @param date      der zu prüfende String
+     * @return boolean  true falls date gültig ist, andernfalls false
+     */
     public static boolean isValidDate( String date ) {
         Pattern p = Pattern.compile( "^\\d{1,2}\\.\\d{1,2}\\.\\d{4}$" );
         Matcher m = p.matcher( date );
@@ -39,6 +49,11 @@ public class Validator {
         return true;
     }
     
+    /**
+     * prüft ob time dem Format HH:mm entspricht und eine gültige Uhrzeit darstellt
+     * @param time      der zu prüfende String
+     * @return boolean  true falls date gültig ist, andernfalls false
+     */
     public static boolean isValidTime( String time ) {
         Pattern p = Pattern.compile( "^\\d{2}:\\d{2}$" );
         Matcher m = p.matcher( time );
@@ -51,9 +66,14 @@ public class Validator {
         return false;
     }
     
-    public static boolean isValidGeldBetrag( String beitrag ) {
+    /**
+     * prüft ob betrag dem Format HH:mm entspricht und eine gültige Uhrzeit darstellt
+     * @param betrag    der zu prüfende String
+     * @return boolean  true falls betrag ein gültiger Komma-separierter double Wert ist, andernfalls false 
+     */
+    public static boolean isValidGeldBetrag( String betrag ) {
         Pattern p = Pattern.compile( "^\\d+(,\\d+)?$" );
-        Matcher m = p.matcher( beitrag );
+        Matcher m = p.matcher( betrag );
         return m.matches();
     }
 }

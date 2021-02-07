@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mycompany.vereinsmanager.Dialogs;
 
 import com.mycompany.vereinsmanager.Enums.EObjektStatus;
@@ -18,80 +13,119 @@ import com.mycompany.vereinsmanager.main.XMLSerializer;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.NavigableSet;
-import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 
 /**
- *
+ * 
  * @author Timo
  */
 public class MannschaftDialog extends javax.swing.JDialog {
-
-    private boolean IsNew;
+    /**
+    * true beim Erzeugen einer neuen Mannschaft, sonst false
+    */
+    private boolean isNew;
+    /**
+    * Trainingszeitendialog
+    */
     public SelectTrainingszeitenDialog EditTrainingszeitenDialog;
-
+    /**
+    * Trainingszeiten der Mannschaft
+    */
+    private ArrayList<Trainingszeit> trainingszeiten;
+    /**
+    * parent
+    */
+    private StartupWindow parent;
+    /**
+     *
+     * @return ArrayList&lt;Trainingszeit&gt; Trainingszeiten der Mannschaft
+     */
     public ArrayList<Trainingszeit> getTrainingszeiten() {
         return trainingszeiten;
     }
-
+    
+    /**
+     * setzt die Trainingszeiten für den aktuellen Mannschaftsdialog
+     * @param trainingszeiten
+     */
     public void setTrainingszeiten(ArrayList<Trainingszeit> trainingszeiten) {
         this.trainingszeiten = trainingszeiten;
     }
-    private ArrayList<Trainingszeit> trainingszeiten;
-    private StartupWindow parent;
 
+    /**
+     * gibt zurück ob der Mannschaftsdialog für eine neue Mannschaft ist oder nicht
+     * @return boolean isNew
+     */
     public boolean isIsNew() {
-        return IsNew;
+        return isNew;
     }
 
+    /**
+     * Setzt isNew neu und aktiviert/deaktiviert das Eingabefeld für Bezeichnung
+     * @param IsNew boolean neuer Wert für isNew
+     */
     public void setIsNew(boolean IsNew) {
-        this.IsNew = IsNew;
+        this.isNew = IsNew;
         SetWindowTitle();
         this.tfBezeichnung.setEnabled(IsNew);
         this.tfBezeichnung.setEditable(IsNew);
         this.btnLoeschen.setEnabled(!IsNew);
     }
 
+    /**
+     * Gibt die Spieler als JList object zurück
+     * @return JList lbSpieler
+     */
     public JList<String> getLbSpieler() {
         return lbSpieler;
     }
 
+    /**
+     * Lädt die angegebene Spielerliste in lbSpieler
+     * @param Spieler ArrayList&lt;Spieler&gt;
+     */
     public void setLbSpieler(ArrayList<String> Spieler) {
         DefaultListModel model = new DefaultListModel();
         model.addAll(Spieler);
         this.lbSpieler.setModel(model);
     }
 
-    public JTextField getTfBezeichnung() {
-        return tfBezeichnung;
+    /**
+     * Setzt bezeichnung in das Bezeichnungseingabefeld
+     * @param bezeichnung
+     */
+    public void setTfBezeichnung(String bezeichnung) {
+        this.tfBezeichnung.setText(bezeichnung);
     }
 
-    public void setTfBezeichnung(String Bezeichnung) {
-        this.tfBezeichnung.setText(Bezeichnung);
+    /**
+     * Setzt ergebnis in das Ergebnisfeld
+     * @param ergebnis
+     */
+    public void setTfErgebnis(String ergebnis) {
+        this.tfErgebnis.setText(ergebnis);
     }
 
-    public JTextField getTfErgebnis() {
-        return tfErgebnis;
-    }
-
-    public void setTfErgebnis(String Ergebnis) {
-        this.tfErgebnis.setText(Ergebnis);
-    }
-
+    /**
+     * Gibt den aktuellen Trainernamen zurück
+     * @return String toString() des ausgewählten Trainers in der Combobox
+     */
     public String getcboTrainer() {
         return cboTrainer.getModel().getSelectedItem() != null ? cboTrainer.getModel().getSelectedItem().toString() : "";
     }
-
-    public void setcboTrainer(String Trainer) throws IOException {
+    /**
+     * Setzt trainer als ausgewählten Trainer in der Trainercombobox
+     * @param trainer
+     * @throws IOException 
+     */
+    public void setcboTrainer(String trainer) throws IOException {
         setCboTrainerItems();
-        cboTrainer.getModel().setSelectedItem(Trainer);
+        cboTrainer.getModel().setSelectedItem(trainer);
     }
 
     /**
@@ -113,14 +147,18 @@ public class MannschaftDialog extends javax.swing.JDialog {
         setCboTrainerItems();
     }
 
+    /**
+     * Macht das Bezeichnungseingabefeld editierbar oder uneditierbar
+     * @param CanEdit boolean
+     */
     public void ChangetfBezeichnungCanEdit(Boolean CanEdit) {
         tfBezeichnung.setEditable(CanEdit);
         tfBezeichnung.setEnabled(CanEdit);
     }
 
     private void SetWindowTitle() {
-        String Caption = IsNew ? EObjektStatus.erstellen.toString() : EObjektStatus.bearbeiten.toString();
-        String ButtonCaption = IsNew ? ESaveStatus.erstellen.toString() : ESaveStatus.aktualisieren.toString();
+        String Caption = isNew ? EObjektStatus.erstellen.toString() : EObjektStatus.bearbeiten.toString();
+        String ButtonCaption = isNew ? ESaveStatus.erstellen.toString() : ESaveStatus.aktualisieren.toString();
         lblÜberschrift.setText("Mannschaft " + Caption);
         btnSpeichern.setText(ButtonCaption);
     }
@@ -325,7 +363,7 @@ public class MannschaftDialog extends javax.swing.JDialog {
             Boolean existiertBereits = false;
             for (Mannschaft cMannschaft : OldMannschaften) {
                 if (tfBezeichnung.getText().equals(cMannschaft.getBezeichnung())) {
-                    if (!IsNew) {
+                    if (!isNew) {
                         OldMannschaften.remove(cMannschaft);
                     } else {
                         lblWarning.setText("<html><b>" + tfBezeichnung.getText() + " existiert bereits</b></html>");

@@ -41,6 +41,25 @@ public class MannschaftDialog extends javax.swing.JDialog {
     * parent
     */
     private StartupWindow parent;
+    
+    /**
+     * Creates new form MannschaftDialog
+     */
+    public MannschaftDialog() throws IOException {
+        setCboTrainerItems();
+    }
+
+    public MannschaftDialog(StartupWindow parent) throws IOException {
+        this(false, parent);
+    }
+
+    public MannschaftDialog(boolean IsNew, StartupWindow parent) throws IOException {
+        initComponents();
+        this.parent = parent;
+        setIsNew(IsNew);
+        SetWindowTitle();
+        setCboTrainerItems();
+    }
     /**
      *
      * @return ArrayList&lt;Trainingszeit&gt; Trainingszeiten der Mannschaft
@@ -126,25 +145,6 @@ public class MannschaftDialog extends javax.swing.JDialog {
     public void setcboTrainer(String trainer) throws IOException {
         setCboTrainerItems();
         cboTrainer.getModel().setSelectedItem(trainer);
-    }
-
-    /**
-     * Creates new form MannschaftDialog
-     */
-    public MannschaftDialog() throws IOException {
-        setCboTrainerItems();
-    }
-
-    public MannschaftDialog(StartupWindow parent) throws IOException {
-        this(false, parent);
-    }
-
-    public MannschaftDialog(boolean IsNew, StartupWindow parent) throws IOException {
-        initComponents();
-        this.parent = parent;
-        setIsNew(IsNew);
-        SetWindowTitle();
-        setCboTrainerItems();
     }
 
     /**

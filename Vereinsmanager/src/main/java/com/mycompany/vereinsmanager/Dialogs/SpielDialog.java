@@ -356,9 +356,9 @@ public class SpielDialog extends javax.swing.JDialog {
             // html damit der linebreak im label funktioniert, sehr hässlich
             String warning = "<html>";
             if (!isValidTime(anfangszeit)) {
-                warning += "Die Startzeit ist fasch formatiert.\\n";
+                warning += "Die Startzeit ist fasch formatiert.<br>";
             }
-            if (!isValidDate(datum)) {
+            if (!isValidDate(datum) || datum.isEmpty() ) {
                 warning += "Das Datum ist falsch formatiert";
             } else {
                 // parts[2]=Jahre || parts[1]=Monate || parts[0]=Tage
@@ -368,12 +368,14 @@ public class SpielDialog extends javax.swing.JDialog {
                 // A month is represented by an integer from 0 to 11; 0 is January, 1 is February, and so forth; thus 11 is December.
                 // A date (day of month) is represented by an integer from 1 to 31 in the usual manner.
                 date = new Date(Integer.parseInt(parts[2]) - 1900, Integer.parseInt(parts[1]) - 1, Integer.parseInt(parts[0]));
+                
+                if (date != null && !date.after(new Date())) {
+                    warning += "Das Datum muss in der Zukunft liegen!";
+                }
             }
             //DateFormat format = new SimpleDateFormat("dd.MM.YYYY", Locale.GERMAN);
             //Date zukunftsDate = format.parse(datum);
-            if (!date.after(new Date())) {
-              warning += "Das Datum muss in der Zukunft liegen!";
-            }
+
 
             if (warning.equals("<html>")) {
                 //SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.YYYY HH:mm");

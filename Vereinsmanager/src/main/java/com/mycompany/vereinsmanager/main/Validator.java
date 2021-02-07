@@ -5,9 +5,6 @@
  */
 package com.mycompany.vereinsmanager.main;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -30,7 +27,8 @@ public class Validator {
         Pattern p = Pattern.compile( "^\\d{1,2}\\.\\d{1,2}\\.\\d{4}$" );
         Matcher m = p.matcher( date );
         if( m.matches() ) {
-            // Wenn das Datum nicht geparst werden kann wird false return
+            // Wenn das Datum nicht geparst werden kann wird false returned
+            // Wenn es geparst werden kann wird true returned
             try {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
                 LocalDate localDate = formatter.parse(date, LocalDate::from);
@@ -51,5 +49,11 @@ public class Validator {
             }
         }
         return false;
+    }
+    
+    public static boolean isValidGeldBetrag( String beitrag ) {
+        Pattern p = Pattern.compile( "^\\d+(,\\d+)?$" );
+        Matcher m = p.matcher( beitrag );
+        return m.matches();
     }
 }

@@ -17,8 +17,9 @@ public class NormalesMitglied extends Mitglied{
     public NormalesMitglied() {
     }
     
-    public NormalesMitglied( String vorname, String nachname, String straße, String PLZ, String ort, Date geburtsDatum, String email, String telefonNr ) {
+    public NormalesMitglied( String vorname, String nachname, String straße, String PLZ, String ort, Date geburtsDatum, String email, String telefonNr, Double beitrag ) {
         super( vorname, nachname, straße, PLZ, ort, geburtsDatum, email, telefonNr);
+        this.zuZahlenderBetrag = beitrag;
     }
 
     public double getZuZahlenderBetrag() {

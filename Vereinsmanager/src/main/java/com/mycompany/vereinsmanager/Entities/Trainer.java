@@ -12,21 +12,22 @@ import java.util.Date;
  * @author masia
  */
 public class Trainer extends Mitglied {
-       private double Gehalt;
+    private double gehalt;
 
     public Trainer() {
     }
     
-    public Trainer( String vorname, String nachname, String strasse, String plz, String ort, Date geburtsDatum, String email, String telefonNr ) {
+    public Trainer( String vorname, String nachname, String strasse, String plz, String ort, Date geburtsDatum, String email, String telefonNr, double gehalt ) {
         super( vorname, nachname, strasse, plz, ort, geburtsDatum, email, telefonNr );
+        this.gehalt = gehalt;
     }
 
     public double getGehalt() {
-        return Gehalt;
+        return gehalt;
     }
 
     public void setGehalt(double Gehalt) {
-        this.Gehalt = Gehalt;
+        this.gehalt = Gehalt;
     }
        
        

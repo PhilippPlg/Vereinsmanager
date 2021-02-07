@@ -62,6 +62,7 @@ public class SpielerDialog extends javax.swing.JDialog {
         this.Zugehörigkeit = Zugehörigkeit;
         initComponents();
         setIsNew(IsNew);
+        setLblBeitrag();
         AddAssignmentItems();
         SetWindowTitle();
         this.parent = parent;
@@ -79,6 +80,13 @@ public class SpielerDialog extends javax.swing.JDialog {
     public boolean isIsNew() {
         return IsNew;
     }
+    
+    public void setLblBeitrag() {
+        switch( Zugehörigkeit ) {
+            case Mitglieder -> lblBeitrag.setText("Beitrag");
+            case Spieler, Trainer -> lblBeitrag.setText("Gehalt");
+        }
+    }
 
     public void setIsNew(boolean IsNew) {
         this.IsNew = IsNew;
@@ -94,6 +102,10 @@ public class SpielerDialog extends javax.swing.JDialog {
 
     public JTextField getTfEmail() {
         return tfEmail;
+    }
+    
+    public void setTfBeitrag( String beitrag ) {
+        this.tfBeitrag.setText( beitrag );
     }
 
     public void setTfEmail(String Email) {
@@ -221,6 +233,8 @@ public class SpielerDialog extends javax.swing.JDialog {
         btnSpeichern = new javax.swing.JButton();
         lblWarning = new javax.swing.JLabel();
         btnLoeschen = new javax.swing.JButton();
+        lblBeitrag = new javax.swing.JLabel();
+        tfBeitrag = new javax.swing.JTextField();
 
         lblÜberschrift.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblÜberschrift.setText("Mannschaft (erstellen / bearbeiten / anzeigen)");
@@ -271,6 +285,8 @@ public class SpielerDialog extends javax.swing.JDialog {
             }
         });
 
+        lblBeitrag.setText("Beitrag/Gehalt");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -306,37 +322,43 @@ public class SpielerDialog extends javax.swing.JDialog {
                                         .addGap(39, 39, 39)
                                         .addComponent(tfOrt, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(39, 39, 39)
                                 .addComponent(tfTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblBeitrag))
                                 .addGap(39, 39, 39)
-                                .addComponent(cboZugehörigkeit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(tfBeitrag)
+                                    .addComponent(cboZugehörigkeit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(39, 39, 39)
-                                .addComponent(tfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
+                                .addGap(76, 76, 76)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(39, 39, 39))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGap(56, 56, 56)
                                         .addComponent(btnLoeschen)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(btnVerwerfen)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(btnSpeichern))
-                                    .addComponent(cboMannschaft, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(lblWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(16, Short.MAX_VALUE))
+                                    .addComponent(lblWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(39, 39, 39)
+                                        .addComponent(tfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(39, 39, 39)
+                                        .addComponent(cboMannschaft, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -381,9 +403,13 @@ public class SpielerDialog extends javax.swing.JDialog {
                     .addComponent(cboZugehörigkeit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13)
                     .addComponent(cboMannschaft, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(lblWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(tfBeitrag, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblBeitrag)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSpeichern)
                     .addComponent(btnVerwerfen)
@@ -397,6 +423,7 @@ public class SpielerDialog extends javax.swing.JDialog {
     private void btnSpeichernActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSpeichernActionPerformed
         try {
             Date geb = null;
+            double betrag = 0;
             String vorname = tfVorname.getText();
             String nachname = tfNachname.getText();
             String strasse = tfStraße.getText();
@@ -405,13 +432,14 @@ public class SpielerDialog extends javax.swing.JDialog {
             String telefon = tfTelefon.getText();
             String email = tfEmail.getText();
             String gebRaw = tfGeburtsdatum.getText();
+            String betragRaw = tfBeitrag.getText();
             // html damit der linebreak im label funktioniert, sehr hässlich
             String warning = "<html>";
             if (!isValidEmail(email)) {
                 warning += "Die Email-Adresse ist falsch formatiert.<br>";
             }
             if (!isValidDate(gebRaw)) {
-                warning += "Das Geburtsdatum ist falsch formatiert.";
+                warning += "Das Geburtsdatum ist falsch formatiert.<br>";
             } else {
                 // parts[2]=Jahre || parts[1]=Monate || parts[0]=Tage
                 String[] parts = gebRaw.split("\\.");
@@ -420,6 +448,11 @@ public class SpielerDialog extends javax.swing.JDialog {
                 // A month is represented by an integer from 0 to 11; 0 is January, 1 is February, and so forth; thus 11 is December.
                 // A date (day of month) is represented by an integer from 1 to 31 in the usual manner.
                 geb = new Date(Integer.parseInt(parts[2]) - 1900, Integer.parseInt(parts[1]) - 1, Integer.parseInt(parts[0]));
+            }
+            if( !isValidGeldBetrag(betragRaw ) ) {
+                warning += "Der Beitrag ist falsch formatiert.";
+            } else {
+                betrag = Double.parseDouble( betragRaw.replace( ',', '.' ) );
             }
             if (warning.equals("<html>")) {
                 ArrayList<Object> ObjekteZumSpeichern = new ArrayList<Object>();
@@ -437,7 +470,7 @@ public class SpielerDialog extends javax.swing.JDialog {
                             }
                         }
 
-                        NormalesMitglied mitglied = new NormalesMitglied(vorname, nachname, strasse, plz, ort, geb, email, telefon);
+                        NormalesMitglied mitglied = new NormalesMitglied(vorname, nachname, strasse, plz, ort, geb, email, telefon, betrag);
                         Object Mannschaft = cboMannschaft.getSelectedItem();
                         if (Mannschaft != null) {
                             mitglied.setMannschaft(Mannschaft.toString());
@@ -459,7 +492,7 @@ public class SpielerDialog extends javax.swing.JDialog {
                             }
                         }
 
-                        Profispieler spieler = new Profispieler(vorname, nachname, strasse, plz, ort, geb, email, telefon);
+                        Profispieler spieler = new Profispieler(vorname, nachname, strasse, plz, ort, geb, email, telefon, betrag);
                         Object bMannschaft = cboMannschaft.getSelectedItem();
                         if (bMannschaft != null) {
                             spieler.setMannschaft(bMannschaft.toString());
@@ -481,7 +514,7 @@ public class SpielerDialog extends javax.swing.JDialog {
                             }
                         }
 
-                        Trainer trainer = new Trainer(vorname, nachname, strasse, plz, ort, geb, email, telefon);
+                        Trainer trainer = new Trainer(vorname, nachname, strasse, plz, ort, geb, email, telefon, betrag);
                         trainers.add(trainer);
                         ObjekteZumSpeichern.addAll(trainers);
                         break;
@@ -623,8 +656,10 @@ public class SpielerDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel lblBeitrag;
     private javax.swing.JLabel lblWarning;
     private javax.swing.JLabel lblÜberschrift;
+    private javax.swing.JTextField tfBeitrag;
     private javax.swing.JTextField tfEmail;
     private javax.swing.JTextField tfGeburtsdatum;
     private javax.swing.JTextField tfNachname;

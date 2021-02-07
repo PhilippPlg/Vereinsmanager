@@ -555,10 +555,11 @@ public class StartupWindow extends javax.swing.JFrame {
         showTrainer();
     }//GEN-LAST:event_jContentWindowComponentShown
 
-    private void mitgliedDialogErzeugen(Boolean isNew, Mitglied mitglied) {
+    private void mitgliedDialogErzeugen(Boolean isNew, NormalesMitglied mitglied) {
         try {
             SpielerDialog = new SpielerDialog(EZugehörigkeit.Mitglieder, isNew, this);
             if (mitglied != null) {
+                Double beitrag = mitglied.getZuZahlenderBetrag();
                 SpielerDialog.setTfVorname(mitglied.getVorname());
                 SpielerDialog.setTfNachname(mitglied.getNachname());
                 SpielerDialog.setTfStraße(mitglied.getStraße());
@@ -570,6 +571,7 @@ public class StartupWindow extends javax.swing.JFrame {
                 SpielerDialog.setTfTelefon(mitglied.getTelefonNr());
                 SpielerDialog.setTfEmail(mitglied.getEmail());
                 SpielerDialog.setCboMannschaftName(mitglied.getMannschaft());
+                SpielerDialog.setTfBeitrag( beitrag.toString().replace('.', ',') );
             }
             SpielerDialog.setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
             SpielerDialog.setDefaultCloseOperation(HIDE_ON_CLOSE);
@@ -583,6 +585,7 @@ public class StartupWindow extends javax.swing.JFrame {
     private void spielerDialogErzeugen(Boolean isNew, Profispieler spieler) throws IOException {
         SpielerDialog = new SpielerDialog(EZugehörigkeit.Spieler, isNew, this); //Hier Entity �bergeben und in Konstruktor die Werte setzen(wenn nicht neu)
         if (spieler != null) {
+            Double beitrag = spieler.getGehalt();
             SpielerDialog.setTfVorname(spieler.getVorname());
             SpielerDialog.setTfNachname(spieler.getNachname());
             SpielerDialog.setTfStraße(spieler.getStraße());
@@ -594,6 +597,7 @@ public class StartupWindow extends javax.swing.JFrame {
             SpielerDialog.setTfTelefon(spieler.getTelefonNr());
             SpielerDialog.setTfEmail(spieler.getEmail());
             SpielerDialog.setCboMannschaftName(spieler.getMannschaft());
+            SpielerDialog.setTfBeitrag( beitrag.toString().replace('.', ',') );
         }
         SpielerDialog.setDefaultCloseOperation(HIDE_ON_CLOSE);
         SpielerDialog.setModal(true);
@@ -663,6 +667,7 @@ public class StartupWindow extends javax.swing.JFrame {
     private void trainerDialogErzeugen(Boolean isNew, Trainer trainer) throws IOException {
         SpielerDialog = new SpielerDialog(EZugehörigkeit.Trainer, isNew, this); //Hier Entity �bergeben und in Konstruktor die Werte setzen(wenn nicht neu)
         if (trainer != null) {
+            Double beitrag = trainer.getGehalt();
             SpielerDialog.setTfVorname(trainer.getVorname());
             SpielerDialog.setTfNachname(trainer.getNachname());
             SpielerDialog.setTfStraße(trainer.getStraße());
@@ -674,6 +679,7 @@ public class StartupWindow extends javax.swing.JFrame {
             SpielerDialog.setTfTelefon(trainer.getTelefonNr());
             SpielerDialog.setTfEmail(trainer.getEmail());
             SpielerDialog.setCboMannschaftName(trainer.getMannschaft());
+            SpielerDialog.setTfBeitrag( beitrag.toString().replace('.', ',') );
         }
         SpielerDialog.changeStatecboMannschaften(false);
         SpielerDialog.setDefaultCloseOperation(HIDE_ON_CLOSE);

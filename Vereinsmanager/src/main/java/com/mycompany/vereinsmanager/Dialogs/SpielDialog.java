@@ -288,7 +288,7 @@ public class SpielDialog extends javax.swing.JDialog {
                                     .addComponent(tfOrt, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -322,12 +322,15 @@ public class SpielDialog extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSpeichern)
-                    .addComponent(btnVerwerfen)
-                    .addComponent(lblWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnLoeschen))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnSpeichern)
+                            .addComponent(btnVerwerfen)
+                            .addComponent(btnLoeschen))
+                        .addGap(0, 75, Short.MAX_VALUE))
+                    .addComponent(lblWarning, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -339,7 +342,7 @@ public class SpielDialog extends javax.swing.JDialog {
 
     private void btnSpeichernActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSpeichernActionPerformed
         try {
-            Date geb = null;
+            Date date = null;
 
             String eigenesTeam = "";
             Object mannschaft = cboMannschaft.getSelectedItem();
@@ -357,42 +360,46 @@ public class SpielDialog extends javax.swing.JDialog {
             }
             if (!isValidDate(datum)) {
                 warning += "Das Datum ist falsch formatiert";
+            } else {
+                // parts[2]=Jahre || parts[1]=Monate || parts[0]=Tage
+                String[] parts = datum.split("\\.");
+                // https://docs.oracle.com/javase/8/docs/api/java/util/Date.html
+                // A year y is represented by the integer y - 1900.
+                // A month is represented by an integer from 0 to 11; 0 is January, 1 is February, and so forth; thus 11 is December.
+                // A date (day of month) is represented by an integer from 1 to 31 in the usual manner.
+                date = new Date(Integer.parseInt(parts[2]) - 1900, Integer.parseInt(parts[1]) - 1, Integer.parseInt(parts[0]));
             }
             //DateFormat format = new SimpleDateFormat("dd.MM.YYYY", Locale.GERMAN);
             //Date zukunftsDate = format.parse(datum);
-            //if (!zukunftsDate.after(new Date())) {
-            //  warning += "Das Datum muss in der Zukunft liegen!";
-            //}
+            if (!date.after(new Date())) {
+              warning += "Das Datum muss in der Zukunft liegen!";
+            }
 
             if (warning.equals("<html>")) {
-                SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.YYYY HH:mm");
-                try {
-                    Date date = dateFormat.parse(datum + " " + anfangszeit);
-                    ArrayList<Spiel> spiele = XMLLoader.loadSpiel();
-                    ArrayList<Object> ObjekteZumSpeichern = new ArrayList<>();
-                    ESaveObject SaveObject = ESaveObject.spiel;
+                //SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.YYYY HH:mm");
+                //Date date = dateFormat.parse(datum + " " + anfangszeit);
+                ArrayList<Spiel> spiele = XMLLoader.loadSpiel();
+                ArrayList<Object> ObjekteZumSpeichern = new ArrayList<>();
+                ESaveObject SaveObject = ESaveObject.spiel;
 
-                    if (!IsNew) {
-                        String actualCaption = eigenesTeam + " gegen " + gegner;
-                        for (Spiel cSpiel : spiele) {
-                            String spielCaption = cSpiel.getEigenesTeam() + " gegen " + cSpiel.getGegnerTeam();
-                            if (spielCaption.equals(actualCaption)) {
-                                spiele.remove(cSpiel);
-                                break;
-                            }
+                if (!IsNew) {
+                    String actualCaption = eigenesTeam + " gegen " + gegner;
+                    for (Spiel cSpiel : spiele) {
+                        String spielCaption = cSpiel.getEigenesTeam() + " gegen " + cSpiel.getGegnerTeam();
+                        if (spielCaption.equals(actualCaption)) {
+                            spiele.remove(cSpiel);
+                            break;
                         }
                     }
-
-                    Spiel newSpiel = new Spiel(eigenesTeam, gegner, date, ort);
-                    spiele.add(newSpiel);
-                    ObjekteZumSpeichern.addAll(spiele);
-                    XMLSerializer.serializeToXML(ObjekteZumSpeichern, SaveObject);
-                    lblWarning.setText("<html><b>Das Spiel wurde gespeichert!</b></html>");
-                    parent.SpielDialog.dispose();
-                    parent.AllesAktualisieren();
-                } catch (ParseException e) {
-                    Logger.getLogger(SpielerDialog.class.getName()).log(Level.SEVERE, null, e);
                 }
+
+                Spiel newSpiel = new Spiel(eigenesTeam, gegner, date, ort);
+                spiele.add(newSpiel);
+                ObjekteZumSpeichern.addAll(spiele);
+                XMLSerializer.serializeToXML(ObjekteZumSpeichern, SaveObject);
+                lblWarning.setText("<html><b>Das Spiel wurde gespeichert!</b></html>");
+                parent.SpielDialog.dispose();
+                parent.AllesAktualisieren();
 
             } else {
                 warning += "</html>";

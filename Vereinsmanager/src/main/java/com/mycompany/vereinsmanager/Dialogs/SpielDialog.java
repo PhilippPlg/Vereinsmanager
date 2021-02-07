@@ -343,7 +343,6 @@ public class SpielDialog extends javax.swing.JDialog {
     private void btnSpeichernActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSpeichernActionPerformed
         try {
             Date date = null;
-
             String eigenesTeam = "";
             Object mannschaft = cboMannschaft.getSelectedItem();
             if (mannschaft != null) {
@@ -367,19 +366,14 @@ public class SpielDialog extends javax.swing.JDialog {
                 // A year y is represented by the integer y - 1900.
                 // A month is represented by an integer from 0 to 11; 0 is January, 1 is February, and so forth; thus 11 is December.
                 // A date (day of month) is represented by an integer from 1 to 31 in the usual manner.
-                date = new Date(Integer.parseInt(parts[2]) - 1900, Integer.parseInt(parts[1]) - 1, Integer.parseInt(parts[0]));
+                date = new Date(Integer.parseInt(parts[2]) - 1900, Integer.parseInt(parts[1]) - 1, Integer.parseInt(parts[0]), Integer.parseInt(anfangszeit.split(":")[0]), Integer.parseInt(anfangszeit.split(":")[1]));
                 
-                if (date != null && !date.after(new Date())) {
+                if ( !date.after(new Date())) {
                     warning += "Das Datum muss in der Zukunft liegen!";
                 }
             }
-            //DateFormat format = new SimpleDateFormat("dd.MM.YYYY", Locale.GERMAN);
-            //Date zukunftsDate = format.parse(datum);
-
-
+            
             if (warning.equals("<html>")) {
-                //SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.YYYY HH:mm");
-                //Date date = dateFormat.parse(datum + " " + anfangszeit);
                 ArrayList<Spiel> spiele = XMLLoader.loadSpiel();
                 ArrayList<Object> ObjekteZumSpeichern = new ArrayList<>();
                 ESaveObject SaveObject = ESaveObject.spiel;
@@ -402,7 +396,6 @@ public class SpielDialog extends javax.swing.JDialog {
                 lblWarning.setText("<html><b>Das Spiel wurde gespeichert!</b></html>");
                 parent.SpielDialog.dispose();
                 parent.AllesAktualisieren();
-
             } else {
                 warning += "</html>";
                 lblWarning.setText(warning);

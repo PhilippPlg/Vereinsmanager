@@ -677,12 +677,14 @@ public class StartupWindow extends javax.swing.JFrame {
         if (spiel != null) {
             SpielDialog.setCboMannschaftName(spiel.getEigenesTeam());
             SpielDialog.setTfGegner(spiel.getGegnerTeam());
-            SpielDialog.setTfAnfangszeit(spiel.getBeginn());
             SpielDialog.setTfOrt(spiel.getOrt());
             Date datum = spiel.getZeitpunkt();
+            SimpleDateFormat formatter = new SimpleDateFormat( "HH:mm" );
+            String zeit = formatter.format(datum);
+            SpielDialog.setTfAnfangszeit( zeit );
             if (datum != null) {
-                SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.YYYY");
-                String date = sdf.format(datum);
+                formatter.applyPattern("dd.MM.YYYY");
+                String date = formatter.format(datum);
                 SpielDialog.setTfDatum(date);
             }
         }

@@ -7,9 +7,9 @@ package com.mycompany.vereinsmanager.main;
 
 import com.mycompany.vereinsmanager.Dialogs.BeitraegeDialog;
 import com.mycompany.vereinsmanager.Entities.Mannschaft;
-import com.mycompany.vereinsmanager.Enums.EZugehörigkeit;
+import com.mycompany.vereinsmanager.Enums.EZugehoerigkeit;
 import com.mycompany.vereinsmanager.Dialogs.MannschaftDialog;
-import com.mycompany.vereinsmanager.Dialogs.SpielerDialog;
+import com.mycompany.vereinsmanager.Dialogs.MitgliedDialog;
 import com.mycompany.vereinsmanager.Dialogs.SpielDialog;
 import com.mycompany.vereinsmanager.Entities.Mitglied;
 import com.mycompany.vereinsmanager.Entities.NormalesMitglied;
@@ -44,7 +44,7 @@ public class StartupWindow extends javax.swing.JFrame {
     }
     public MannschaftDialog MannschaftDialog;
     public SpielDialog SpielDialog;
-    public SpielerDialog SpielerDialog;
+    public MitgliedDialog SpielerDialog;
     public BeitraegeDialog BeitraegeDialog;
 
     /**
@@ -584,7 +584,7 @@ public class StartupWindow extends javax.swing.JFrame {
     
     private void mitgliedDialogErzeugen(Boolean isNew, NormalesMitglied mitglied) {
         try {
-            SpielerDialog = new SpielerDialog(EZugehörigkeit.Mitglieder, isNew, this);
+            SpielerDialog = new MitgliedDialog(EZugehoerigkeit.Mitglieder, isNew, this);
             if (mitglied != null) {
                 Double beitrag = mitglied.getZuZahlenderBetrag();
                 SpielerDialog.setTfVorname(mitglied.getVorname());
@@ -610,7 +610,7 @@ public class StartupWindow extends javax.swing.JFrame {
     }
 
     private void spielerDialogErzeugen(Boolean isNew, Profispieler spieler) throws IOException {
-        SpielerDialog = new SpielerDialog(EZugehörigkeit.Spieler, isNew, this); //Hier Entity �bergeben und in Konstruktor die Werte setzen(wenn nicht neu)
+        SpielerDialog = new MitgliedDialog(EZugehoerigkeit.Spieler, isNew, this); //Hier Entity �bergeben und in Konstruktor die Werte setzen(wenn nicht neu)
         if (spieler != null) {
             Double beitrag = spieler.getGehalt();
             SpielerDialog.setTfVorname(spieler.getVorname());
@@ -697,7 +697,7 @@ public class StartupWindow extends javax.swing.JFrame {
     }
 
     private void trainerDialogErzeugen(Boolean isNew, Trainer trainer) throws IOException {
-        SpielerDialog = new SpielerDialog(EZugehörigkeit.Trainer, isNew, this); //Hier Entity �bergeben und in Konstruktor die Werte setzen(wenn nicht neu)
+        SpielerDialog = new MitgliedDialog(EZugehoerigkeit.Trainer, isNew, this); //Hier Entity �bergeben und in Konstruktor die Werte setzen(wenn nicht neu)
         if (trainer != null) {
             Double beitrag = trainer.getGehalt();
             SpielerDialog.setTfVorname(trainer.getVorname());
@@ -805,7 +805,7 @@ public class StartupWindow extends javax.swing.JFrame {
         return naechstesSpiel;
     }
 
-    public void AllesAktualisieren() {
+    public void allesAktualisieren() {
         showMannschaften();
         showMitglieder();
         showSpiele();

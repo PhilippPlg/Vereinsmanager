@@ -1,14 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mycompany.vereinsmanager.Dialogs;
 
 import com.mycompany.vereinsmanager.Enums.EObjektStatus;
 import com.mycompany.vereinsmanager.Enums.ESaveObject;
 import com.mycompany.vereinsmanager.Enums.ESaveStatus;
-import com.mycompany.vereinsmanager.Enums.EZugehörigkeit;
+import com.mycompany.vereinsmanager.Enums.EZugehoerigkeit;
 import com.mycompany.vereinsmanager.Entities.Mannschaft;
 import com.mycompany.vereinsmanager.Entities.NormalesMitglied;
 import com.mycompany.vereinsmanager.Entities.Profispieler;
@@ -30,59 +25,80 @@ import javax.swing.JTextField;
  *
  * @author Timo
  */
-public class SpielerDialog extends javax.swing.JDialog {
-
-    private static EZugehörigkeit Zugehörigkeit;
-    private StartupWindow parent;
-    private boolean IsNew;
-    private String cboMannschaftName;
-
-    public void setCboMannschaftName(String cboMannschaftName) {
-        try {
-            this.cboMannschaftName = cboMannschaftName;
-            setCboMannschaftenItems();
-            cboMannschaft.getModel().setSelectedItem(cboMannschaftName);
-        } catch (IOException ex) {
-            Logger.getLogger(SpielerDialog.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
+public final class MitgliedDialog extends javax.swing.JDialog {
     /**
-     * Creates new form MannschaftDialog
+     * Rolle des Mitglieds
      */
-    public SpielerDialog() {
-
+    private static EZugehoerigkeit zugehoerigkeit;
+    /**
+     * parent Frame
+     */
+    private StartupWindow parent;
+    /**
+     * ob es sich um einen neues Mitglied oder ein bestehendes handelt
+     */
+    private boolean isNew;
+    /**
+     * Erzeugt einen Mitglieddialog für einen ein bestehendes Mitglied
+     * @param zugehoerigkeit EZugehoerigkeit Rolle des Mitglieds
+     * @param parent parent Frame
+     * @throws IOException 
+     */
+    public MitgliedDialog(EZugehoerigkeit zugehoerigkeit, StartupWindow parent) throws IOException {
+        this(zugehoerigkeit, false, parent);
     }
-
-    public SpielerDialog(EZugehörigkeit Zugehörigkeit, StartupWindow parent) throws IOException {
-        this(Zugehörigkeit, false, parent);
-    }
-
-    public SpielerDialog(EZugehörigkeit Zugehörigkeit, boolean IsNew, StartupWindow parent) throws IOException {
-        this.Zugehörigkeit = Zugehörigkeit;
+    /**
+     * Erstellt einen neuen Mitgliederdialog für ein neues oder bestehendes Mitglied
+     * @param zugehoerigkeit EZugehoerigkeit Rolle des Mitglieds
+     * @param isNew boolean ob es sich um ein neues Mitglied handelt oder nicht
+     * @param parent parent Frame
+     * @throws IOException 
+     */
+    public MitgliedDialog(EZugehoerigkeit zugehoerigkeit, boolean isNew, StartupWindow parent) throws IOException {
+        this.zugehoerigkeit = zugehoerigkeit;
         initComponents();
-        setIsNew(IsNew);
+        setIsNew(isNew);
         setLblBeitrag();
         AddAssignmentItems();
         SetWindowTitle();
         this.parent = parent;
         setCboMannschaftenItems();
     }
-
+    /**
+     * Wählt in der Mannschaftscombobox die Mannschaft mit der übergebenen Bezeichnung aus
+     * @param cboMannschaftName Mannschaftsname
+     */
+    public void setCboMannschaftName(String cboMannschaftName) {
+        try {
+            setCboMannschaftenItems();
+            cboMannschaft.getModel().setSelectedItem(cboMannschaftName);
+        } catch (IOException ex) {
+            Logger.getLogger(MitgliedDialog.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    /**
+     * Setzt die Mitgliedsrolle in der Zugehörigkeitscombobox
+     */
     private void AddAssignmentItems() {
-        EZugehörigkeit[] Assignments = {EZugehörigkeit.Mitglieder, EZugehörigkeit.Spieler, EZugehörigkeit.Trainer};
+        EZugehoerigkeit[] Assignments = {EZugehoerigkeit.Mitglieder, EZugehoerigkeit.Spieler, EZugehoerigkeit.Trainer};
         cboZugehörigkeit.removeAllItems();
-        for (EZugehörigkeit Zugehörigkeit : Assignments) {
+        for (EZugehoerigkeit Zugehörigkeit : Assignments) {
             cboZugehörigkeit.addItem(Zugehörigkeit.toString());
         }
     }
-
+    /**
+     * Gibt zurück ob es sich um ein neues oder bestehendes Mitglied handelt
+     * @return boolean isNew
+     */
     public boolean isIsNew() {
-        return IsNew;
+        return isNew;
     }
-
+    /**
+     * Setzt den Text zum Beitragsfeld je nach Rolle dynamisch
+     */
     public final void setLblBeitrag() {
-        switch (Zugehörigkeit) {
+        switch (zugehoerigkeit) {
             case Mitglieder ->
                 lblBeitrag.setText("Beitrag");
             case Spieler, Trainer ->
@@ -90,20 +106,21 @@ public class SpielerDialog extends javax.swing.JDialog {
         }
     }
 
-    public void setIsNew(boolean IsNew) {
-        this.IsNew = IsNew;
+    /**
+     * Setzt ob es sich um ein neues oder bestehendes Mitglied handelt.
+     * Aktiviert/Deaktiviert entsprechend die Eingabefelder
+     * @param isNew
+     */
+    public void setIsNew(boolean isNew) {
+        this.isNew = isNew;
         SetWindowTitle();
-        this.tfVorname.setEnabled(IsNew);
-        this.tfVorname.setEditable(IsNew);
-        this.tfNachname.setEnabled(IsNew);
-        this.tfNachname.setEditable(IsNew);
-        this.tfGeburtsdatum.setEnabled(IsNew);
-        this.tfGeburtsdatum.setEditable(IsNew);
-        this.btnLoeschen.setEnabled(!IsNew);
-    }
-
-    public JTextField getTfEmail() {
-        return tfEmail;
+        this.tfVorname.setEnabled(isNew);
+        this.tfVorname.setEditable(isNew);
+        this.tfNachname.setEnabled(isNew);
+        this.tfNachname.setEditable(isNew);
+        this.tfGeburtsdatum.setEnabled(isNew);
+        this.tfGeburtsdatum.setEditable(isNew);
+        this.btnLoeschen.setEnabled(!isNew);
     }
 
     public void setTfBeitrag(String beitrag) {
@@ -114,56 +131,28 @@ public class SpielerDialog extends javax.swing.JDialog {
         this.tfEmail.setText(Email);
     }
 
-    public JTextField getTfGeburtsdatum() {
-        return tfGeburtsdatum;
-    }
-
     public void setTfGeburtsdatum(String Geburtsdatum) {
         this.tfGeburtsdatum.setText(Geburtsdatum);
-    }
-
-    public JTextField getTfNachname() {
-        return tfNachname;
     }
 
     public void setTfNachname(String Nachname) {
         this.tfNachname.setText(Nachname);
     }
 
-    public JTextField getTfOrt() {
-        return tfOrt;
-    }
-
     public void setTfOrt(String Ort) {
         this.tfOrt.setText(Ort);
-    }
-
-    public JTextField getTfPLZ() {
-        return tfPLZ;
     }
 
     public void setTfPLZ(String PLZ) {
         this.tfPLZ.setText(PLZ);
     }
 
-    public JTextField getTfStraße() {
-        return tfStraße;
-    }
-
     public void setTfStraße(String Straße) {
         this.tfStraße.setText(Straße);
     }
 
-    public JTextField getTfTelefon() {
-        return tfTelefon;
-    }
-
     public void setTfTelefon(String Telefon) {
         this.tfTelefon.setText(Telefon);
-    }
-
-    public JTextField getTfVorname() {
-        return tfVorname;
     }
 
     public void setTfVorname(String Vorname) {
@@ -171,9 +160,9 @@ public class SpielerDialog extends javax.swing.JDialog {
     }
 
     private void SetWindowTitle() {
-        String Caption = IsNew ? EObjektStatus.erstellen.toString() : EObjektStatus.bearbeiten.toString();
-        String ButtonCaption = IsNew ? ESaveStatus.erstellen.toString() : ESaveStatus.aktualisieren.toString();
-        switch (Zugehörigkeit) {
+        String Caption = isNew ? EObjektStatus.erstellen.toString() : EObjektStatus.bearbeiten.toString();
+        String ButtonCaption = isNew ? ESaveStatus.erstellen.toString() : ESaveStatus.aktualisieren.toString();
+        switch (zugehoerigkeit) {
             case Mitglieder:
                 lblÜberschrift.setText("Mitglied " + Caption);
                 cboZugehörigkeit.setSelectedIndex(0);
@@ -460,14 +449,14 @@ public class SpielerDialog extends javax.swing.JDialog {
                 ArrayList<Object> ObjekteZumSpeichern = new ArrayList<Object>();
                 ESaveObject SaveObject = ESaveObject.normalesMitglied;
                 Boolean existiertBereits = false;
-                switch (Zugehörigkeit) {
+                switch (zugehoerigkeit) {
                     case Mitglieder:
                         ArrayList<NormalesMitglied> mitglieder = XMLLoader.loadMitglieder();
                         SaveObject = ESaveObject.normalesMitglied;
 
                         for (NormalesMitglied cmitglied : mitglieder) {
                             if (vorname.equals(cmitglied.getVorname()) && nachname.equals(cmitglied.getNachname())) {
-                                if (!IsNew) {
+                                if (!isNew) {
                                     mitglieder.remove(cmitglied);
                                 } else {
                                     lblWarning.setText("<html><b>" + cmitglied.getVorname() + " " + cmitglied.getNachname() + " existiert bereits</b></html>");
@@ -492,7 +481,7 @@ public class SpielerDialog extends javax.swing.JDialog {
 
                         for (Profispieler cspieler : profis) {
                             if (vorname.equals(cspieler.getVorname()) && nachname.equals(cspieler.getNachname())) {
-                                if (!IsNew) {
+                                if (!isNew) {
                                     profis.remove(cspieler);
                                 } else {
                                     lblWarning.setText("<html><b>" + cspieler.getVorname() + " " + cspieler.getNachname() + " existiert bereits</b></html>");
@@ -517,7 +506,7 @@ public class SpielerDialog extends javax.swing.JDialog {
 
                         for (Trainer cTrainer : trainers) {
                             if (vorname.equals(cTrainer.getVorname()) && nachname.equals(cTrainer.getNachname())) {
-                                if (!IsNew) {
+                                if (!isNew) {
                                     trainers.remove(cTrainer);
                                 } else {
                                     lblWarning.setText("<html><b>" + cTrainer.getVorname() + " " + cTrainer.getNachname() + " existiert bereits</b></html>");
@@ -538,14 +527,14 @@ public class SpielerDialog extends javax.swing.JDialog {
                 }
                 XMLSerializer.serializeToXML(ObjekteZumSpeichern, SaveObject);
                 lblWarning.setText("<html><b>Das Mitglied wurde gespeichert!</b></html>");
-                parent.AllesAktualisieren();
+                parent.allesAktualisieren();
                 parent.SpielerDialog.dispose();
             } else {
                 warning += "</html>";
                 lblWarning.setText(warning);
             }
         } catch (IOException ex) {
-            Logger.getLogger(SpielerDialog.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MitgliedDialog.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnSpeichernActionPerformed
 
@@ -563,7 +552,7 @@ public class SpielerDialog extends javax.swing.JDialog {
                 return;
             }
 
-            switch (Zugehörigkeit) {
+            switch (zugehoerigkeit) {
                 case Mitglieder:
                     ArrayList<NormalesMitglied> OldMitglieder = XMLLoader.loadMitglieder();
                     for (NormalesMitglied cmitglied : OldMitglieder) {
@@ -598,10 +587,10 @@ public class SpielerDialog extends javax.swing.JDialog {
                     XMLSerializer.serializeToXML(neueObjekte, ESaveObject.trainer);
                     break;
             }
-            parent.AllesAktualisieren();
+            parent.allesAktualisieren();
             parent.SpielerDialog.dispose();
         } catch (IOException ex) {
-            Logger.getLogger(SpielerDialog.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MitgliedDialog.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnLoeschenActionPerformed
 
@@ -628,18 +617,20 @@ public class SpielerDialog extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SpielerDialog.class
+            java.util.logging.Logger.getLogger(MitgliedDialog.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SpielerDialog.class
+            java.util.logging.Logger.getLogger(MitgliedDialog.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SpielerDialog.class
+            java.util.logging.Logger.getLogger(MitgliedDialog.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SpielerDialog.class
+            java.util.logging.Logger.getLogger(MitgliedDialog.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
@@ -647,10 +638,10 @@ public class SpielerDialog extends javax.swing.JDialog {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    new SpielerDialog(Zugehörigkeit, null).setVisible(true);
+                    new MitgliedDialog(zugehoerigkeit, null).setVisible(true);
 
                 } catch (IOException ex) {
-                    Logger.getLogger(SpielerDialog.class
+                    Logger.getLogger(MitgliedDialog.class
                             .getName()).log(Level.SEVERE, null, ex);
                 }
             }

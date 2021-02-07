@@ -17,14 +17,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 
 /**
  * 
  * @author Timo
  */
-public class MannschaftDialog extends javax.swing.JDialog {
+public final class MannschaftDialog extends javax.swing.JDialog {
     /**
     * true beim Erzeugen einer neuen Mannschaft, sonst false
     */
@@ -43,20 +42,22 @@ public class MannschaftDialog extends javax.swing.JDialog {
     private StartupWindow parent;
     
     /**
-     * Creates new form MannschaftDialog
+     *  Erstellt neuen Mannschaftsdialog
+     * @throws IOException 
      */
     public MannschaftDialog() throws IOException {
         setCboTrainerItems();
     }
-
-    public MannschaftDialog(StartupWindow parent) throws IOException {
-        this(false, parent);
-    }
-
-    public MannschaftDialog(boolean IsNew, StartupWindow parent) throws IOException {
+    /**
+     * Erstellt neuen Mannschaftsdialog
+     * @param isNew boolean ob es sich um eine neue Mannschaft handelt oder um eine bestehende
+     * @param parent parent Frame
+     * @throws IOException 
+     */
+    public MannschaftDialog(boolean isNew, StartupWindow parent) throws IOException {
         initComponents();
         this.parent = parent;
-        setIsNew(IsNew);
+        setIsNew(isNew);
         SetWindowTitle();
         setCboTrainerItems();
     }
@@ -97,15 +98,7 @@ public class MannschaftDialog extends javax.swing.JDialog {
     }
 
     /**
-     * Gibt die Spieler als JList object zurück
-     * @return JList lbSpieler
-     */
-    public JList<String> getLbSpieler() {
-        return lbSpieler;
-    }
-
-    /**
-     * Lädt die angegebene Spielerliste in lbSpieler
+     * Lädt die angegebene Spielerliste in lbSpieler Liste
      * @param Spieler ArrayList&lt;Spieler&gt;
      */
     public void setLbSpieler(ArrayList<String> Spieler) {
@@ -156,13 +149,19 @@ public class MannschaftDialog extends javax.swing.JDialog {
         tfBezeichnung.setEnabled(CanEdit);
     }
 
+    /**
+     * Stellt passenden Text für Label- und Buttonbeschriftung ein
+     */
     private void SetWindowTitle() {
         String Caption = isNew ? EObjektStatus.erstellen.toString() : EObjektStatus.bearbeiten.toString();
         String ButtonCaption = isNew ? ESaveStatus.erstellen.toString() : ESaveStatus.aktualisieren.toString();
         lblÜberschrift.setText("Mannschaft " + Caption);
         btnSpeichern.setText(ButtonCaption);
     }
-
+    /**
+     * Lädt die Liste der Trainer aus dem XMLFile und lädt diese in die Trainercombobox cboTrainer
+     * @throws IOException 
+     */
     private void setCboTrainerItems() throws IOException {
         ArrayList<Trainer> trainer = XMLLoader.loadTrainer();
         ArrayList<String> trainerNamen = new ArrayList<>();
@@ -387,7 +386,7 @@ public class MannschaftDialog extends javax.swing.JDialog {
             ObjekteZumSpeichern.addAll(OldMannschaften);
             ObjekteZumSpeichern.add(Mannschaft);
             XMLSerializer.serializeToXML(ObjekteZumSpeichern, ESaveObject.mannschaft);
-            parent.AllesAktualisieren();
+            parent.allesAktualisieren();
             parent.MannschaftDialog.dispose();
         } catch (IOException ex) {
             Logger.getLogger(MannschaftDialog.class.getName()).log(Level.SEVERE, null, ex);
@@ -431,7 +430,7 @@ public class MannschaftDialog extends javax.swing.JDialog {
             }
             neueMannschaften.addAll(OldMannschaften);
             XMLSerializer.serializeToXML(neueMannschaften, ESaveObject.mannschaft);
-            parent.AllesAktualisieren();
+            parent.allesAktualisieren();
             parent.MannschaftDialog.dispose();
         } catch (IOException ex) {
             Logger.getLogger(MannschaftDialog.class.getName()).log(Level.SEVERE, null, ex);

@@ -144,7 +144,7 @@ public final class BeitraegeDialog extends javax.swing.JDialog {
                         try {
                             XMLSerializer.serializeToXML(mitgliederSaveList, ESaveObject.normalesMitglied);
                         } catch (IOException ex) {
-                            Logger.getLogger(SpielerDialog.class.getName()).log(Level.SEVERE, null, ex);
+                            Logger.getLogger(MitgliedDialog.class.getName()).log(Level.SEVERE, null, ex);
                         }
                         
                         // Muss nochmal aufgerufen werden um den Tree neu zu erstellen

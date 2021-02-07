@@ -9,6 +9,6 @@ package com.mycompany.vereinsmanager.Enums;
  *
  * @author Timo
  */
-public enum EZugehörigkeit {
+public enum EZugehoerigkeit {
     Mitglieder, Spieler, Trainer
 }

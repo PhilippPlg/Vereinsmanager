@@ -1,13 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mycompany.vereinsmanager.Dialogs;
 
 import com.mycompany.vereinsmanager.Entities.Mannschaft;
 import com.mycompany.vereinsmanager.Entities.Trainingszeit;
-import com.mycompany.vereinsmanager.Enums.ESaveObject;
 import com.mycompany.vereinsmanager.main.Validator;
 import com.mycompany.vereinsmanager.main.XMLLoader;
 import java.awt.event.ItemEvent;
@@ -23,22 +17,39 @@ import java.util.logging.Logger;
 public class SelectTrainingszeitenDialog extends javax.swing.JDialog {
 
     /**
-     * Creates new form SelectTrainingszeitenDialog
+     * parent Frame
      */
     private MannschaftDialog parent;
+    /**
+     * Mannschaftsbezeichnung der Mannschaft um deren Trainingszeiten es geht
+     */
     private String mannschaftsBezeichnung;
+    /**
+     * Trainingszeiten
+     */
     private ArrayList<Trainingszeit> trainingszeiten;
 
+    /**
+     * Erstellt neuen Trainingszeitendialog
+     */
     public SelectTrainingszeitenDialog() {
     }
-
+    /**
+     * Erstellt neuen Trainingszeitendialog
+     * @param parent parent Frame
+     * @param mannschaftsBezeichnung Mannschaftsbezeichnung der Mannschaft um deren Trainingszeiten es geht
+     */
     public SelectTrainingszeitenDialog(MannschaftDialog parent, String mannschaftsBezeichnung) {
         initComponents();
         this.parent = parent;
         this.mannschaftsBezeichnung = mannschaftsBezeichnung;
     }
     
-    
+    /**
+     * Sucht die ArrayList&lt;Trainingszeit&gt; der aktuellen Mannschaft raus und
+     * ruft fillField(zeit) auf um die einzelnen Eingabefelder der Trainingszeiten
+     * beim Bearbeiten einer Mannschaft zu füllen
+     */
     public void fillFields() {
         if( !this.mannschaftsBezeichnung.isEmpty() ) {
             try{
@@ -47,11 +58,12 @@ public class SelectTrainingszeitenDialog extends javax.swing.JDialog {
                 for( int i = 0; i < mannschaften.size(); i++ ) {
                     if( this.mannschaftsBezeichnung.equals( mannschaften.get(i).getBezeichnung() ) ) {
                         zeiten = mannschaften.get(i).getTrainingszeiten();
+                        break;
                     }
                 }
                 if( zeiten != null ) {
-                    for (Trainingszeit zeiten1 : zeiten) {
-                        this.fillField(zeiten1);
+                    for (Trainingszeit zeit : zeiten) {
+                        this.fillField(zeit);
                     }
                 }
             } catch( IOException e ) {
@@ -60,51 +72,54 @@ public class SelectTrainingszeitenDialog extends javax.swing.JDialog {
         }
         parent.validate();
     }
-    
+    /**
+     * Füllt zu einer Trainingszeit die passenden Eingabefelder
+     * @param zeit Trainingszeit
+     */
     public void fillField( Trainingszeit zeit ) {
         switch( zeit.getWochentag() ) {
-            case "Montag":
+            case "Montag" -> {
                 cbMontag.setEnabled(true);
                 cbMontag.setSelected(true);
                 tfvonMontag.setText( zeit.getAnfangszeit() );
                 tfBisMontag.setText( zeit.getEndzeit() );
-                break;
-            case "Dienstag":
+            }
+            case "Dienstag" -> {
                 cbDienstag.setEnabled(true);
                 cbDienstag.setSelected(true);
                 tfvonDienstag.setText( zeit.getAnfangszeit() );
                 tfBisDienstag.setText( zeit.getEndzeit() );
-                break;
-            case "Mittwoch":
+            }
+            case "Mittwoch" -> {
                 cbMittwoch.setEnabled(true);
                 cbMittwoch.setSelected(true);
                 tfvonMittwoch.setText( zeit.getAnfangszeit() );
                 tfBisMittwoch.setText( zeit.getEndzeit() );
-                break;
-            case "Donnerstag":
+            }
+            case "Donnerstag" -> {
                 cbDonnerstag.setEnabled(true);
                 cbDonnerstag.setSelected(true);
                 tfvonDonnerstag.setText( zeit.getAnfangszeit() );
                 tfBisDonnerstag.setText( zeit.getEndzeit() );
-                break;
-            case "Freitag":
+            }
+            case "Freitag" -> {
                 cbFreitag.setEnabled(true);
                 cbFreitag.setSelected(true);
                 tfvonFreitag.setText( zeit.getAnfangszeit() );
                 tfBisFreitag.setText( zeit.getEndzeit() );
-                break;
-            case "Samstag":
+            }
+            case "Samstag" -> {
                 cbSamstag.setEnabled(true);
                 cbSamstag.setSelected(true);
                 tfvonSamstag.setText( zeit.getAnfangszeit() );
                 tfBisSamstag.setText( zeit.getEndzeit() );
-                break;
-            case "Sonntag":
+            }
+            case "Sonntag" -> {
                 cbSonntag.setEnabled(true);
                 cbSonntag.setSelected(true);
                 tfvonSonntag.setText( zeit.getAnfangszeit() );
                 tfBisSonntag.setText( zeit.getEndzeit() );
-                break;
+            }
         }
     }
 
@@ -571,6 +586,10 @@ public class SelectTrainingszeitenDialog extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_cbSonntagItemStateChanged
 
+    /**
+     * Wertet die Checkboxen für die täglichen Trainings aus, erstellt die
+     * Trainingszeitobjekte und speichert sie in trainingszeiten
+     */
     private void checkBoxenAuswerten() {
         Boolean ungueltigeZeiten = false;
         trainingszeiten = new ArrayList<>();

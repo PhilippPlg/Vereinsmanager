@@ -128,7 +128,7 @@ public final class SpielDialog extends javax.swing.JDialog {
         ArrayList<Mannschaft> tempMannschaften = XMLLoader.loadMannschaft();
         Mannschaft eigeneMannschaft = new Mannschaft();
         for (Mannschaft cMannschaft : tempMannschaften) {
-            if (cMannschaft.getBezeichnung().equals(cboMannschaft.getModel().getSelectedItem().toString())) {
+            if (cMannschaft.getBezeichnung().equalsIgnoreCase(cboMannschaft.getModel().getSelectedItem().toString())) {
                 eigeneMannschaft = cMannschaft;
                 break;
             }
@@ -426,7 +426,7 @@ public final class SpielDialog extends javax.swing.JDialog {
                 String actualCaption = eigenesTeam + " gegen " + gegner;
                 for (Spiel cSpiel : spiele) {
                     String spielCaption = cSpiel.getEigenesTeam() + " gegen " + cSpiel.getGegnerTeam();
-                    if (spielCaption.equals(actualCaption)) {
+                    if (spielCaption.equalsIgnoreCase(actualCaption)) {
                         if (!isNew) {
                             spiele.remove(cSpiel);
                         } else {
@@ -467,7 +467,7 @@ public final class SpielDialog extends javax.swing.JDialog {
             ArrayList<Object> neueSpiele = new ArrayList();
             for (Spiel cSpiel : OldSpiele) {
                 if ((cboMannschaft.getSelectedItem().toString() + " gegen " + tfGegner.getText())
-                        .equals(cSpiel.getEigenesTeam() + " gegen " + cSpiel.getGegnerTeam())) {
+                        .equalsIgnoreCase(cSpiel.getEigenesTeam() + " gegen " + cSpiel.getGegnerTeam())) {
                     OldSpiele.remove(cSpiel);
                     break;
                 }
@@ -500,7 +500,7 @@ public final class SpielDialog extends javax.swing.JDialog {
                 if (cMannschaftsName == null || mannschaftsName == null) {
                     continue;
                 }
-                if (cMannschaftsName.equals(mannschaftsName)) {
+                if (cMannschaftsName.equalsIgnoreCase(mannschaftsName)) {
                     teamSpieler.add(cSpieler.getVorname() + " " + cSpieler.getNachname());
                 }
                 break;
@@ -510,7 +510,7 @@ public final class SpielDialog extends javax.swing.JDialog {
                 if (cMannschaftsName == null || mannschaftsName == null) {
                     continue;
                 }
-                if (cMannschaftsName.equals(mannschaftsName)) {
+                if (cMannschaftsName.equalsIgnoreCase(mannschaftsName)) {
                     teamSpieler.add(cMitglied.getVorname() + " " + cMitglied.getNachname());
                 }
                 break;

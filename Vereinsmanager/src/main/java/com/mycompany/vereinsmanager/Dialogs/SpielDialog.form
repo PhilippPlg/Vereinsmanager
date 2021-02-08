@@ -59,11 +59,9 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                           <Component id="lblErgebnisHinweis" pref="115" max="32767" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="tfGegner" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="tfOrt" alignment="0" pref="115" max="32767" attributes="0"/>
-                                              <Component id="tfErgebnis" alignment="0" max="32767" attributes="0"/>
-                                          </Group>
+                                          <Component id="tfGegner" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="tfOrt" alignment="0" pref="115" max="32767" attributes="0"/>
+                                          <Component id="tfErgebnis" alignment="0" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>

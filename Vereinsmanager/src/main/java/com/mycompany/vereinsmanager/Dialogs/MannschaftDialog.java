@@ -361,7 +361,7 @@ public final class MannschaftDialog extends javax.swing.JDialog {
             ArrayList<Mannschaft> OldMannschaften = XMLLoader.loadMannschaft();
             Boolean existiertBereits = false;
             for (Mannschaft cMannschaft : OldMannschaften) {
-                if (tfBezeichnung.getText().equals(cMannschaft.getBezeichnung())) {
+                if (tfBezeichnung.getText().equalsIgnoreCase(cMannschaft.getBezeichnung())) {
                     if (!isNew) {
                         OldMannschaften.remove(cMannschaft);
                     } else {
@@ -423,7 +423,7 @@ public final class MannschaftDialog extends javax.swing.JDialog {
             ArrayList<Mannschaft> OldMannschaften = XMLLoader.loadMannschaft();
             ArrayList<Object> neueMannschaften = new ArrayList();
             for (Mannschaft cMannschaft : OldMannschaften) {
-                if (tfBezeichnung.getText().equals(cMannschaft.getBezeichnung())) {
+                if (tfBezeichnung.getText().equalsIgnoreCase(cMannschaft.getBezeichnung())) {
                     OldMannschaften.remove(cMannschaft);
                     break;
                 }
@@ -443,7 +443,7 @@ public final class MannschaftDialog extends javax.swing.JDialog {
             tmpMannschaft.setBezeichnung(this.tfBezeichnung.getText());
             Spiel naechstesSpiel = parent.ermittelNaechstesSpiel(tmpMannschaft);
 
-            if (naechstesSpiel.toString().equals("null gegen null")) {
+            if (naechstesSpiel.toString().equalsIgnoreCase("null gegen null")) {
                 int result = JOptionPane.showConfirmDialog(null, "Kein nächstes Spiel vorhanden, neues anlegen?", "Kein Spiel gefunden", JOptionPane.YES_NO_OPTION);
                 if (result == JOptionPane.NO_OPTION) {
                     return;

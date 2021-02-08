@@ -484,7 +484,7 @@ public final class MitgliedDialog extends javax.swing.JDialog {
                         SaveObject = ESaveObject.normalesMitglied;
 
                         for (NormalesMitglied cmitglied : mitglieder) {
-                            if (vorname.equals(cmitglied.getVorname()) && nachname.equals(cmitglied.getNachname())) {
+                            if (vorname.equalsIgnoreCase(cmitglied.getVorname()) && nachname.equalsIgnoreCase(cmitglied.getNachname())) {
                                 if (!isNew) {
                                     mitglieder.remove(cmitglied);
                                 } else {
@@ -509,7 +509,7 @@ public final class MitgliedDialog extends javax.swing.JDialog {
                         SaveObject = ESaveObject.profiSpieler;
 
                         for (Profispieler cspieler : profis) {
-                            if (vorname.equals(cspieler.getVorname()) && nachname.equals(cspieler.getNachname())) {
+                            if (vorname.equalsIgnoreCase(cspieler.getVorname()) && nachname.equalsIgnoreCase(cspieler.getNachname())) {
                                 if (!isNew) {
                                     profis.remove(cspieler);
                                 } else {
@@ -534,7 +534,7 @@ public final class MitgliedDialog extends javax.swing.JDialog {
                         SaveObject = ESaveObject.trainer;
 
                         for (Trainer cTrainer : trainers) {
-                            if (vorname.equals(cTrainer.getVorname()) && nachname.equals(cTrainer.getNachname())) {
+                            if (vorname.equalsIgnoreCase(cTrainer.getVorname()) && nachname.equalsIgnoreCase(cTrainer.getNachname())) {
                                 if (!isNew) {
                                     trainers.remove(cTrainer);
                                 } else {
@@ -585,7 +585,7 @@ public final class MitgliedDialog extends javax.swing.JDialog {
                 case Mitglieder:
                     ArrayList<NormalesMitglied> OldMitglieder = XMLLoader.loadMitglieder();
                     for (NormalesMitglied cmitglied : OldMitglieder) {
-                        if (vorname.equals(cmitglied.getVorname()) && nachname.equals(cmitglied.getNachname())) {
+                        if (vorname.equalsIgnoreCase(cmitglied.getVorname()) && nachname.equalsIgnoreCase(cmitglied.getNachname())) {
                             OldMitglieder.remove(cmitglied);
                             break;
                         }
@@ -596,7 +596,7 @@ public final class MitgliedDialog extends javax.swing.JDialog {
                 case Spieler:
                     ArrayList<Profispieler> OldSpieler = XMLLoader.loadProfiSpieler();
                     for (Profispieler cSpieler : OldSpieler) {
-                        if (vorname.equals(cSpieler.getVorname()) && nachname.equals(cSpieler.getNachname())) {
+                        if (vorname.equalsIgnoreCase(cSpieler.getVorname()) && nachname.equalsIgnoreCase(cSpieler.getNachname())) {
                             OldSpieler.remove(cSpieler);
                             break;
                         }
@@ -607,7 +607,7 @@ public final class MitgliedDialog extends javax.swing.JDialog {
                 case Trainer:
                     ArrayList<Trainer> OldTrainer = XMLLoader.loadTrainer();
                     for (Trainer cTrainer : OldTrainer) {
-                        if (vorname.equals(cTrainer.getVorname()) && nachname.equals(cTrainer.getNachname())) {
+                        if (vorname.equalsIgnoreCase(cTrainer.getVorname()) && nachname.equalsIgnoreCase(cTrainer.getNachname())) {
                             OldTrainer.remove(cTrainer);
                             break;
                         }

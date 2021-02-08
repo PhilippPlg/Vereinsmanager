@@ -146,7 +146,7 @@ public final class MitgliedDialog extends javax.swing.JDialog {
         this.tfPLZ.setText(plz);
     }
 
-    public void setTfStraße(String strasse) {
+    public void setTfStrasse(String strasse) {
         this.tfStrasse.setText(strasse);
     }
 

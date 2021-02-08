@@ -110,7 +110,7 @@ public class Mitglied {
      * Setzt die übergebene Straße als Straße des Mitglieds
      * @param strasse Straße
      */
-    public void setStraße(String strasse) {
+    public void setStrasse(String strasse) {
         this.strasse = strasse;
     }
     /**

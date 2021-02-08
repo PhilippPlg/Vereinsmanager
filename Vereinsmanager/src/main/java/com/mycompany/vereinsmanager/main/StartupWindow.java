@@ -588,8 +588,7 @@ public class StartupWindow extends javax.swing.JFrame {
                 Double beitrag = mitglied.getZuZahlenderBetrag();
                 SpielerDialog.setTfVorname(mitglied.getVorname());
                 SpielerDialog.setTfNachname(mitglied.getNachname());
-                SpielerDialog.setTfStraße(mitglied.getStrasse());
-                System.out.println(mitglied.getStrasse());
+                SpielerDialog.setTfStrasse(mitglied.getStrasse());
                 SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.YYYY");
                 String date = sdf.format(mitglied.getGeburtsDatum());
                 SpielerDialog.setTfGeburtsdatum(date);
@@ -615,7 +614,7 @@ public class StartupWindow extends javax.swing.JFrame {
             Double beitrag = spieler.getGehalt();
             SpielerDialog.setTfVorname(spieler.getVorname());
             SpielerDialog.setTfNachname(spieler.getNachname());
-            SpielerDialog.setTfStraße(spieler.getStrasse());
+            SpielerDialog.setTfStrasse(spieler.getStrasse());
             SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.YYYY");
             String date = sdf.format(spieler.getGeburtsDatum());
             SpielerDialog.setTfGeburtsdatum(date);
@@ -702,7 +701,7 @@ public class StartupWindow extends javax.swing.JFrame {
             Double beitrag = trainer.getGehalt();
             SpielerDialog.setTfVorname(trainer.getVorname());
             SpielerDialog.setTfNachname(trainer.getNachname());
-            SpielerDialog.setTfStraße(trainer.getStrasse());
+            SpielerDialog.setTfStrasse(trainer.getStrasse());
             SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.YYYY");
             String date = sdf.format(trainer.getGeburtsDatum());
             SpielerDialog.setTfGeburtsdatum(date);

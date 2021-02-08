@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mycompany.vereinsmanager.main;
 
 import com.mycompany.vereinsmanager.Entities.Mannschaft;
@@ -24,7 +19,14 @@ import java.util.ArrayList;
  * @author Timo
  */
 public class XMLLoader {
-
+    
+    /**
+     * Liest eine ArrayList von ESaveObjects aus XMLFiles/"SaveObject".xml aus
+     * und gibt diese als Obeject zurück - Das Ergebnis muss noch gecastet werden
+     * @param SaveObject
+     * @return Object
+     * @throws IOException 
+     */
     public static Object deserializeFromXML(ESaveObject SaveObject) throws IOException {
         File file = new File("./XMLFiles/" + SaveObject.toString() + ".xml");
         if (!file.exists()) {
@@ -47,7 +49,11 @@ public class XMLLoader {
         fis.close();
         return decodedEntity;
     }
-
+    /**
+     * Liest die Liste der normalen Mitglieder aus XMLFiles/normalesMitglied.xml
+     * @return ArrayList&lt;NormalesMitglied&gt;
+     * @throws IOException 
+     */
     public static ArrayList<NormalesMitglied> loadMitglieder() throws IOException {
         Object UncastedMitglieder = deserializeFromXML(ESaveObject.normalesMitglied);
         if (UncastedMitglieder == null) {
@@ -55,7 +61,11 @@ public class XMLLoader {
         }
         return (ArrayList<NormalesMitglied>) UncastedMitglieder;
     }
-
+    /**
+     * Liest die Liste der Profispieler aus XMLFiles/profiSpieler.xml
+     * @return ArrayList&lt;Profispieler&gt;
+     * @throws IOException 
+     */
     public static ArrayList<Profispieler> loadProfiSpieler() throws IOException {
         Object UncastedSpieler = deserializeFromXML(ESaveObject.profiSpieler);
         if (UncastedSpieler == null) {
@@ -63,7 +73,11 @@ public class XMLLoader {
         }
         return (ArrayList<Profispieler>) UncastedSpieler;
     }
-
+    /**
+     * Liest die Liste der Mannschaften aus XMLFiles/mannschaft.xml
+     * @return ArrayList&lt;Mannschaft&gt;
+     * @throws IOException 
+     */
     public static ArrayList<Mannschaft> loadMannschaft() throws IOException {
         Object UncastedMannschaft = deserializeFromXML(ESaveObject.mannschaft);
         if (UncastedMannschaft == null) {
@@ -71,7 +85,11 @@ public class XMLLoader {
         }
         return (ArrayList<Mannschaft>) UncastedMannschaft;
     }
-
+    /**
+     * Liest die Liste der Trainer aus XMLFiles/trainer.xml
+     * @return ArrayList&lt;Trainer&gt;
+     * @throws IOException 
+     */
     public static ArrayList<Trainer> loadTrainer() throws IOException {
         Object UncastedTrainer = deserializeFromXML(ESaveObject.trainer);
         if (UncastedTrainer == null) {
@@ -79,7 +97,11 @@ public class XMLLoader {
         }
         return (ArrayList<Trainer>) UncastedTrainer;
     }
-
+    /**
+     * Liest die Liste der Spiele aus XMLFiles/spiel.xml 
+     * @return ArrayList&lt;Spiel&gt;
+     * @throws IOException 
+     */
     public static ArrayList<Spiel> loadSpiel() throws IOException {
         Object UncastedSpiel = deserializeFromXML(ESaveObject.spiel);
         if (UncastedSpiel == null) {

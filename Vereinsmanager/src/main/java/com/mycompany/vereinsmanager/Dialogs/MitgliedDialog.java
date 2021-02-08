@@ -472,7 +472,6 @@ public final class MitgliedDialog extends javax.swing.JDialog {
                         }
                         mitglieder.add(mitglied);
                         ObjekteZumSpeichern.addAll(mitglieder);
-                        //ObjekteZumSpeichern.add(mitglied);
                         break;
 
                     case Spieler:

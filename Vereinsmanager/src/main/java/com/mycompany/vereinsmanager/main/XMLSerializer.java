@@ -18,6 +18,12 @@ import java.util.ArrayList;
  */
 public class XMLSerializer {
 
+    /**
+     * Schreibt ein object in XML-Form und speichert es in XMLFiles/"SaveObject".xml
+     * @param object das zu speichernde object
+     * @param SaveObject ESaveObject Zugehörigkeit/Object-type
+     * @throws IOException 
+     */
     public static void serializeToXML(ArrayList<Object> object, ESaveObject SaveObject) throws IOException {
         File XMLFile = new File("./XMLFiles/" + SaveObject.toString() + ".xml");
         if (!XMLFile.exists()) {

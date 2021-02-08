@@ -11,7 +11,6 @@ import com.mycompany.vereinsmanager.Enums.EZugehoerigkeit;
 import com.mycompany.vereinsmanager.Dialogs.MannschaftDialog;
 import com.mycompany.vereinsmanager.Dialogs.MitgliedDialog;
 import com.mycompany.vereinsmanager.Dialogs.SpielDialog;
-import com.mycompany.vereinsmanager.Entities.Mitglied;
 import com.mycompany.vereinsmanager.Entities.NormalesMitglied;
 import com.mycompany.vereinsmanager.Entities.Profispieler;
 import com.mycompany.vereinsmanager.Entities.Spiel;
@@ -590,6 +589,7 @@ public class StartupWindow extends javax.swing.JFrame {
                 SpielerDialog.setTfVorname(mitglied.getVorname());
                 SpielerDialog.setTfNachname(mitglied.getNachname());
                 SpielerDialog.setTfStraße(mitglied.getStrasse());
+                System.out.println(mitglied.getStrasse());
                 SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.YYYY");
                 String date = sdf.format(mitglied.getGeburtsDatum());
                 SpielerDialog.setTfGeburtsdatum(date);

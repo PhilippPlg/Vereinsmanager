@@ -19,7 +19,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 
 /**
  *
@@ -127,36 +126,36 @@ public final class MitgliedDialog extends javax.swing.JDialog {
         this.tfBeitrag.setText(beitrag);
     }
 
-    public void setTfEmail(String Email) {
-        this.tfEmail.setText(Email);
+    public void setTfEmail(String email) {
+        this.tfEmail.setText(email);
     }
 
-    public void setTfGeburtsdatum(String Geburtsdatum) {
-        this.tfGeburtsdatum.setText(Geburtsdatum);
+    public void setTfGeburtsdatum(String geburtsDatum) {
+        this.tfGeburtsdatum.setText(geburtsDatum);
     }
 
-    public void setTfNachname(String Nachname) {
-        this.tfNachname.setText(Nachname);
+    public void setTfNachname(String nachname) {
+        this.tfNachname.setText(nachname);
     }
 
-    public void setTfOrt(String Ort) {
-        this.tfOrt.setText(Ort);
+    public void setTfOrt(String ort) {
+        this.tfOrt.setText(ort);
     }
 
-    public void setTfPLZ(String PLZ) {
-        this.tfPLZ.setText(PLZ);
+    public void setTfPLZ(String plz) {
+        this.tfPLZ.setText(plz);
     }
 
-    public void setTfStraße(String Straße) {
-        this.tfStraße.setText(Straße);
+    public void setTfStraße(String strasse) {
+        this.tfStrasse.setText(strasse);
     }
 
-    public void setTfTelefon(String Telefon) {
-        this.tfTelefon.setText(Telefon);
+    public void setTfTelefon(String telefonNr) {
+        this.tfTelefon.setText(telefonNr);
     }
 
-    public void setTfVorname(String Vorname) {
-        this.tfVorname.setText(Vorname);
+    public void setTfVorname(String vorname) {
+        this.tfVorname.setText(vorname);
     }
 
     private void SetWindowTitle() {
@@ -203,7 +202,7 @@ public final class MitgliedDialog extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         tfVorname = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        tfStraße = new javax.swing.JTextField();
+        tfStrasse = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         tfPLZ = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
@@ -296,7 +295,7 @@ public final class MitgliedDialog extends javax.swing.JDialog {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(tfVorname, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tfStraße, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tfStrasse, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(tfPLZ, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -367,7 +366,7 @@ public final class MitgliedDialog extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel3)
-                                    .addComponent(tfStraße, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(tfStrasse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel6)
@@ -417,7 +416,7 @@ public final class MitgliedDialog extends javax.swing.JDialog {
             double betrag = 0;
             String vorname = tfVorname.getText();
             String nachname = tfNachname.getText();
-            String strasse = tfStraße.getText();
+            String strasse = tfStrasse.getText();
             String plz = tfPLZ.getText();
             String ort = tfOrt.getText();
             String telefon = tfTelefon.getText();
@@ -465,14 +464,15 @@ public final class MitgliedDialog extends javax.swing.JDialog {
                                 break;
                             }
                         }
-
+                        
                         NormalesMitglied mitglied = new NormalesMitglied(vorname, nachname, strasse, plz, ort, geb, email, telefon, betrag);
                         Object Mannschaft = cboMannschaft.getSelectedItem();
                         if (Mannschaft != null) {
                             mitglied.setMannschaft(Mannschaft.toString());
                         }
+                        mitglieder.add(mitglied);
                         ObjekteZumSpeichern.addAll(mitglieder);
-                        ObjekteZumSpeichern.add(mitglied);
+                        //ObjekteZumSpeichern.add(mitglied);
                         break;
 
                     case Spieler:
@@ -673,7 +673,7 @@ public final class MitgliedDialog extends javax.swing.JDialog {
     private javax.swing.JTextField tfNachname;
     private javax.swing.JTextField tfOrt;
     private javax.swing.JTextField tfPLZ;
-    private javax.swing.JTextField tfStraße;
+    private javax.swing.JTextField tfStrasse;
     private javax.swing.JTextField tfTelefon;
     private javax.swing.JTextField tfVorname;
     // End of variables declaration//GEN-END:variables

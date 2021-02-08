@@ -35,7 +35,7 @@
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="tfVorname" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
-                                  <Component id="tfStraße" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
+                                  <Component id="tfStrasse" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
                                   <Component id="tfPLZ" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -133,7 +133,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Component id="jLabel3" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="tfStraße" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tfStrasse" alignment="1" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" attributes="0">
@@ -209,7 +209,7 @@
         <Property name="text" type="java.lang.String" value="Stra&#xdf;e"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="tfStra&#xdf;e">
+    <Component class="javax.swing.JTextField" name="tfStrasse">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>

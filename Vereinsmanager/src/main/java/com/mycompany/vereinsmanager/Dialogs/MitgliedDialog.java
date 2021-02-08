@@ -81,9 +81,9 @@ public final class MitgliedDialog extends javax.swing.JDialog {
      */
     private void AddAssignmentItems() {
         EZugehoerigkeit[] Assignments = {EZugehoerigkeit.Mitglieder, EZugehoerigkeit.Spieler, EZugehoerigkeit.Trainer};
-        cboZugehörigkeit.removeAllItems();
+        cboZugehoerigkeit.removeAllItems();
         for (EZugehoerigkeit Zugehörigkeit : Assignments) {
-            cboZugehörigkeit.addItem(Zugehörigkeit.toString());
+            cboZugehoerigkeit.addItem(Zugehörigkeit.toString());
         }
     }
     /**
@@ -121,58 +121,88 @@ public final class MitgliedDialog extends javax.swing.JDialog {
         this.tfGeburtsdatum.setEditable(isNew);
         this.btnLoeschen.setEnabled(!isNew);
     }
-
+    /**
+     * Setzt den übergebenen Betrag in das Beitragseingabefeld
+     * @param beitrag 
+     */
     public void setTfBeitrag(String beitrag) {
         this.tfBeitrag.setText(beitrag);
     }
-
+    /**
+     * Setzt die übergebene Email-Adresse in das Emaileingabefeld ein
+     * @param email 
+     */
     public void setTfEmail(String email) {
         this.tfEmail.setText(email);
     }
-
+    /**
+     * Setzt den übergebenen Datumsstring in das Geburtsdatumeingabefeld
+     * @param geburtsDatum 
+     */
     public void setTfGeburtsdatum(String geburtsDatum) {
         this.tfGeburtsdatum.setText(geburtsDatum);
     }
-
+    /**
+     * Setzt den übergebenen Nachnamen in das Nachnameneingabefeld
+     * @param nachname 
+     */
     public void setTfNachname(String nachname) {
         this.tfNachname.setText(nachname);
     }
-
+    /**
+     * Setzt den übergebenen Ort in das Ortseingabefeld
+     * @param ort 
+     */
     public void setTfOrt(String ort) {
         this.tfOrt.setText(ort);
     }
-
+    /**
+     * Setzt die übergebene Postleitzahl in das Postleitzahleingabefeld
+     * @param plz 
+     */
     public void setTfPLZ(String plz) {
         this.tfPLZ.setText(plz);
     }
-
+    /**
+     * Setzt die übergebene Straße in das Straßeneingabefeld
+     * @param strasse 
+     */
     public void setTfStrasse(String strasse) {
         this.tfStrasse.setText(strasse);
     }
-
+    /**
+     * Setzt die übergebene Telefonnummer in das Telefonnummerneingabefeld
+     * @param telefonNr 
+     */
     public void setTfTelefon(String telefonNr) {
         this.tfTelefon.setText(telefonNr);
     }
-
+    /**
+     * Setzt den übergebenen Vornamen in das Vornameneingabefeld
+     * @param vorname 
+     */
     public void setTfVorname(String vorname) {
         this.tfVorname.setText(vorname);
     }
-
+    /**
+     * Bestimmt und setzt die Überschrift des Windows und den ausgewählten Wert
+     * der Zugehörigkeitscombobox dynamisch anhand der Mitgliedsrolle (Zugehörigkeit)
+     */
     private void SetWindowTitle() {
         String Caption = isNew ? EObjektStatus.erstellen.toString() : EObjektStatus.bearbeiten.toString();
         String ButtonCaption = isNew ? ESaveStatus.erstellen.toString() : ESaveStatus.aktualisieren.toString();
         switch (zugehoerigkeit) {
             case Mitglieder:
-                lblÜberschrift.setText("Mitglied " + Caption);
-                cboZugehörigkeit.setSelectedIndex(0);
+                lblUeberschrift.setText("Mitglied " + Caption);
+                cboZugehoerigkeit.setSelectedIndex(0);
                 break;
             case Spieler:
-                lblÜberschrift.setText("Spieler " + Caption);
-                cboZugehörigkeit.setSelectedIndex(1);
+                lblUeberschrift.setText("Spieler " + Caption);
+                cboZugehoerigkeit.setSelectedIndex(1);
                 break;
             case Trainer:
-                lblÜberschrift.setText("Trainer " + Caption);
-                cboZugehörigkeit.setSelectedIndex(2);
+                lblUeberschrift.setText("Trainer " + Caption);
+                cboZugehoerigkeit.setSelectedIndex(2);
                 break;
         }
         btnSpeichern.setText(ButtonCaption);
@@ -198,7 +228,7 @@ public final class MitgliedDialog extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblÜberschrift = new javax.swing.JLabel();
+        lblUeberschrift = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         tfVorname = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -217,7 +247,7 @@ public final class MitgliedDialog extends javax.swing.JDialog {
         tfEmail = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        cboZugehörigkeit = new javax.swing.JComboBox<>();
+        cboZugehoerigkeit = new javax.swing.JComboBox<>();
         cboMannschaft = new javax.swing.JComboBox<>();
         btnVerwerfen = new javax.swing.JButton();
         btnSpeichern = new javax.swing.JButton();
@@ -226,8 +256,8 @@ public final class MitgliedDialog extends javax.swing.JDialog {
         lblBeitrag = new javax.swing.JLabel();
         tfBeitrag = new javax.swing.JTextField();
 
-        lblÜberschrift.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblÜberschrift.setText("Mannschaft (erstellen / bearbeiten / anzeigen)");
+        lblUeberschrift.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblUeberschrift.setText("Mannschaft (erstellen / bearbeiten / anzeigen)");
 
         jLabel2.setText("Vorname");
 
@@ -249,8 +279,8 @@ public final class MitgliedDialog extends javax.swing.JDialog {
 
         jLabel13.setText("Mannschaft");
 
-        cboZugehörigkeit.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cboZugehörigkeit.setEnabled(false);
+        cboZugehoerigkeit.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboZugehoerigkeit.setEnabled(false);
 
         cboMannschaft.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -291,7 +321,7 @@ public final class MitgliedDialog extends javax.swing.JDialog {
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(39, 39, 39)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblÜberschrift, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblUeberschrift, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(tfVorname, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -324,7 +354,7 @@ public final class MitgliedDialog extends javax.swing.JDialog {
                                 .addGap(39, 39, 39)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(tfBeitrag)
-                                    .addComponent(cboZugehörigkeit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(cboZugehoerigkeit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(76, 76, 76)
@@ -356,7 +386,7 @@ public final class MitgliedDialog extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblÜberschrift, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblUeberschrift, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -390,7 +420,7 @@ public final class MitgliedDialog extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel11)
-                    .addComponent(cboZugehörigkeit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cboZugehoerigkeit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13)
                     .addComponent(cboMannschaft, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -652,7 +682,7 @@ public final class MitgliedDialog extends javax.swing.JDialog {
     private javax.swing.JButton btnSpeichern;
     private javax.swing.JButton btnVerwerfen;
     private javax.swing.JComboBox<String> cboMannschaft;
-    private javax.swing.JComboBox<String> cboZugehörigkeit;
+    private javax.swing.JComboBox<String> cboZugehoerigkeit;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;
@@ -664,8 +694,8 @@ public final class MitgliedDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel lblBeitrag;
+    private javax.swing.JLabel lblUeberschrift;
     private javax.swing.JLabel lblWarning;
-    private javax.swing.JLabel lblÜberschrift;
     private javax.swing.JTextField tfBeitrag;
     private javax.swing.JTextField tfEmail;
     private javax.swing.JTextField tfGeburtsdatum;

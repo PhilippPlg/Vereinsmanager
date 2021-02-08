@@ -31,7 +31,7 @@
                       </Group>
                       <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblÜberschrift" min="-2" pref="242" max="-2" attributes="0"/>
+                          <Component id="lblUeberschrift" min="-2" pref="242" max="-2" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="tfVorname" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
@@ -75,7 +75,7 @@
                               <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="tfBeitrag" max="32767" attributes="0"/>
-                                  <Component id="cboZugehörigkeit" min="-2" max="-2" attributes="0"/>
+                                  <Component id="cboZugehoerigkeit" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -122,7 +122,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="lblÜberschrift" min="-2" pref="23" max="-2" attributes="0"/>
+                      <Component id="lblUeberschrift" min="-2" pref="23" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
@@ -167,7 +167,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Component id="jLabel11" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Component id="cboZugehörigkeit" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Component id="cboZugehoerigkeit" alignment="1" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel13" alignment="1" min="-2" max="-2" attributes="0"/>
                   <Component id="cboMannschaft" alignment="1" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -191,7 +191,7 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="lbl&#xdc;berschrift">
+    <Component class="javax.swing.JLabel" name="lblUeberschrift">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="Mannschaft (erstellen / bearbeiten / anzeigen)"/>
@@ -263,7 +263,7 @@
         <Property name="text" type="java.lang.String" value="Mannschaft"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="cboZugeh&#xf6;rigkeit">
+    <Component class="javax.swing.JComboBox" name="cboZugehoerigkeit">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="4">

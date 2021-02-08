@@ -10,5 +10,10 @@ package com.mycompany.vereinsmanager.Enums;
  * @author Timo
  */
 public enum ESaveObject {
-    mannschaft,trainer,normalesMitglied,profiSpieler,spiel,trainingsZeit,verwaltung
+    mannschaft,
+    trainer,
+    normalesMitglied,
+    profiSpieler,
+    spiel,
+    trainingsZeit
 }

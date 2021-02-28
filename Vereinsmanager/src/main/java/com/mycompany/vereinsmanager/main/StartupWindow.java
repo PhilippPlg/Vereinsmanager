@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mycompany.vereinsmanager.main;
 
 import com.mycompany.vereinsmanager.Dialogs.BeitraegeDialog;
@@ -27,11 +22,16 @@ import javax.swing.DefaultListModel;
 import javax.swing.JList;
 
 /**
- *
+ * Mainframe/Hauptansicht des Vereinsmanagers
  * @author Timo
  */
 public class StartupWindow extends javax.swing.JFrame {
 
+    public MannschaftDialog MannschaftDialog;
+    public SpielDialog SpielDialog;
+    public MitgliedDialog SpielerDialog;
+    public BeitraegeDialog BeitraegeDialog;
+    
     /**
      * Creates new form StartupWindow
      */
@@ -41,10 +41,6 @@ public class StartupWindow extends javax.swing.JFrame {
         showSpiele();
         this.setTitle("Handballverein ITFM4");
     }
-    public MannschaftDialog MannschaftDialog;
-    public SpielDialog SpielDialog;
-    public MitgliedDialog SpielerDialog;
-    public BeitraegeDialog BeitraegeDialog;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -75,8 +71,7 @@ public class StartupWindow extends javax.swing.JFrame {
         btnAddSpiel = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         lbSpiele = new javax.swing.JList<>();
-        jPanel1 = new javax.swing.JPanel();
-        jSpielerTab1 = new javax.swing.JPanel();
+        jTrainerTab = new javax.swing.JPanel();
         btnAddTrainer = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
         lbTrainer = new javax.swing.JList<>();
@@ -86,12 +81,6 @@ public class StartupWindow extends javax.swing.JFrame {
         jMenu2.setText("jMenu2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jContentWindow.addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentShown(java.awt.event.ComponentEvent evt) {
-                jContentWindowComponentShown(evt);
-            }
-        });
 
         jMannschaftTab.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
@@ -298,9 +287,9 @@ public class StartupWindow extends javax.swing.JFrame {
 
         jContentWindow.addTab("Spiele", jSpielTab);
 
-        jSpielerTab1.addComponentListener(new java.awt.event.ComponentAdapter() {
+        jTrainerTab.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
-                jSpielerTab1ComponentShown(evt);
+                jTrainerTabComponentShown(evt);
             }
         });
 
@@ -323,49 +312,30 @@ public class StartupWindow extends javax.swing.JFrame {
         });
         jScrollPane5.setViewportView(lbTrainer);
 
-        javax.swing.GroupLayout jSpielerTab1Layout = new javax.swing.GroupLayout(jSpielerTab1);
-        jSpielerTab1.setLayout(jSpielerTab1Layout);
-        jSpielerTab1Layout.setHorizontalGroup(
-            jSpielerTab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jSpielerTab1Layout.createSequentialGroup()
+        javax.swing.GroupLayout jTrainerTabLayout = new javax.swing.GroupLayout(jTrainerTab);
+        jTrainerTab.setLayout(jTrainerTabLayout);
+        jTrainerTabLayout.setHorizontalGroup(
+            jTrainerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jTrainerTabLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jSpielerTab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jTrainerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane5)
-                    .addGroup(jSpielerTab1Layout.createSequentialGroup()
+                    .addGroup(jTrainerTabLayout.createSequentialGroup()
                         .addComponent(btnAddTrainer, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 518, Short.MAX_VALUE)))
                 .addContainerGap())
         );
-        jSpielerTab1Layout.setVerticalGroup(
-            jSpielerTab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jSpielerTab1Layout.createSequentialGroup()
+        jTrainerTabLayout.setVerticalGroup(
+            jTrainerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jTrainerTabLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnAddTrainer)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 649, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addComponent(jSpielerTab1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 376, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addComponent(jSpielerTab1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-
-        jContentWindow.addTab("Trainer", jPanel1);
+        jContentWindow.addTab("Trainer", jTrainerTab);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -376,21 +346,33 @@ public class StartupWindow extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jContentWindow, javax.swing.GroupLayout.PREFERRED_SIZE, 393, Short.MAX_VALUE)
+                .addComponent(jContentWindow)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    /**
+     * Mitglied erstellen Button Action, ruft den Dialog zum Erzeugen eines Mitglieds auf
+     * @param evt Event, wird nicht weiter verwendet (Netbeansvorgabe)
+     */
     private void btnAddMitgliedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddMitgliedActionPerformed
         mitgliedDialogErzeugen(true, null);
     }//GEN-LAST:event_btnAddMitgliedActionPerformed
 
+    /**
+     * Mannschaft erstellen Button Action, ruft den Dialog zum Erzeugen einer Mannschaft auf
+     * @param evt Event, wird nicht weiter verwendet (Netbeansvorgabe)
+     */
     private void btnAddMannschaftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddMannschaftActionPerformed
         mannschaftDialogErzeugen(true, null);
     }//GEN-LAST:event_btnAddMannschaftActionPerformed
-
+    
+    /**
+     * Profispieler erstellen Button Action, ruft den Dialog zum Erzeugen eines Spielers auf
+     * @param evt Event, wird nicht weiter verwendet (Netbeansvorgabe)
+     */
     private void btnAddSpielerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddSpielerActionPerformed
         try {
             spielerDialogErzeugen(true, null);
@@ -399,6 +381,10 @@ public class StartupWindow extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnAddSpielerActionPerformed
 
+    /**
+     * Spiel erstellen Button Action, ruft den Dialog zum Erzeugen eines Spiels auf
+     * @param evt Event, wird nicht weiter verwendet (Netbeansvorgabe)
+     */
     private void btnAddSpielActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddSpielActionPerformed
         try {
             spielDialogErzeugen(true, null);
@@ -406,7 +392,22 @@ public class StartupWindow extends javax.swing.JFrame {
             Logger.getLogger(StartupWindow.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnAddSpielActionPerformed
-
+    
+    /**
+     * Trainer erstellen Button Action, ruft den Dialog zum Erzeugen eines Trainers auf
+     * @param evt Event, wird nicht weiter verwendet (Netbeansvorgabe)
+     */
+    private void btnAddTrainerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddTrainerActionPerformed
+        try {
+            trainerDialogErzeugen(true, null);
+        } catch (IOException ex) {
+            Logger.getLogger(StartupWindow.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnAddTrainerActionPerformed
+	
+    /**
+     * Lädt alle Mitgliederdatensätze in lbMitglieder (lbMitglieder liegt im Mitgliedertab)
+     */
     private void showMitglieder() {
         try {
             DefaultListModel model = new DefaultListModel();
@@ -417,6 +418,9 @@ public class StartupWindow extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Lädt alle Mannschaftsdatensätze in lbMannschaft (lbMannschaft liegt im Mannschaftstab)
+     */
     private void showMannschaften() {
         try {
             DefaultListModel model = new DefaultListModel();
@@ -433,6 +437,9 @@ public class StartupWindow extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Lädt alle Spielerdatensätze in lbSpieler(lbSpieler liegt im Spielertab)
+     */
     private void showSpieler() {
         try {
             DefaultListModel model = new DefaultListModel();
@@ -443,6 +450,9 @@ public class StartupWindow extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Lädt alle Spieldatensätze in lbSpiele (lbSpiele liegt im Spieletab)
+     */
     private void showSpiele() {
         try {
             DefaultListModel model = new DefaultListModel();
@@ -452,23 +462,57 @@ public class StartupWindow extends javax.swing.JFrame {
             Logger.getLogger(StartupWindow.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    /**
+     * Lädt alle Trainerdatensätze in lbTrainer (lbTrainer liegt im Trainertab)
+     */
+    private void showTrainer() {
+        try {
+            DefaultListModel model = new DefaultListModel();
+            model.addAll(XMLLoader.loadTrainer());
+            lbTrainer.setModel(model);
+        } catch (IOException ex) {
+            Logger.getLogger(StartupWindow.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
+    }
+    
+    /**
+     * Mannschaftstab ComponentShown Action, zeigt die Mannschaften beim Aufrufen des Mannschaftstabs an
+     * @param evt Event, wird nicht weiter verwendet (Netbeansvorgabe)
+     */
     private void jMannschaftTabComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jMannschaftTabComponentShown
         showMannschaften();
     }//GEN-LAST:event_jMannschaftTabComponentShown
 
+    /**
+     * Mitgliedertab ComponentShown Action, zeigt die Mitglieder beim Aufrufen des Mitgliedertabs an
+     * @param evt Event, wird nicht weiter verwendet (Netbeansvorgabe)
+     */
     private void jMitgliedTabComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jMitgliedTabComponentShown
         showMitglieder();
     }//GEN-LAST:event_jMitgliedTabComponentShown
-
+    
+    /**
+     * Spielertab ComponentShown Action, zeigt die Spieler beim Aufrufen des Spielertabs an
+     * @param evt Event, wird nicht weiter verwendet (Netbeansvorgabe)
+     */
     private void jSpielerTabComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jSpielerTabComponentShown
         showSpieler();
     }//GEN-LAST:event_jSpielerTabComponentShown
 
-    private void jTrainerTabComponentShown(java.awt.event.ComponentEvent evt) {
+    /**
+     * Trainertab ComponentShown Action, zeigt die Trainer beim Aufrufen des Trainertabs an
+     * @param evt Event, wird nicht weiter verwendet (Netbeansvorgabe)
+     */
+    private void jTrainerTabComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jTrainerTabComponentShown
         showTrainer();
-    }
+    }//GEN-LAST:event_jTrainerTabComponentShown
 
+    /**
+     * Mannschaftslisten Mausdoppelklick Action, ruft zu der angeklickten Mannschaft den "Mannschaft bearbeiten" Dialog auf
+     * @param evt Event, der Mausklick des Nutzers
+     */
     private void lbMannschaftMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbMannschaftMouseClicked
         JList list = (JList) evt.getSource();
         if (evt.getClickCount() == 2) {
@@ -483,6 +527,10 @@ public class StartupWindow extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_lbMannschaftMouseClicked
 
+    /**
+     * Mitgliedslisten Mausdoppelklick Action, ruft zu dem angeklickten Mitglied den "Mitglied bearbeiten" Dialog auf
+     * @param evt Event, der Mausklick des Nutzers
+     */
     private void lbMitgliederMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbMitgliederMouseClicked
         JList list = (JList) evt.getSource();
         if (evt.getClickCount() == 2) {
@@ -497,6 +545,10 @@ public class StartupWindow extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_lbMitgliederMouseClicked
 
+    /**
+     * Profispielerlisten Mausdoppelklick Action, ruft zu dem angeklickten Profispieler den "Profispieelr bearbeiten" Dialog auf
+     * @param evt Event, der Mausklick des Nutzers
+     */
     private void lbSpielerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbSpielerMouseClicked
         JList list = (JList) evt.getSource();
         if (evt.getClickCount() == 2) {
@@ -511,6 +563,10 @@ public class StartupWindow extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_lbSpielerMouseClicked
 
+    /**
+     * Spiellisten Mausdoppelklick Action, ruft zu dem angeklickten Spiel den "Spiel bearbeiten" Dialog auf
+     * @param evt Event, der Mausklick des Nutzers
+     */
     private void lbSpieleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbSpieleMouseClicked
         JList list = (JList) evt.getSource();
         if (evt.getClickCount() == 2) {
@@ -525,14 +581,10 @@ public class StartupWindow extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_lbSpieleMouseClicked
 
-    private void btnAddTrainerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddTrainerActionPerformed
-        try {
-            trainerDialogErzeugen(true, null);
-        } catch (IOException ex) {
-            Logger.getLogger(StartupWindow.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_btnAddTrainerActionPerformed
-
+     /**
+     * Trainerlisten Mausdoppelklick Action, ruft zu dem angeklickten Spiel den "Spiel bearbeiten" Dialog auf
+     * @param evt Event, der Mausklick des Nutzers
+     */
     private void lbTrainerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbTrainerMouseClicked
         JList list = (JList) evt.getSource();
         if (evt.getClickCount() == 2) {
@@ -547,24 +599,10 @@ public class StartupWindow extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_lbTrainerMouseClicked
 
-    private void showTrainer() {
-        try {
-            DefaultListModel model = new DefaultListModel();
-            model.addAll(XMLLoader.loadTrainer());
-            lbTrainer.setModel(model);
-        } catch (IOException ex) {
-            Logger.getLogger(StartupWindow.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }
-    private void jSpielerTab1ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jSpielerTab1ComponentShown
-
-    }//GEN-LAST:event_jSpielerTab1ComponentShown
-
-    private void jContentWindowComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jContentWindowComponentShown
-        showTrainer();
-    }//GEN-LAST:event_jContentWindowComponentShown
-
+    /**
+     * Ausstehende Beiträge anzeigen Action, ruft den Dialog mit offenen Mitgliedsbeiträgen auf
+     * @param evt Event, wird nicht weiter verwendet (Netbeansvorgabe)
+     */
     private void btnBeitraegeAnzeigenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBeitraegeAnzeigenActionPerformed
         try {
             beitraegeDialogErzeugen(XMLLoader.loadMitglieder());
@@ -573,6 +611,10 @@ public class StartupWindow extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnBeitraegeAnzeigenActionPerformed
 
+    /**
+     * Erzeugt den Dialog mit ausstehenden Mitgliederbeiträgen
+     * @param mitglieder Arraylist mit allen Mitgliedern, die Liste muss nicht bereits gefiltert sein nach offenen Beiträgen
+     */
     private void beitraegeDialogErzeugen(ArrayList<NormalesMitglied> mitglieder ) {
         BeitraegeDialog = new BeitraegeDialog( this, true, mitglieder );
         BeitraegeDialog.setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
@@ -581,6 +623,11 @@ public class StartupWindow extends javax.swing.JFrame {
         BeitraegeDialog.setVisible(true);
     }
     
+    /**
+     * Erzeugt den Dialog Mitglied bearbeiten/anlegen
+     * @param isNew ob es sich um ein neues Mitglied oder um ein bestehendes handelt
+     * @param mitglied Mitglied das geöffnet werden soll
+     */
     private void mitgliedDialogErzeugen(Boolean isNew, NormalesMitglied mitglied) {
         try {
             SpielerDialog = new MitgliedDialog(EZugehoerigkeit.Mitglieder, isNew, this);
@@ -607,7 +654,13 @@ public class StartupWindow extends javax.swing.JFrame {
             Logger.getLogger(StartupWindow.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
+    /**
+     * Erzeugt den Dialog Profispieler bearbeiten/anlegen
+     * @param isNew ob es sich um einen neuen Profispieler oder um einen bestehenden handelt
+     * @param spieler Profispieler der geöffnet werden soll
+     * @throws IOException falls die Spielerliste nicht geöffnet werden kann
+     */
     private void spielerDialogErzeugen(Boolean isNew, Profispieler spieler) throws IOException {
         SpielerDialog = new MitgliedDialog(EZugehoerigkeit.Spieler, isNew, this); //Hier Entity �bergeben und in Konstruktor die Werte setzen(wenn nicht neu)
         if (spieler != null) {
@@ -630,6 +683,11 @@ public class StartupWindow extends javax.swing.JFrame {
         SpielerDialog.setVisible(true);
     }
 
+    /**
+     * Erzeugt den Dialog Mannschaft bearbeiten/anlegen
+     * @param isNew ob es sich um eine neue Mannschaft oder um eine bestehende handelt
+     * @param mannschaft Mannschaft die geöffnet werden soll
+     */
     private void mannschaftDialogErzeugen(Boolean isNew, Mannschaft mannschaft) {
         try {
             MannschaftDialog = new MannschaftDialog(isNew, this);
@@ -671,6 +729,12 @@ public class StartupWindow extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Erzeugt den Dialog Spiel bearbeiten/anlegen
+     * @param isNew ob es sich um ein neues Spiel handelt oder um ein bestehendes
+     * @param spiel Spiel das geöffnet werden soll
+     * @throws IOException falls die Spieleliste nicht geöffnet/gelesen werden kann
+     */
     public void spielDialogErzeugen(Boolean isNew, Spiel spiel) throws IOException {
         SpielDialog = new SpielDialog(isNew, this); //Hier Entity �bergeben und in Konstruktor die Werte setzen(wenn nicht neu)
         if (spiel != null) {
@@ -694,7 +758,13 @@ public class StartupWindow extends javax.swing.JFrame {
         SpielDialog.setModal(true);
         SpielDialog.setVisible(true);
     }
-
+    
+    /**
+     * Erzeugt den Dialog Trainer bearbeiten/anlegen
+     * @param isNew ob es sich um einen neuen Trainer handelt oder um einen bestehenden
+     * @param trainer Trainer der geöffnet werden soll
+     * @throws IOException falls die Trainerliste nicht geöffnet/gelesen werden kann
+     */
     private void trainerDialogErzeugen(Boolean isNew, Trainer trainer) throws IOException {
         SpielerDialog = new MitgliedDialog(EZugehoerigkeit.Trainer, isNew, this); //Hier Entity �bergeben und in Konstruktor die Werte setzen(wenn nicht neu)
         if (trainer != null) {
@@ -718,16 +788,29 @@ public class StartupWindow extends javax.swing.JFrame {
         SpielerDialog.setVisible(true);
     }
 
-    private Mannschaft ermittelMannschaft(String Bezeichnung) throws IOException {
+    /**
+     * Lädt die Mannschaftsliste und prüft ob eine Mannschaft mit der übergebenen Bezeichnung existiert
+     * @param bezeichnung Bezeichnung der Mannschaft die in der Mannschaftsliste gesucht wird
+     * @return Mannschaft, entweder die bestehende Mannschaft, oder eine ungesetzte neue Mannschaft
+     * @throws IOException falls die Mannschaftsliste nicht geöffnet/gelesen werden kann
+     */
+    private Mannschaft ermittelMannschaft(String bezeichnung) throws IOException {
         ArrayList<Mannschaft> mannschaften = XMLLoader.loadMannschaft();
         for (Mannschaft cMannschaft : mannschaften) {
-            if (Bezeichnung.equals(cMannschaft.getBezeichnung())) {
+            if (bezeichnung.equals(cMannschaft.getBezeichnung())) {
                 return cMannschaft;
             }
         }
         return new Mannschaft();
     }
 
+    /**
+     * Lädt die Mitgliederliste und prüft ob ein Mitglied mit dem übergebenen Namen (Vorname Nachname) existiert
+     * @param Name Name des Mitglieds das gesucht wird
+     * @return NormalesMitglied, entweder das bestehende Mitglied, oder ein ungesetztes neues Mitglied
+     * @throws IOException falls die Mitgliederliste nicht geöffnet/gelesen werden kann
+     * @todo Name durch Mail ersetzten bitte
+     */
     private NormalesMitglied ermittelMitglied(String Name) throws IOException {
         String[] parts = Name.split(" ");
         String vorname = parts[0].trim();
@@ -741,6 +824,13 @@ public class StartupWindow extends javax.swing.JFrame {
         return new NormalesMitglied();
     }
 
+    /**
+     * Lädt die Profispielerliste und prüft ob ein Spieler mit dem übergebenen Namen (Vorname Nachname) existiert
+     * @param Name Name des Profispielers der gesucht wird
+     * @return Profispieler, entweder der bestehende Spieler, oder ein ungesetzter neuer Spieler
+     * @throws IOException falls die Profispielerliste nicht geöffnet/gelesen werden kann
+     * @todo Name durch Mail ersetzten bitte
+     */
     private Profispieler ermittelSpieler(String Name) throws IOException {
         String[] parts = Name.split(" ");
         String vorname = parts[0].trim();
@@ -754,6 +844,13 @@ public class StartupWindow extends javax.swing.JFrame {
         return new Profispieler();
     }
 
+    /**
+     * Lädt die Trainerliste und prüft ob ein Trainer mit dem übergebenen Namen (Vorname Nachname) existiert
+     * @param Name Name des Trainers der gesucht wird
+     * @return Trainer, entweder der bestehende Trainer, oder ein ungesetzter neuer Trainer
+     * @throws IOException falls die Trainerliste nicht geöffnet/gelesen werden kann
+     * @todo Name durch Mail ersetzten bitte
+     */
     private Trainer ermittelTrainer(String Name) throws IOException {
         String[] parts = Name.split(" ");
         String vorname = parts[0].trim();
@@ -767,6 +864,13 @@ public class StartupWindow extends javax.swing.JFrame {
         return new Trainer();
     }
 
+    /**
+     * Lädt die Spieleliste und prüft ob ein Spiel mit der übergebenen Bezeichnung (eigenesTeam gegen gegnerTeam) existiert
+     * @param Bezeichnung Bezeichnung der Begegnung des Spiels
+     * @return Spiel, entweder das bestehende Spiel, oder ein ungesetztes neues Spiel
+     * @throws IOException falls die Spieleliste nicht geöffnet/gelesen werden kann
+     * @todo hier sollten wir noch das Datum an die Caption hängen oder sowas in der Art
+     */
     private Spiel ermittelSpiel(String Bezeichnung) throws IOException {
         ArrayList<Spiel> spiele = XMLLoader.loadSpiel(); //Richtigen PK setzen
         for (Spiel cSpiel : spiele) {
@@ -778,6 +882,12 @@ public class StartupWindow extends javax.swing.JFrame {
         return new Spiel(null, null, null, null);
     }
 
+    /**
+     * Lädt das nächste Spiel der übergebenen Mannschaft
+     * @param mannschaft Name/Bezeichnung der eigenen Mannschaft
+     * @return Spiel, entweder das nächste Spiel der Mannschaft oder, falls nicht vorhanden, ein ungesetztes neues Spiel
+     * @throws IOException falls die Spieleliste nicht geöffnet/gelesen werden kann
+     */
     public Spiel ermittelNaechstesSpiel(Mannschaft mannschaft) throws IOException {
         Spiel naechstesSpiel = new Spiel();
         ArrayList<Spiel> alleSpiele = XMLLoader.loadSpiel();
@@ -804,6 +914,9 @@ public class StartupWindow extends javax.swing.JFrame {
         return naechstesSpiel;
     }
 
+    /**
+     * Aktualisiert alle Tabs (Mannschaften, Mitglieder, Spiele, Spieler, Trainer) in der Hauptansicht
+     */
     public void allesAktualisieren() {
         showMannschaften();
         showMitglieder();
@@ -813,6 +926,7 @@ public class StartupWindow extends javax.swing.JFrame {
     }
 
     /**
+     * Mainmethode der Vereinsverwaltung
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -859,7 +973,6 @@ public class StartupWindow extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JPanel jMitgliedTab;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -867,7 +980,7 @@ public class StartupWindow extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JPanel jSpielTab;
     private javax.swing.JPanel jSpielerTab;
-    private javax.swing.JPanel jSpielerTab1;
+    private javax.swing.JPanel jTrainerTab;
     private javax.swing.JList<String> lbMannschaft;
     private javax.swing.JList<String> lbMitglieder;
     private javax.swing.JList<String> lbSpiele;

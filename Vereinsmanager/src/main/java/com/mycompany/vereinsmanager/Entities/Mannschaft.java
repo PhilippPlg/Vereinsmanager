@@ -114,6 +114,10 @@ public class Mannschaft {
     public void setTrainingszeiten(Trainingszeit[] trainingszeiten) {
         this.trainingszeiten = trainingszeiten;
     }
+    
+    public void setNaechstesSpiel( Spiel spiel ) {
+        this.naechstesSpiel = spiel;
+    }
 
     /**
      * Gibt die Spiele der Mannschaft zurück

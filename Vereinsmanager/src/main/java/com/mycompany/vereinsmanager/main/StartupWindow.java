@@ -824,9 +824,9 @@ public class StartupWindow extends javax.swing.JFrame {
      * @param Name Name des Mitglieds das gesucht wird
      * @return NormalesMitglied, entweder das bestehende Mitglied, oder ein ungesetztes neues Mitglied
      * @throws IOException falls die Mitgliederliste nicht geöffnet/gelesen werden kann
-     * @todo Name durch Mail ersetzten bitte
      */
     private NormalesMitglied ermittelMitglied(String Name) throws IOException {
+        // Name durch Mail ersetzen
         String[] parts = Name.split(" ");
         String vorname = parts[0].trim();
         String nachname = parts[1].trim();
@@ -844,9 +844,9 @@ public class StartupWindow extends javax.swing.JFrame {
      * @param Name Name des Profispielers der gesucht wird
      * @return Profispieler, entweder der bestehende Spieler, oder ein ungesetzter neuer Spieler
      * @throws IOException falls die Profispielerliste nicht geöffnet/gelesen werden kann
-     * @todo Name durch Mail ersetzten bitte
      */
     private Profispieler ermittelSpieler(String Name) throws IOException {
+        //Name durch Mail ersetzen
         String[] parts = Name.split(" ");
         String vorname = parts[0].trim();
         String nachname = parts[1].trim();
@@ -864,9 +864,9 @@ public class StartupWindow extends javax.swing.JFrame {
      * @param Name Name des Trainers der gesucht wird
      * @return Trainer, entweder der bestehende Trainer, oder ein ungesetzter neuer Trainer
      * @throws IOException falls die Trainerliste nicht geöffnet/gelesen werden kann
-     * @todo Name durch Mail ersetzten bitte
      */
     private Trainer ermittelTrainer(String Name) throws IOException {
+        // Name durch Mail ersetzen
         String[] parts = Name.split(" ");
         String vorname = parts[0].trim();
         String nachname = parts[1].trim();
@@ -884,9 +884,9 @@ public class StartupWindow extends javax.swing.JFrame {
      * @param Bezeichnung Bezeichnung der Begegnung des Spiels
      * @return Spiel, entweder das bestehende Spiel, oder ein ungesetztes neues Spiel
      * @throws IOException falls die Spieleliste nicht geöffnet/gelesen werden kann
-     * @todo hier sollten wir noch das Datum an die Caption hängen oder sowas in der Art
      */
     private Spiel ermittelSpiel(String Bezeichnung) throws IOException {
+        // Datum oder so dranhängen, Mannschaften können mehrfach gegeneinader spielen
         ArrayList<Spiel> spiele = XMLLoader.loadSpiel(); //Richtigen PK setzen
         for (Spiel cSpiel : spiele) {
             String spielCaption = cSpiel.getEigenesTeam() + " gegen " + cSpiel.getGegnerTeam();

@@ -7,17 +7,17 @@ package com.mycompany.vereinsmanager.Enums;
 public enum EZugehoerigkeit {
     
     /**
-     * NormalesMitglied {@link NormalesMitglied}
+     * {@link com.mycompany.vereinsmanager.Entities.NormalesMitglied}
      */
     Mitglieder,
     
     /**
-     * Profispieler {@link Profispieler}
+     * {@link com.mycompany.vereinsmanager.Entities.Profispieler}
      */
     Spieler, 
     
     /**
-     * Trainer {@link Trainer}
+     * {@link com.mycompany.vereinsmanager.Entities.Trainer}
      */
     Trainer
 }

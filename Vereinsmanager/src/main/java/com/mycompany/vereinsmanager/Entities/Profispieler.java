@@ -7,12 +7,18 @@ import java.util.Date;
  * @author masia
  */
 public class Profispieler extends Mitglied{
+    
+    /**
+     * Gehalt des Profispielers
+     */
     private double gehalt;
+    
     /**
      * Erstellt einen neuen Profispieler
      */
     public Profispieler() {
     }
+    
     /**
      * Erstellt einen neuen Profispieler mit den angegeben Attributen
      * @param vorname Vorname
@@ -34,6 +40,7 @@ public class Profispieler extends Mitglied{
      * Gibt das Gehalt des Profispielers zurück
      * @return gehalt
      */
+    
     public double getGehalt() {
         return gehalt;
     }
@@ -42,6 +49,7 @@ public class Profispieler extends Mitglied{
      * Setzt das Gehalt auf den übergebenen Wert
      * @param Gehalt
      */
+    
     public void setGehalt(double Gehalt) {
         this.gehalt = Gehalt;
     }

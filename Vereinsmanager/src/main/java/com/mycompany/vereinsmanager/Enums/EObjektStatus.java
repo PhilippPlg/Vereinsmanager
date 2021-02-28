@@ -1,14 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mycompany.vereinsmanager.Enums;
 
 /**
- *
+ * Enum der Optionen für Dialoge, entweder werden Objekte bearbeitet oder erstellt
  * @author Timo
  */
 public enum EObjektStatus {
-    erstellen, bearbeiten
+    
+    /**
+     * Erstellen Option
+     */
+    erstellen,
+    
+    /**
+     * Bearbeiten Option
+     */
+    bearbeiten
 }

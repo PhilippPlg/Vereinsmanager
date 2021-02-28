@@ -17,6 +17,9 @@ import javax.swing.tree.DefaultTreeModel;
  */
 public final class BeitraegeDialog extends javax.swing.JDialog {
     
+    /**
+     * Mitgliederliste
+     */
     private ArrayList<NormalesMitglied> mitglieder;
     /**
      * Creates new form BeitraegeDialog

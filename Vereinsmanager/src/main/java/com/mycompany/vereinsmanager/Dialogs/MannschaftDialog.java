@@ -387,14 +387,14 @@ public final class MannschaftDialog extends javax.swing.JDialog {
             ObjekteZumSpeichern.add(Mannschaft);
             XMLSerializer.serializeToXML(ObjekteZumSpeichern, ESaveObject.mannschaft);
             parent.allesAktualisieren();
-            parent.MannschaftDialog.dispose();
+            parent.mannschaftDialog.dispose();
         } catch (IOException ex) {
             Logger.getLogger(MannschaftDialog.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnSpeichernActionPerformed
 
     private void btnVerwerfenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerwerfenActionPerformed
-        parent.MannschaftDialog.dispose();
+        parent.mannschaftDialog.dispose();
     }//GEN-LAST:event_btnVerwerfenActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -431,7 +431,7 @@ public final class MannschaftDialog extends javax.swing.JDialog {
             neueMannschaften.addAll(OldMannschaften);
             XMLSerializer.serializeToXML(neueMannschaften, ESaveObject.mannschaft);
             parent.allesAktualisieren();
-            parent.MannschaftDialog.dispose();
+            parent.mannschaftDialog.dispose();
         } catch (IOException ex) {
             Logger.getLogger(MannschaftDialog.class.getName()).log(Level.SEVERE, null, ex);
         }

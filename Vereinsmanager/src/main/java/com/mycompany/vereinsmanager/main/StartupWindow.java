@@ -27,10 +27,25 @@ import javax.swing.JList;
  */
 public class StartupWindow extends javax.swing.JFrame {
 
-    public MannschaftDialog MannschaftDialog;
-    public SpielDialog SpielDialog;
-    public MitgliedDialog SpielerDialog;
-    public BeitraegeDialog BeitraegeDialog;
+    /**
+     * Zugehöriger Mannschaftsdialog
+     */
+    public MannschaftDialog mannschaftDialog;
+    
+    /**
+     * Zugehöriger Spieledialog
+     */
+    public SpielDialog spielDialog;
+    
+    /**
+     * Zugehöriger Profispielerdialog
+     */
+    public MitgliedDialog spielerDialog;
+    
+    /**
+     * Zugehöriger Beitragsdialog
+     */
+    public BeitraegeDialog beitraegeDialog;
     
     /**
      * Creates new form StartupWindow
@@ -616,11 +631,11 @@ public class StartupWindow extends javax.swing.JFrame {
      * @param mitglieder Arraylist mit allen Mitgliedern, die Liste muss nicht bereits gefiltert sein nach offenen Beiträgen
      */
     private void beitraegeDialogErzeugen(ArrayList<NormalesMitglied> mitglieder ) {
-        BeitraegeDialog = new BeitraegeDialog( this, true, mitglieder );
-        BeitraegeDialog.setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
-        BeitraegeDialog.setDefaultCloseOperation(HIDE_ON_CLOSE);
-        BeitraegeDialog.setModal(true);
-        BeitraegeDialog.setVisible(true);
+        beitraegeDialog = new BeitraegeDialog( this, true, mitglieder );
+        beitraegeDialog.setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
+        beitraegeDialog.setDefaultCloseOperation(HIDE_ON_CLOSE);
+        beitraegeDialog.setModal(true);
+        beitraegeDialog.setVisible(true);
     }
     
     /**
@@ -630,26 +645,26 @@ public class StartupWindow extends javax.swing.JFrame {
      */
     private void mitgliedDialogErzeugen(Boolean isNew, NormalesMitglied mitglied) {
         try {
-            SpielerDialog = new MitgliedDialog(EZugehoerigkeit.Mitglieder, isNew, this);
+            spielerDialog = new MitgliedDialog(EZugehoerigkeit.Mitglieder, isNew, this);
             if (mitglied != null) {
                 Double beitrag = mitglied.getZuZahlenderBetrag();
-                SpielerDialog.setTfVorname(mitglied.getVorname());
-                SpielerDialog.setTfNachname(mitglied.getNachname());
-                SpielerDialog.setTfStrasse(mitglied.getStrasse());
+                spielerDialog.setTfVorname(mitglied.getVorname());
+                spielerDialog.setTfNachname(mitglied.getNachname());
+                spielerDialog.setTfStrasse(mitglied.getStrasse());
                 SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.YYYY");
                 String date = sdf.format(mitglied.getGeburtsDatum());
-                SpielerDialog.setTfGeburtsdatum(date);
-                SpielerDialog.setTfPLZ(mitglied.getPLZ());
-                SpielerDialog.setTfOrt(mitglied.getOrt());
-                SpielerDialog.setTfTelefon(mitglied.getTelefonNr());
-                SpielerDialog.setTfEmail(mitglied.getEmail());
-                SpielerDialog.setCboMannschaftName(mitglied.getMannschaft());
-                SpielerDialog.setTfBeitrag( beitrag.toString().replace('.', ',') );
+                spielerDialog.setTfGeburtsdatum(date);
+                spielerDialog.setTfPLZ(mitglied.getPLZ());
+                spielerDialog.setTfOrt(mitglied.getOrt());
+                spielerDialog.setTfTelefon(mitglied.getTelefonNr());
+                spielerDialog.setTfEmail(mitglied.getEmail());
+                spielerDialog.setCboMannschaftName(mitglied.getMannschaft());
+                spielerDialog.setTfBeitrag( beitrag.toString().replace('.', ',') );
             }
-            SpielerDialog.setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
-            SpielerDialog.setDefaultCloseOperation(HIDE_ON_CLOSE);
-            SpielerDialog.setModal(true);
-            SpielerDialog.setVisible(true);
+            spielerDialog.setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
+            spielerDialog.setDefaultCloseOperation(HIDE_ON_CLOSE);
+            spielerDialog.setModal(true);
+            spielerDialog.setVisible(true);
         } catch (IOException ex) {
             Logger.getLogger(StartupWindow.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -662,25 +677,25 @@ public class StartupWindow extends javax.swing.JFrame {
      * @throws IOException falls die Spielerliste nicht geöffnet werden kann
      */
     private void spielerDialogErzeugen(Boolean isNew, Profispieler spieler) throws IOException {
-        SpielerDialog = new MitgliedDialog(EZugehoerigkeit.Spieler, isNew, this); //Hier Entity �bergeben und in Konstruktor die Werte setzen(wenn nicht neu)
+        spielerDialog = new MitgliedDialog(EZugehoerigkeit.Spieler, isNew, this); //Hier Entity �bergeben und in Konstruktor die Werte setzen(wenn nicht neu)
         if (spieler != null) {
             Double beitrag = spieler.getGehalt();
-            SpielerDialog.setTfVorname(spieler.getVorname());
-            SpielerDialog.setTfNachname(spieler.getNachname());
-            SpielerDialog.setTfStrasse(spieler.getStrasse());
+            spielerDialog.setTfVorname(spieler.getVorname());
+            spielerDialog.setTfNachname(spieler.getNachname());
+            spielerDialog.setTfStrasse(spieler.getStrasse());
             SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.YYYY");
             String date = sdf.format(spieler.getGeburtsDatum());
-            SpielerDialog.setTfGeburtsdatum(date);
-            SpielerDialog.setTfPLZ(spieler.getPLZ());
-            SpielerDialog.setTfOrt(spieler.getOrt());
-            SpielerDialog.setTfTelefon(spieler.getTelefonNr());
-            SpielerDialog.setTfEmail(spieler.getEmail());
-            SpielerDialog.setCboMannschaftName(spieler.getMannschaft());
-            SpielerDialog.setTfBeitrag( beitrag.toString().replace('.', ',') );
+            spielerDialog.setTfGeburtsdatum(date);
+            spielerDialog.setTfPLZ(spieler.getPLZ());
+            spielerDialog.setTfOrt(spieler.getOrt());
+            spielerDialog.setTfTelefon(spieler.getTelefonNr());
+            spielerDialog.setTfEmail(spieler.getEmail());
+            spielerDialog.setCboMannschaftName(spieler.getMannschaft());
+            spielerDialog.setTfBeitrag( beitrag.toString().replace('.', ',') );
         }
-        SpielerDialog.setDefaultCloseOperation(HIDE_ON_CLOSE);
-        SpielerDialog.setModal(true);
-        SpielerDialog.setVisible(true);
+        spielerDialog.setDefaultCloseOperation(HIDE_ON_CLOSE);
+        spielerDialog.setModal(true);
+        spielerDialog.setVisible(true);
     }
 
     /**
@@ -690,10 +705,10 @@ public class StartupWindow extends javax.swing.JFrame {
      */
     private void mannschaftDialogErzeugen(Boolean isNew, Mannschaft mannschaft) {
         try {
-            MannschaftDialog = new MannschaftDialog(isNew, this);
+            mannschaftDialog = new MannschaftDialog(isNew, this);
             if (mannschaft != null) {
-                MannschaftDialog.setTfBezeichnung(mannschaft.getBezeichnung());
-                MannschaftDialog.setcboTrainer(mannschaft.getTrainer());
+                mannschaftDialog.setTfBezeichnung(mannschaft.getBezeichnung());
+                mannschaftDialog.setcboTrainer(mannschaft.getTrainer());
                 ArrayList<String> teamSpieler = new ArrayList<>();
                 ArrayList<Profispieler> alleSpieler = XMLLoader.loadProfiSpieler();
                 ArrayList<NormalesMitglied> alleMitglieder = XMLLoader.loadMitglieder();
@@ -719,11 +734,11 @@ public class StartupWindow extends javax.swing.JFrame {
                     }
                     break;
                 }
-                MannschaftDialog.setLbSpieler(teamSpieler);
+                mannschaftDialog.setLbSpieler(teamSpieler);
             }
-            MannschaftDialog.setDefaultCloseOperation(HIDE_ON_CLOSE);
-            MannschaftDialog.setModal(true);
-            MannschaftDialog.setVisible(true);
+            mannschaftDialog.setDefaultCloseOperation(HIDE_ON_CLOSE);
+            mannschaftDialog.setModal(true);
+            mannschaftDialog.setVisible(true);
         } catch (IOException ex) {
             Logger.getLogger(StartupWindow.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -736,27 +751,27 @@ public class StartupWindow extends javax.swing.JFrame {
      * @throws IOException falls die Spieleliste nicht geöffnet/gelesen werden kann
      */
     public void spielDialogErzeugen(Boolean isNew, Spiel spiel) throws IOException {
-        SpielDialog = new SpielDialog(isNew, this); //Hier Entity �bergeben und in Konstruktor die Werte setzen(wenn nicht neu)
+        spielDialog = new SpielDialog(isNew, this); //Hier Entity �bergeben und in Konstruktor die Werte setzen(wenn nicht neu)
         if (spiel != null) {
-            SpielDialog.setCboMannschaftName(spiel.getEigenesTeam());
-            SpielDialog.setTfGegner(spiel.getGegnerTeam());
-            SpielDialog.setTfOrt(spiel.getOrt());
+            spielDialog.setCboMannschaftName(spiel.getEigenesTeam());
+            spielDialog.setTfGegner(spiel.getGegnerTeam());
+            spielDialog.setTfOrt(spiel.getOrt());
             Date datum = spiel.getZeitpunkt();
             SimpleDateFormat formatter = new SimpleDateFormat( "HH:mm" );
             String zeit = formatter.format(datum);
-            SpielDialog.setTfAnfangszeit( zeit );
+            spielDialog.setTfAnfangszeit( zeit );
             if (datum != null) {
                 formatter.applyPattern("dd.MM.YYYY");
                 String date = formatter.format(datum);
-                SpielDialog.setTfDatum(date);
+                spielDialog.setTfDatum(date);
                 if( datum.after( new Date() ) ) {
-                    SpielDialog.hideErgebnis();
+                    spielDialog.hideErgebnis();
                 }
             }
         }
-        SpielDialog.setDefaultCloseOperation(HIDE_ON_CLOSE);
-        SpielDialog.setModal(true);
-        SpielDialog.setVisible(true);
+        spielDialog.setDefaultCloseOperation(HIDE_ON_CLOSE);
+        spielDialog.setModal(true);
+        spielDialog.setVisible(true);
     }
     
     /**
@@ -766,26 +781,26 @@ public class StartupWindow extends javax.swing.JFrame {
      * @throws IOException falls die Trainerliste nicht geöffnet/gelesen werden kann
      */
     private void trainerDialogErzeugen(Boolean isNew, Trainer trainer) throws IOException {
-        SpielerDialog = new MitgliedDialog(EZugehoerigkeit.Trainer, isNew, this); //Hier Entity �bergeben und in Konstruktor die Werte setzen(wenn nicht neu)
+        spielerDialog = new MitgliedDialog(EZugehoerigkeit.Trainer, isNew, this); //Hier Entity �bergeben und in Konstruktor die Werte setzen(wenn nicht neu)
         if (trainer != null) {
             Double beitrag = trainer.getGehalt();
-            SpielerDialog.setTfVorname(trainer.getVorname());
-            SpielerDialog.setTfNachname(trainer.getNachname());
-            SpielerDialog.setTfStrasse(trainer.getStrasse());
+            spielerDialog.setTfVorname(trainer.getVorname());
+            spielerDialog.setTfNachname(trainer.getNachname());
+            spielerDialog.setTfStrasse(trainer.getStrasse());
             SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.YYYY");
             String date = sdf.format(trainer.getGeburtsDatum());
-            SpielerDialog.setTfGeburtsdatum(date);
-            SpielerDialog.setTfPLZ(trainer.getPLZ());
-            SpielerDialog.setTfOrt(trainer.getOrt());
-            SpielerDialog.setTfTelefon(trainer.getTelefonNr());
-            SpielerDialog.setTfEmail(trainer.getEmail());
-            SpielerDialog.setCboMannschaftName(trainer.getMannschaft());
-            SpielerDialog.setTfBeitrag( beitrag.toString().replace('.', ',') );
+            spielerDialog.setTfGeburtsdatum(date);
+            spielerDialog.setTfPLZ(trainer.getPLZ());
+            spielerDialog.setTfOrt(trainer.getOrt());
+            spielerDialog.setTfTelefon(trainer.getTelefonNr());
+            spielerDialog.setTfEmail(trainer.getEmail());
+            spielerDialog.setCboMannschaftName(trainer.getMannschaft());
+            spielerDialog.setTfBeitrag( beitrag.toString().replace('.', ',') );
         }
-        SpielerDialog.changeStatecboMannschaften(false);
-        SpielerDialog.setDefaultCloseOperation(HIDE_ON_CLOSE);
-        SpielerDialog.setModal(true);
-        SpielerDialog.setVisible(true);
+        spielerDialog.changeStatecboMannschaften(false);
+        spielerDialog.setDefaultCloseOperation(HIDE_ON_CLOSE);
+        spielerDialog.setModal(true);
+        spielerDialog.setVisible(true);
     }
 
     /**

@@ -208,6 +208,10 @@ public final class MitgliedDialog extends javax.swing.JDialog {
         btnSpeichern.setText(ButtonCaption);
     }
 
+    /**
+     * Lädt die Mannschaftsliste und lädt diese in die Mannschaftscombobox
+     * @throws IOException falls die Mannschaftsliste nicht geöffnet/gelesen werden kann
+     */
     private void setCboMannschaftenItems() throws IOException {
         ArrayList<Mannschaft> mannschaften = XMLLoader.loadMannschaft();
         ArrayList<String> mannschaftsNamen = new ArrayList<String>();
@@ -554,7 +558,7 @@ public final class MitgliedDialog extends javax.swing.JDialog {
                 XMLSerializer.serializeToXML(ObjekteZumSpeichern, SaveObject);
                 lblWarning.setText("<html><b>Das Mitglied wurde gespeichert!</b></html>");
                 parent.allesAktualisieren();
-                parent.SpielerDialog.dispose();
+                parent.spielerDialog.dispose();
             } else {
                 warning += "</html>";
                 lblWarning.setText(warning);
@@ -565,7 +569,7 @@ public final class MitgliedDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_btnSpeichernActionPerformed
 
     private void btnVerwerfenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerwerfenActionPerformed
-        parent.SpielerDialog.dispose();
+        parent.spielerDialog.dispose();
     }//GEN-LAST:event_btnVerwerfenActionPerformed
 
     private void btnLoeschenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoeschenActionPerformed
@@ -614,12 +618,16 @@ public final class MitgliedDialog extends javax.swing.JDialog {
                     break;
             }
             parent.allesAktualisieren();
-            parent.SpielerDialog.dispose();
+            parent.spielerDialog.dispose();
         } catch (IOException ex) {
             Logger.getLogger(MitgliedDialog.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnLoeschenActionPerformed
 
+    /**
+     * aktiviert oder deaktiviert die Mannschaftscombobox
+     * @param isEnabled ob die Box aktiviert oder deaktiviert werden soll
+     */
     public void changeStatecboMannschaften(Boolean isEnabled) {
         cboMannschaft.setEnabled(isEnabled);
         cboMannschaft.setEditable(isEnabled);

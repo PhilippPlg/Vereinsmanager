@@ -40,6 +40,7 @@ public final class SpielDialog extends javax.swing.JDialog {
 
     /**
      * Erstellt neuen Spieldialog
+     * @throws IOException falls die Mannschaftsliste nicht geöffnet/gelesen werden kann
      */
     public SpielDialog() throws IOException {
         setCboMannschaftenItems();
@@ -379,7 +380,7 @@ public final class SpielDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVerwerfenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerwerfenActionPerformed
-        parent.SpielDialog.dispose();
+        parent.spielDialog.dispose();
     }//GEN-LAST:event_btnVerwerfenActionPerformed
 
     private void btnSpeichernActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSpeichernActionPerformed
@@ -444,7 +445,7 @@ public final class SpielDialog extends javax.swing.JDialog {
                 ObjekteZumSpeichern.addAll(spiele);
                 XMLSerializer.serializeToXML(ObjekteZumSpeichern, SaveObject);
                 lblWarning.setText("<html><b>Das Spiel wurde gespeichert!</b></html>");
-                parent.SpielDialog.dispose();
+                parent.spielDialog.dispose();
                 parent.allesAktualisieren();
             } else {
                 warning += "</html>";
@@ -473,7 +474,7 @@ public final class SpielDialog extends javax.swing.JDialog {
             neueSpiele.addAll(OldSpiele);
             XMLSerializer.serializeToXML(neueSpiele, ESaveObject.spiel);
             parent.allesAktualisieren();
-            parent.SpielDialog.dispose();
+            parent.spielDialog.dispose();
         } catch (IOException ex) {
             Logger.getLogger(MannschaftDialog.class.getName()).log(Level.SEVERE, null, ex);
         }

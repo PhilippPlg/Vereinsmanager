@@ -47,13 +47,18 @@ public class Mannschaft {
     public Mannschaft(String bezeichnung) {
         this.bezeichnung = bezeichnung;
     }
+    
+    /**
+     * Gibt das nächste Spiel zurück
+     * @return nächstes Spiel
+     */
     public Spiel getNaechstesSpiel() {
         return naechstesSpiel;
     }
 
     /**
-     * Gibt das letzte Spiel zurück
-     * @return Spiel
+     * Gibt das letzte Ergebnis zurück
+     * @return das letzte Ergebnis
      */
     public Spiel getLetztesErgebnis() {
         return letztesErgebnis;
@@ -115,6 +120,10 @@ public class Mannschaft {
         this.trainingszeiten = trainingszeiten;
     }
     
+    /**
+     * Stellt das nächste Spiel der Mannschaft ein
+     * @param spiel nächstes Spiel
+     */
     public void setNaechstesSpiel( Spiel spiel ) {
         this.naechstesSpiel = spiel;
     }

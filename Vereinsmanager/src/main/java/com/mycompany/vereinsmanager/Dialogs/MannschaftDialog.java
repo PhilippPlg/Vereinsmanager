@@ -20,7 +20,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
 /**
- * 
+ * Frame mit Eingabemaske zum Bearbeiten von Mannschaften
  * @author Timo
  */
 public final class MannschaftDialog extends javax.swing.JDialog {

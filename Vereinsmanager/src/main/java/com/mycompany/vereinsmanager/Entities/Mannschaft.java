@@ -1,7 +1,7 @@
 package com.mycompany.vereinsmanager.Entities;
 
 /**
- *
+ * Mannschaftsmodell
  * @author masia
  */
 public class Mannschaft {

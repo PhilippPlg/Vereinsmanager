@@ -3,7 +3,7 @@ package com.mycompany.vereinsmanager.Entities;
 import java.util.Date;
 
 /**
- *
+ * Modell der normales Mitglieder (zahlungspflichtig)
  * @author masia
  */
 public class NormalesMitglied extends Mitglied {

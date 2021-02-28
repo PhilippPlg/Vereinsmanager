@@ -3,7 +3,7 @@ package com.mycompany.vereinsmanager.Entities;
 import java.util.Date;
 
 /**
- *
+ * Mitgliedsmodell, andere Mitgliedertypen erben von diesem Parent
  * @author masia
  */
 public class Mitglied {

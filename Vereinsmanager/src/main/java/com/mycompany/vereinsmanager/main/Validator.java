@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mycompany.vereinsmanager.main;
 
 import java.time.LocalDate;
@@ -12,7 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- *
+ * Hilfsklasse zum Validieren von Eingabewerten
  * @author Tim
  */
 public class Validator {

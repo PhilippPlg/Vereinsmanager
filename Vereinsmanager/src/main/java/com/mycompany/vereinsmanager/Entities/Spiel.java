@@ -3,7 +3,7 @@ package com.mycompany.vereinsmanager.Entities;
 import java.util.Date;
 
 /**
- *
+ * Spielmodell
  * @author masia
  */
 public class Spiel {

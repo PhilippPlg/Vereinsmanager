@@ -11,7 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Frame zur Auswahl von Trainingszeiten
  * @author Timo
  */
 public class SelectTrainingszeitenDialog extends javax.swing.JDialog {

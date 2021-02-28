@@ -3,7 +3,7 @@ package com.mycompany.vereinsmanager.Entities;
 import java.util.Date;
 
 /**
- *
+ * Profispielermodell
  * @author masia
  */
 public class Profispieler extends Mitglied{

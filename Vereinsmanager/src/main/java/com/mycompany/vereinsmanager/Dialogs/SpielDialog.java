@@ -21,10 +21,9 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 
 /**
- *
+ * Frame mit Eingabemaske zum Bearbeiten von Spielen
  * @author Timo
  */
 public final class SpielDialog extends javax.swing.JDialog {

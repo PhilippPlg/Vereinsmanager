@@ -1,7 +1,7 @@
 package com.mycompany.vereinsmanager.Entities;
 
 /**
- *
+ * Trainingszeitenmodell
  * @author masia
  */
 public class Trainingszeit {

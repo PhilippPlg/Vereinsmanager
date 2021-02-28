@@ -21,7 +21,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * Frame mit Eingabemaske zum Bearbeiten von Mitgliedern
  * @author Timo
  */
 public final class MitgliedDialog extends javax.swing.JDialog {

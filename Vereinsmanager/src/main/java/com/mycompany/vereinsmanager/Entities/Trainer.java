@@ -3,7 +3,7 @@ package com.mycompany.vereinsmanager.Entities;
 import java.util.Date;
 
 /**
- *
+ * Trainermodell
  * @author masia
  */
 public class Trainer extends Mitglied {

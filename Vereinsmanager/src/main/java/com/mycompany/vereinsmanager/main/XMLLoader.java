@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- *
+ * Hilfsklasse zum Laden und Decoden von unseren in XMLFiles gespeicherten Objekten
  * @author Timo
  */
 public class XMLLoader {

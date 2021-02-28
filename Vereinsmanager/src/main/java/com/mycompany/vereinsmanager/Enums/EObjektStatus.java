@@ -1,7 +1,7 @@
 package com.mycompany.vereinsmanager.Enums;
 
 /**
- * Enum der Optionen für Dialoge, entweder werden Objekte bearbeitet oder erstellt
+ * Enum der Optionen für Dialogtitel, entweder werden Objekte bearbeitet oder erstellt
  * @author Timo
  */
 public enum EObjektStatus {
